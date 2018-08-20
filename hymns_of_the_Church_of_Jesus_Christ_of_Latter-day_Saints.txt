@@ -1,0 +1,1031 @@
+// Gabriel Staples
+// https://www.electricrcaircraftguy.com
+// Hymns Source: https://www.lds.org/music/library/hymns?lang=eng
+// Date copied from online: 19 Aug. 2018
+//
+// Instructions to use this document:
+// 1. Go to the link above and manually (very carefully) copy and paste the entire set of hymns--title and hymn number
+// only, into this document, replacing the contents below.
+// 2. Run the Python script to clean up this file, as follows: ``
+
+The Morning Breaks  1   DOWNLOAD
+    
+Play
+The Spirit of God   2   DOWNLOAD
+    
+Play
+Now Let Us Rejoice  3   DOWNLOAD
+    
+Play
+Truth Eternal   4   DOWNLOAD
+    
+Play
+High on the Mountain Top    5   DOWNLOAD
+    
+Play
+Redeemer of Israel  6   DOWNLOAD
+    
+Play
+Israel, Israel, God Is Calling  7   DOWNLOAD
+    
+Play
+Awake and Arise 8   DOWNLOAD
+    
+Play
+Come, Rejoice   9   DOWNLOAD
+    
+Play
+Come, Sing to the Lord  10  DOWNLOAD
+    
+Play
+What Was Witnessed in the Heavens?  11  DOWNLOAD
+    
+Play
+’Twas Witnessed in the Morning Sky* 12  
+    
+Play
+An Angel from on High   13  DOWNLOAD
+    
+Play
+Sweet Is the Peace the Gospel Brings    14  DOWNLOAD
+    
+Play
+I Saw a Mighty Angel Fly    15  DOWNLOAD
+    
+Play
+What Glorious Scenes Mine Eyes Behold   16  DOWNLOAD
+    
+Play
+Awake, Ye Saints of God, Awake! 17  DOWNLOAD
+    
+Play
+The Voice of God Again Is Heard 18  DOWNLOAD
+    
+Play
+We Thank Thee, O God, for a Prophet 19  DOWNLOAD
+    
+Play
+God of Power, God of Right  20  DOWNLOAD
+    
+Play
+Come, Listen to a Prophet’s Voice   21  DOWNLOAD
+    
+Play
+We Listen to a Prophet’s Voice  22  DOWNLOAD
+    
+Play
+We Ever Pray for Thee   23  DOWNLOAD
+    
+Play
+God Bless Our Prophet Dear  24  DOWNLOAD
+    
+Play
+Now We’ll Sing with One Accord  25  DOWNLOAD
+    
+Play
+Joseph Smith’s First Prayer 26  DOWNLOAD
+    
+Play
+Praise to the Man   27  DOWNLOAD
+    
+Play
+Saints, Behold How Great Jehovah    28  DOWNLOAD
+    
+Play
+A Poor Wayfaring Man of Grief   29  DOWNLOAD
+    
+Play
+Come, Come, Ye Saints   30  DOWNLOAD
+    
+Play
+O God, Our Help in Ages Past    31  DOWNLOAD
+    
+Play
+The Happy Day at Last Has Come  32  DOWNLOAD
+    
+Play
+Our Mountain Home So Dear   33  DOWNLOAD
+    
+Play
+O Ye Mountains High 34  DOWNLOAD
+    
+Play
+For the Strength of the Hills   35  DOWNLOAD
+    
+Play
+They, the Builders of the Nation    36  DOWNLOAD
+    
+Play
+The Wintry Day, Descending to Its Close 37  DOWNLOAD
+    
+Play
+Come, All Ye Saints of Zion 38  DOWNLOAD
+    
+Play
+O Saints of Zion    39  DOWNLOAD
+    
+Play
+Arise, O Glorious Zion  40  DOWNLOAD
+    
+Play
+Let Zion in Her Beauty Rise 41  DOWNLOAD
+    
+Play
+Hail to the Brightness of Zion’s Glad Morning!  42  DOWNLOAD
+    
+Play
+Zion Stands with Hills Surrounded   43  DOWNLOAD
+    
+Play
+Beautiful Zion, Built Above 44  DOWNLOAD
+    
+Play
+Lead Me into Life Eternal   45  DOWNLOAD
+    
+Play
+Glorious Things of Thee Are Spoken  46  DOWNLOAD
+    
+Play
+We Will Sing of Zion    47  DOWNLOAD
+    
+Play
+Glorious Things Are Sung of Zion    48  DOWNLOAD
+    
+Play
+Adam-ondi-Ahman 49  DOWNLOAD
+    
+Play
+Come, Thou Glorious Day of Promise  50  DOWNLOAD
+    
+Play
+Sons of Michael, He Approaches  51  DOWNLOAD
+    
+Play
+The Day Dawn Is Breaking    52  DOWNLOAD
+    
+Play
+Let Earth’s Inhabitants Rejoice 53  DOWNLOAD
+    
+Play
+Behold, the Mountain of the Lord*   54  
+    
+Play
+Lo, the Mighty God Appearing!   55  DOWNLOAD
+    
+Play
+Softly Beams the Sacred Dawning 56  DOWNLOAD
+    
+Play
+We’re Not Ashamed to Own Our Lord   57  DOWNLOAD
+    
+Play
+Come, Ye Children of the Lord   58  DOWNLOAD
+    
+Play
+Come, O Thou King of Kings  59  DOWNLOAD
+    
+Play
+Battle Hymn of the Republic 60  DOWNLOAD
+    
+Play
+Raise Your Voices to the Lord   61  DOWNLOAD
+    
+Play
+All Creatures of Our God and King   62  DOWNLOAD
+    
+Play
+Great King of Heaven    63  DOWNLOAD
+    
+Play
+On This Day of Joy and Gladness 64  DOWNLOAD
+    
+Play
+Come, All Ye Saints Who Dwell on Earth  65  DOWNLOAD
+    
+Play
+Rejoice, the Lord Is King!  66  DOWNLOAD
+    
+Play
+Glory to God on High    67  DOWNLOAD
+    
+Play
+A Mighty Fortress Is Our God    68  DOWNLOAD
+    
+Play
+All Glory, Laud, and Honor  69  DOWNLOAD
+    
+Play
+Sing Praise to Him  70  DOWNLOAD
+    
+Play
+With Songs of Praise    71  DOWNLOAD
+    
+Play
+Praise to the Lord, the Almighty    72  DOWNLOAD
+    
+Play
+Praise the Lord with Heart and Voice    73  DOWNLOAD
+    
+Play
+Praise Ye the Lord  74  DOWNLOAD
+    
+Play
+In Hymns of Praise  75  DOWNLOAD
+    
+Play
+God of Our Fathers, We Come unto Thee   76  DOWNLOAD
+    
+Play
+Great Is the Lord   77  DOWNLOAD
+    
+Play
+God of Our Fathers, Whose Almighty Hand 78  DOWNLOAD
+    
+Play
+With All the Power of Heart and Tongue  79  DOWNLOAD
+    
+Play
+God of Our Fathers, Known of Old    80  DOWNLOAD
+    
+Play
+Press Forward, Saints   81  DOWNLOAD
+    
+Play
+For All the Saints  82  DOWNLOAD
+    
+Play
+Guide Us, O Thou Great Jehovah  83  DOWNLOAD
+    
+Play
+Faith of Our Fathers    84  DOWNLOAD
+    
+Play
+How Firm a Foundation   85  DOWNLOAD
+    
+Play
+How Great Thou Art* 86  
+    
+Play
+God Is Love 87  DOWNLOAD
+    
+Play
+Great God, Attend While Zion Sings  88  DOWNLOAD
+    
+Play
+The Lord Is My Light    89  DOWNLOAD
+    
+Play
+From All That Dwell below the Skies 90  DOWNLOAD
+    
+Play
+Father, Thy Children to Thee Now Raise  91  DOWNLOAD
+    
+Play
+For the Beauty of the Earth 92  DOWNLOAD
+    
+Play
+Prayer of Thanksgiving  93  DOWNLOAD
+    
+Play
+Come, Ye Thankful People    94  DOWNLOAD
+    
+Play
+Now Thank We All Our God    95  DOWNLOAD
+    
+Play
+Dearest Children, God Is Near You   96  DOWNLOAD
+    
+Play
+Lead, Kindly Light  97  DOWNLOAD
+    
+Play
+I Need Thee Every Hour  98  DOWNLOAD
+    
+Play
+Nearer, Dear Savior, to Thee    99  DOWNLOAD
+    
+Play
+Nearer, My God, to Thee 100 DOWNLOAD
+    
+Play
+Guide Me to Thee    101 DOWNLOAD
+    
+Play
+Jesus, Lover of My Soul 102 DOWNLOAD
+    
+Play
+Precious Savior, Dear Redeemer  103 DOWNLOAD
+    
+Play
+Jesus, Savior, Pilot Me 104 DOWNLOAD
+    
+Play
+Master, the Tempest Is Raging   105 DOWNLOAD
+    
+Play
+God Speed the Right 106 DOWNLOAD
+    
+Play
+Lord, Accept Our True Devotion  107 DOWNLOAD
+    
+Play
+The Lord Is My Shepherd 108 DOWNLOAD
+    
+Play
+The Lord My Pasture Will Prepare    109 DOWNLOAD
+    
+Play
+Cast Thy Burden upon the Lord   110 DOWNLOAD
+    
+Play
+Rock of Ages    111 DOWNLOAD
+    
+Play
+Savior, Redeemer of My Soul 112 DOWNLOAD
+    
+Play
+Our Savior’s Love   113 DOWNLOAD
+    
+Play
+Come unto Him   114 DOWNLOAD
+    
+Play
+Come, Ye Disconsolate   115 DOWNLOAD
+    
+Play
+Come, Follow Me 116 DOWNLOAD
+    
+Play
+Come unto Jesus 117 DOWNLOAD
+    
+Play
+Ye Simple Souls Who Stray   118 DOWNLOAD
+    
+Play
+Come, We That Love the Lord 119 DOWNLOAD
+    
+Play
+Lean on My Ample Arm    120 DOWNLOAD
+    
+Play
+I’m a Pilgrim, I’m a Stranger   121 DOWNLOAD
+    
+Play
+Though Deepening Trials 122 DOWNLOAD
+    
+Play
+Oh, May My Soul Commune with Thee   123 DOWNLOAD
+    
+Play
+Be Still, My Soul   124 DOWNLOAD
+    
+Play
+How Gentle God’s Commands   125 DOWNLOAD
+    
+Play
+How Long, O Lord Most Holy and True 126 DOWNLOAD
+    
+Play
+Does the Journey Seem Long? 127 DOWNLOAD
+    
+Play
+When Faith Endures  128 DOWNLOAD
+    
+Play
+Where Can I Turn for Peace? 129 DOWNLOAD
+    
+Play
+Be Thou Humble  130 DOWNLOAD
+    
+Play
+More Holiness Give Me   131 DOWNLOAD
+    
+Play
+God Is in His Holy Temple   132 DOWNLOAD
+    
+Play
+Father in Heaven    133 DOWNLOAD
+    
+Play
+I Believe in Christ 134 DOWNLOAD
+    
+Play
+My Redeemer Lives   135 DOWNLOAD
+    
+Play
+I Know That My Redeemer Lives   136 DOWNLOAD
+    
+Play
+Testimony   137 DOWNLOAD
+    
+Play
+Bless Our Fast, We Pray 138 DOWNLOAD
+    
+Play
+In Fasting We Approach Thee 139 DOWNLOAD
+    
+Play
+Did You Think to Pray?  140 DOWNLOAD
+    
+Play
+Jesus, the Very Thought of Thee 141 DOWNLOAD
+    
+Play
+Sweet Hour of Prayer    142 DOWNLOAD
+    
+Play
+Let the Holy Spirit Guide   143 DOWNLOAD
+    
+Play
+Secret Prayer   144 DOWNLOAD
+    
+Play
+Prayer Is the Soul’s Sincere Desire 145 DOWNLOAD
+    
+Play
+Gently Raise the Sacred Strain  146 DOWNLOAD
+    
+Play
+Sweet Is the Work   147 DOWNLOAD
+    
+Play
+Sabbath Day 148 DOWNLOAD
+    
+Play
+As the Dew from Heaven Distilling   149 DOWNLOAD
+    
+Play
+O Thou Kind and Gracious Father 150 DOWNLOAD
+    
+Play
+We Meet, Dear Lord  151 DOWNLOAD
+    
+Play
+God Be with You Till We Meet Again  152 DOWNLOAD
+    
+Play
+Lord, We Ask Thee Ere We Part   153 DOWNLOAD
+    
+Play
+Father, This Hour Has Been One of Joy   154 DOWNLOAD
+    
+Play
+We Have Partaken of Thy Love    155 DOWNLOAD
+    
+Play
+Sing We Now at Parting  156 DOWNLOAD
+    
+Play
+Thy Spirit, Lord, Has Stirred Our Souls 157 DOWNLOAD
+    
+Play
+Before Thee, Lord, I Bow My Head    158 DOWNLOAD
+    
+Play
+Now the Day Is Over 159 DOWNLOAD
+    
+Play
+Softly Now the Light of Day 160 DOWNLOAD
+    
+Play
+The Lord Be with Us 161 DOWNLOAD
+    
+Play
+Lord, We Come before Thee Now   162 DOWNLOAD
+    
+Play
+Lord, Dismiss Us with Thy Blessing  163 DOWNLOAD
+    
+Play
+Great God, to Thee My Evening Song  164 DOWNLOAD
+    
+Play
+Abide with Me; ’Tis Eventide    165 DOWNLOAD
+    
+Play
+Abide with Me!  166 DOWNLOAD
+    
+Play
+Come, Let Us Sing an Evening Hymn   167 DOWNLOAD
+    
+Play
+As the Shadows Fall 168 DOWNLOAD
+    
+Play
+As Now We Take the Sacrament    169 DOWNLOAD
+    
+Play
+God, Our Father, Hear Us Pray   170 DOWNLOAD
+    
+Play
+With Humble Heart   171 DOWNLOAD
+    
+Play
+In Humility, Our Savior 172 DOWNLOAD
+    
+Play
+While of These Emblems We Partake   173 DOWNLOAD
+    
+Play
+While of These Emblems We Partake   174 DOWNLOAD
+    
+Play
+O God, the Eternal Father   175 DOWNLOAD
+    
+Play
+’Tis Sweet to Sing the Matchless Love   176 DOWNLOAD
+    
+Play
+’Tis Sweet to Sing the Matchless Love   177 DOWNLOAD
+    
+Play
+O Lord of Hosts 178 DOWNLOAD
+    
+Play
+Again, Our Dear Redeeming Lord  179 DOWNLOAD
+    
+Play
+Father in Heaven, We Do Believe 180 DOWNLOAD
+    
+Play
+Jesus of Nazareth, Savior and King  181 DOWNLOAD
+    
+Play
+We’ll Sing All Hail to Jesus’ Name  182 DOWNLOAD
+    
+Play
+In Remembrance of Thy Suffering 183 DOWNLOAD
+    
+Play
+Upon the Cross of Calvary   184 DOWNLOAD
+    
+Play
+Reverently and Meekly Now   185 DOWNLOAD
+    
+Play
+Again We Meet around the Board  186 DOWNLOAD
+    
+Play
+God Loved Us, So He Sent His Son    187 DOWNLOAD
+    
+Play
+Thy Will, O Lord, Be Done   188 DOWNLOAD
+    
+Play
+O Thou, Before the World Began  189 DOWNLOAD
+    
+Play
+In Memory of the Crucified  190 DOWNLOAD
+    
+Play
+Behold the Great Redeemer Die   191 DOWNLOAD
+    
+Play
+He Died! The Great Redeemer Died    192 DOWNLOAD
+    
+Play
+I Stand All Amazed  193 DOWNLOAD
+    
+Play
+There Is a Green Hill Far Away  194 DOWNLOAD
+    
+Play
+How Great the Wisdom and the Love   195 DOWNLOAD
+    
+Play
+Jesus, Once of Humble Birth 196 DOWNLOAD
+    
+Play
+O Savior, Thou Who Wearest a Crown  197 DOWNLOAD
+    
+Play
+That Easter Morn    198 DOWNLOAD
+    
+Play
+He Is Risen!    199 DOWNLOAD
+    
+Play
+Christ the Lord Is Risen Today  200 DOWNLOAD
+    
+Play
+Joy to the World    201 DOWNLOAD
+    
+Play
+Oh, Come, All Ye Faithful   202 DOWNLOAD
+    
+Play
+Angels We Have Heard on High    203 DOWNLOAD
+    
+Play
+Silent Night    204 DOWNLOAD
+    
+Play
+Once in Royal David’s City  205 DOWNLOAD
+    
+Play
+Away in a Manger    206 DOWNLOAD
+    
+Play
+It Came upon the Midnight Clear 207 DOWNLOAD
+    
+Play
+O Little Town of Bethlehem  208 DOWNLOAD
+    
+Play
+Hark! The Herald Angels Sing    209 DOWNLOAD
+    
+Play
+With Wondering Awe  210 DOWNLOAD
+    
+Play
+While Shepherds Watched Their Flocks    211 DOWNLOAD
+    
+Play
+Far, Far Away on Judea’s Plains 212 DOWNLOAD
+    
+Play
+The First Noel  213 DOWNLOAD
+    
+Play
+I Heard the Bells on Christmas Day  214 DOWNLOAD
+    
+Play
+Ring Out, Wild Bells    215 DOWNLOAD
+    
+Play
+We Are Sowing   216 DOWNLOAD
+    
+Play
+Come, Let Us Anew   217 DOWNLOAD
+    
+Play
+We Give Thee But Thine Own  218 DOWNLOAD
+    
+Play
+Because I Have Been Given Much* 219 
+    
+Play
+Lord, I Would Follow Thee   220 DOWNLOAD
+    
+Play
+Dear to the Heart of the Shepherd   221 DOWNLOAD
+    
+Play
+Hear Thou Our Hymn, O Lord  222 DOWNLOAD
+    
+Play
+Have I Done Any Good?   223 DOWNLOAD
+    
+Play
+I Have Work Enough to Do    224 DOWNLOAD
+    
+Play
+We Are Marching On to Glory 225 DOWNLOAD
+    
+Play
+Improve the Shining Moments 226 DOWNLOAD
+    
+Play
+There Is Sunshine in My Soul Today  227 DOWNLOAD
+    
+Play
+You Can Make the Pathway Bright 228 DOWNLOAD
+    
+Play
+Today, While the Sun Shines 229 DOWNLOAD
+    
+Play
+Scatter Sunshine    230 DOWNLOAD
+    
+Play
+Father, Cheer Our Souls Tonight 231 DOWNLOAD
+    
+Play
+Let Us Oft Speak Kind Words 232 DOWNLOAD
+    
+Play
+Nay, Speak No Ill   233 DOWNLOAD
+    
+Play
+Jesus, Mighty King in Zion  234 DOWNLOAD
+    
+Play
+Should You Feel Inclined to Censure 235 DOWNLOAD
+    
+Play
+Lord, Accept into Thy Kingdom   236 DOWNLOAD
+    
+Play
+Do What Is Right    237 DOWNLOAD
+    
+Play
+Behold Thy Sons and Daughters, Lord 238 DOWNLOAD
+    
+Play
+Choose the Right    239 DOWNLOAD
+    
+Play
+Know This, That Every Soul Is Free  240 DOWNLOAD
+    
+Play
+Count Your Blessings    241 DOWNLOAD
+    
+Play
+Praise God, from Whom All Blessings Flow    242 DOWNLOAD
+    
+Play
+Let Us All Press On 243 DOWNLOAD
+    
+Play
+Come Along, Come Along  244 DOWNLOAD
+    
+Play
+This House We Dedicate to Thee  245 DOWNLOAD
+    
+Play
+Onward, Christian Soldiers  246 DOWNLOAD
+    
+Play
+We Love Thy House, O God    247 DOWNLOAD
+    
+Play
+Up, Awake, Ye Defenders of Zion 248 DOWNLOAD
+    
+Play
+Called to Serve 249 DOWNLOAD
+    
+Play
+We Are All Enlisted 250 DOWNLOAD
+    
+Play
+Behold! A Royal Army    251 DOWNLOAD
+    
+Play
+Put Your Shoulder to the Wheel  252 DOWNLOAD
+    
+Play
+Like Ten Thousand Legions Marching  253 DOWNLOAD
+    
+Play
+True to the Faith   254 DOWNLOAD
+    
+Play
+Carry On    255 DOWNLOAD
+    
+Play
+As Zion’s Youth in Latter Days  256 DOWNLOAD
+    
+Play
+Rejoice! A Glorious Sound Is Heard  257 DOWNLOAD
+    
+Play
+O Thou Rock of Our Salvation    258 DOWNLOAD
+    
+Play
+Hope of Israel  259 DOWNLOAD
+    
+Play
+Who’s on the Lord’s Side?   260 DOWNLOAD
+    
+Play
+Thy Servants Are Prepared   261 DOWNLOAD
+    
+Play
+Go, Ye Messengers of Glory  262 DOWNLOAD
+    
+Play
+Go Forth with Faith 263 DOWNLOAD
+    
+Play
+Hark, All Ye Nations!   264 DOWNLOAD
+    
+Play
+Arise, O God, and Shine 265 DOWNLOAD
+    
+Play
+The Time Is Far Spent   266 DOWNLOAD
+    
+Play
+How Wondrous and Great  267 DOWNLOAD
+    
+Play
+Come, All Whose Souls Are Lighted   268 DOWNLOAD
+    
+Play
+Jehovah, Lord of Heaven and Earth   269 DOWNLOAD
+    
+Play
+I’ll Go Where You Want Me to Go 270 DOWNLOAD
+    
+Play
+Oh, Holy Words of Truth and Love    271 DOWNLOAD
+    
+Play
+Oh Say, What Is Truth?  272 DOWNLOAD
+    
+Play
+Truth Reflects upon Our Senses  273 DOWNLOAD
+    
+Play
+The Iron Rod    274 DOWNLOAD
+    
+Play
+Men Are That They Might Have Joy    275 DOWNLOAD
+    
+Play
+Come Away to the Sunday School  276 DOWNLOAD
+    
+Play
+As I Search the Holy Scriptures 277 DOWNLOAD
+    
+Play
+Thanks for the Sabbath School   278 DOWNLOAD
+    
+Play
+Thy Holy Word   279 DOWNLOAD
+    
+Play
+Welcome, Welcome, Sabbath Morning   280 DOWNLOAD
+    
+Play
+Help Me Teach with Inspiration  281 DOWNLOAD
+    
+Play
+We Meet Again in Sabbath School 282 DOWNLOAD
+    
+Play
+The Glorious Gospel Light Has Shone 283 DOWNLOAD
+    
+Play
+If You Could Hie to Kolob   284 DOWNLOAD
+    
+Play
+God Moves in a Mysterious Way   285 DOWNLOAD
+    
+Play
+Oh, What Songs of the Heart 286 DOWNLOAD
+    
+Play
+Rise, Ye Saints, and Temples Enter  287 DOWNLOAD
+    
+Play
+How Beautiful Thy Temples, Lord 288 DOWNLOAD
+    
+Play
+Holy Temples on Mount Zion  289 DOWNLOAD
+    
+Play
+Rejoice, Ye Saints of Latter Days   290 DOWNLOAD
+    
+Play
+Turn Your Hearts    291 DOWNLOAD
+    
+Play
+O My Father 292 DOWNLOAD
+    
+Play
+Each Life That Touches Ours for Good    293 DOWNLOAD
+    
+Play
+Love at Home    294 DOWNLOAD
+    
+Play
+O Love That Glorifies the Son   295 DOWNLOAD
+    
+Play
+Our Father, by Whose Name   296 DOWNLOAD
+    
+Play
+From Homes of Saints Glad Songs Arise   297 DOWNLOAD
+    
+Play
+Home Can Be a Heaven on Earth   298 DOWNLOAD
+    
+Play
+Children of Our Heavenly Father*    299 
+    
+Play
+Families Can Be Together Forever    300 DOWNLOAD
+    
+Play
+I Am a Child of God 301 DOWNLOAD
+    
+Play
+I Know My Father Lives  302 DOWNLOAD
+    
+Play
+Keep the Commandments   303 DOWNLOAD
+    
+Play
+Teach Me to Walk in the Light   304 DOWNLOAD
+    
+Play
+The Light Divine    305 DOWNLOAD
+    
+Play
+God’s Daily Care    306 DOWNLOAD
+    
+Play
+In Our Lovely Deseret   307 DOWNLOAD
+    
+Play
+Love One Another    308 DOWNLOAD
+    
+Play
+As Sisters in Zion  309 DOWNLOAD
+    
+Play
+A Key Was Turned in Latter Days 310 DOWNLOAD
+    
+Play
+We Meet Again as Sisters    311 DOWNLOAD
+    
+Play
+We Ever Pray for Thee   312 DOWNLOAD
+    
+Play
+God Is Love 313 DOWNLOAD
+    
+Play
+How Gentle God’s Commands   314 DOWNLOAD
+    
+Play
+Jesus, the Very Thought of Thee 315 DOWNLOAD
+    
+Play
+The Lord Is My Shepherd 316 DOWNLOAD
+    
+Play
+Sweet Is the Work   317 DOWNLOAD
+    
+Play
+Love at Home    318 DOWNLOAD
+    
+Play
+Ye Elders of Israel 319 DOWNLOAD
+    
+Play
+The Priesthood of Our Lord  320 DOWNLOAD
+    
+Play
+Ye Who Are Called to Labor  321 DOWNLOAD
+    
+Play
+Come, All Ye Sons of God    322 DOWNLOAD
+    
+Play
+Rise Up, O Men of God   323 DOWNLOAD
+    
+Play
+Rise Up, O Men of God   324 DOWNLOAD
+    
+Play
+See the Mighty Priesthood Gathered  325 DOWNLOAD
+    
+Play
+Come, Come, Ye Saints   326 DOWNLOAD
+    
+Play
+Go, Ye Messengers of Heaven 327 DOWNLOAD
+    
+Play
+An Angel from on High   328 DOWNLOAD
+    
+Play
+Thy Servants Are Prepared   329 DOWNLOAD
+    
+Play
+See, the Mighty Angel Flying    330 DOWNLOAD
+    
+Play
+Oh Say, What Is Truth?  331 DOWNLOAD
+    
+Play
+Come, O Thou King of Kings  332 DOWNLOAD
+    
+Play
+High on the Mountain Top    333 DOWNLOAD
+    
+Play
+I Need Thee Every Hour  334 DOWNLOAD
+    
+Play
+Brightly Beams Our Father’s Mercy   335 DOWNLOAD
+    
+Play
+School Thy Feelings 336 DOWNLOAD
+    
+Play
+O Home Beloved  337 DOWNLOAD
+    
+Play
+America the Beautiful   338 DOWNLOAD
+    
+Play
+My Country, ’Tis of Thee    339 DOWNLOAD
+    
+Play
+The Star-Spangled Banner    340 DOWNLOAD
+    
+Play
+God Save the King   341
