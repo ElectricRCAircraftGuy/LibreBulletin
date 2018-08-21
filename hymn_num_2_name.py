@@ -25,9 +25,7 @@ Notes:
 
 """
 
-file_has_been_read = False # Set to True once you've read in the formatted hymns file
-
-def printHymnsList():
+def printHymnsList(hymns_list):
     for index, hymn_name in enumerate(hymns_list):
         hymn_num = index + 1
         print(str(hymn_num) + ": " + hymn_name)
@@ -58,7 +56,7 @@ def readFormattedHymnsFile(filename):
 
 if __name__ == '__main__':
     hymns_list = readFormattedHymnsFile("hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt")
-    printHymnsList()
+    printHymnsList(hymns_list)
 
     # Test
     hymn_num = 330
