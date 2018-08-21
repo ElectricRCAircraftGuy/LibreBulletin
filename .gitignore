@@ -1,3 +1,6 @@
 # LibreOffice Calc (spreadsheet) & Writer temporary files:
 *.ods#
 *.odt#
+
+# Cached python bytecode
+/__pycache__
