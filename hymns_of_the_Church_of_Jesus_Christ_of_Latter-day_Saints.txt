@@ -1,12 +1,17 @@
 // Gabriel Staples
-// https://www.electricrcaircraftguy.com
+// https://www.ElectricRCAircraftGuy.com
+// - Find my email by clicking the "Contact me" link at the top of my website above.
 // Hymns Source: https://www.lds.org/music/library/hymns?lang=eng
 // Date copied from online: 19 Aug. 2018
 //
 // Instructions to use this document:
 // 1. Go to the link above and manually (very carefully) copy and paste the entire set of hymns (title and hymn number
 // only), into this document, replacing the contents below.
-// 2. Run the "hymns_formatter.py" Python script to clean up this file. Ex: `python3 hymns_formatter.py`
+// 2. Run the "hymns_formatter.py" Python script to clean up this file. Ex: `python3 hymns_formatter.py`. You will now
+//    have all of the hymns in a nicely-formatted file inside 
+//    "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
+// Note: you do NOT have to ensure the hymns are sorted in the list below, as the python formatter will automatically
+//    delete extraneous information and sort them for you.
 
 The Morning Breaks  1   DOWNLOAD
     
