@@ -25,18 +25,36 @@ Notes:
 
 """
 
-def printHymnsList(hymns_list):
-    for index, hymn_name in enumerate(hymns_list):
-        hymn_num = index + 1
-        print(str(hymn_num) + ": " + hymn_name)
+# Global vars:
+hymns_list = [] # NB: empty list, so len(hymns_list)==0 here.
+
+def printHymnsList():
+    global hymns_list
+
+    if (len(hymns_list) > 0):
+        for index, hymn_name in enumerate(hymns_list):
+            hymn_num = index + 1
+            print(str(hymn_num) + ": " + hymn_name)
+    else:
+        print("printHymnsList Error: hymns_list not yet populated. \n" +
+              "Call readFormattedHymnsFile() first to populate it.")
 
 def getHymnName(hymn_num):
-    return hymns_list[hymn_num - 1]
+    global hymns_list
+
+    if (len(hymns_list) > 0):
+        hymn_name = hymns_list[hymn_num - 1]
+    else:
+        hymn_name = "getHymnName Error"
+        print("printHymnsList Error: hymns_list not yet populated. \n" +
+              "Call readFormattedHymnsFile() first to populate it.")
+    return hymn_name
 
 def readFormattedHymnsFile(filename):
-    file = open(filename, "r")
+    global hymns_list
 
     # Read all lines from the file into a list
+    file = open(filename, "r")
     lines = file.readlines()
     file.close()
 
@@ -48,19 +66,20 @@ def readFormattedHymnsFile(filename):
         words = line.split()
         # remove the colon from the hymn_num string, and convert str to int
         hymn_num = int(words[0].replace(':', ''))
-
+        # join the remaining words after the hymn_num into the hymn_name
         hymn_name = ' '.join(words[1:])
         hymns_list[hymn_num - 1] = hymn_name
 
     return hymns_list
 
 if __name__ == '__main__':
-    hymns_list = readFormattedHymnsFile("hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt")
-    printHymnsList(hymns_list)
+    readFormattedHymnsFile("hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt")
+    printHymnsList()
 
     # Test
     hymn_num = 330
+    hymn_name = getHymnName(hymn_num)
     print("\nTest:")
-    print("hymn_num = " + str(hymn_num) + "; name = \"" + getHymnName(330) + "\"")
+    print("hymn_num = " + str(hymn_num) + "; hymn_name = \"" + hymn_name + "\"")
 
 
