@@ -29,27 +29,50 @@ def formatHymns(filename):
     # Read all lines from the file into a list
     lines = file_src.readlines()
 
-    # print(repr(lines[907])) # use `repr` to print special chars like \n too
+    print(repr(lines[907])) # use `repr` to print special chars like \n too
 
-    # process the list of strings
+    # process the list of strings:
+    # - remove whitespace
+    # - remove asterisks ("*"); see replace chars: https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python
+    # - ignore strings beginning with "//" (these are comments)
+    # - ignore blank lines (containing only "" after removing whitespace)
+    # - ignore lines containing only the word "Play"
+    # - remove the word "DOWNLOAD" at the end of each string
+    # - All remaining lines at this point should contain just the hymn name followed by the hymn number, so verify 
+    #   that the last substring (after calling str.split()) is a number, then, if so, store each line into a new list
+    #   in this format: [hymn_num, 'hymn_name'].
+    # (Assume you didn't necessarily get the hymn list in order, and that there may be some missing hymn numbers, so 
+    #  now do the following):
+    # 1. Iterate through this new list, finding the maximum hymn_num present.
+    # 2. Create a new list of this size, called hymn_names, initialzing each element as simply "hymn name". The 
+    #    index of this list will correspond to hymn_num - 1. 
+    # 3. Now read through the last list, copying each hymn name into its corresponding index number in the new list, 
+    #    based on the hymn number.
+    # - Print the index + 1 and hymn_names to ensure it looks right.
+    # - Store the index + 1 and hymn_names into an output file.
+    # - Done!
     lines_formatted = list()
     i_read = 0;
     i_write = 0;
-    for i in range(len(lines)):
+    for line in lines:
 
         # print(repr(lines[i]))
 
+        # For advanced string manipulation help, such as is used below, see: see: https://stackoverflow.com/a/20985070/4561887.
         # Collapse multiple spaces into 1; see: https://stackoverflow.com/a/20985070/4561887
-        lines[i] = ' '.join(lines[i].split())
+        lines[i_read] = ' '.join(lines[i_read].split())
         # Split by whitespace back into substrings
-        s = lines[i].split()
+        s = lines[i_read].split()
 
-        if 
+        i_read += 1
+        # if 
 
 
     print(len(lines))
     print(repr(lines[907])) # use `repr` to print special chars like \n too
     print(repr(lines[752]))
+    print(repr(lines[709].split()))
+
 
 
 if __name__ == '__main__':

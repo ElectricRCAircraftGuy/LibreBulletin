@@ -4,9 +4,9 @@
 // Date copied from online: 19 Aug. 2018
 //
 // Instructions to use this document:
-// 1. Go to the link above and manually (very carefully) copy and paste the entire set of hymns--title and hymn number
-// only, into this document, replacing the contents below.
-// 2. Run the Python script to clean up this file, as follows: ``
+// 1. Go to the link above and manually (very carefully) copy and paste the entire set of hymns (title and hymn number
+// only), into this document, replacing the contents below.
+// 2. Run the "hymns_formatter.py" Python script to clean up this file. Ex: `python3 hymns_formatter.py`
 
 The Morning Breaks  1   DOWNLOAD
     
