@@ -4,3 +4,7 @@
 
 # Cached python bytecode
 /__pycache__
+
+# Sublime Text project workspaces (save projects only, not workspaces)
+# More info here: http://docs.sublimetext.info/en/latest/file_management/projects.html
+*.sublime-workspace
