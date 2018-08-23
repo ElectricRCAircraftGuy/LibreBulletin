@@ -28,10 +28,12 @@
 // the corresponding FIELD_NAME changes in the .odt document.
 
 // 8. If you don't want to do a find/replace on a field below you can either delete it or simply comment it out by
-// adding "//" in front of the FIELD_NAME. Alternatively, just leave the field_value blank below and no replacement in
-// the .odt document will occur for this field.
+// adding "//" in front of the FIELD_NAME. 
 
-// 9. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill them
+// 9. If you'd like to replace a FIELD_NAME with an empty string (thereby deleting the FIELD_NAME) in the .odt document,
+// just leave the field_value blank below.
+
+// 10. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill them
 // out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See the
 // list below.
 // Special Fields:
@@ -42,7 +44,7 @@
 //     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 
-// 10. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
+// 11. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
 // to look at. Good examples of no-cost text editors for basic software development include Notepad++, Sublime Text,
 // Geany, Visual Studio Code, and Atom, for example.
 
