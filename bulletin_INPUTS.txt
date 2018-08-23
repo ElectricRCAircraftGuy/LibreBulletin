@@ -12,28 +12,34 @@
 // 3. field_value can be any number of words, but if there are multiple spaces between words, they will be reduced to a
 // single space.
 
-// 4. FIELD_NAME *must* have a colon (:) immediately following it, with *no spaces or other characters* between the
-// FIELD_NAME and the colon. ie: "FIELD_NAME:"
+// 4. FIELD_NAME should have a colon (:) immediately following it, with *no spaces or other characters* between the
+// FIELD_NAME and the colon. ie: "FIELD_NAME:". However, it will still work without the colon at the end. The colon just
+// makes the list below more readable.
 
-// 5. Comments in this document begin with "//", and are ignored, so feel free to delete all these comments if you  feel
+// 5. By convention, FIELD_NAME should be written in ALL CAPS, though this is not enforced, and it will work even if in 
+// mixed case or all lower-case. Using ALL CAPS, however, helps to make the field stand out more in the .odt document
+// so you can more quickly identify which words in the document are fields you expect to be replaced, and which words 
+// are not.
+
+// 6. Comments in this document begin with "//", and are ignored, so feel free to delete all these comments if you  feel
 // like it. Blank spaces also are ignored and don't matter.
 
-// 6. Order of fields doesn't matter, so feel free to re-arrange them below as you see fit.
+// 7. Order of fields doesn't matter, so feel free to re-arrange them below as you see fit.
 
-// 7. If you'd like to add a new field to find and replace in the .odt document, simply invent one with any unique name
+// 8. If you'd like to add a new field to find and replace in the .odt document, simply invent one with any unique name
 // you can think of (I recommend all caps and with a few preceding characters to indicate what it might mean, such as is
 // indicated in the examples below [ex: "T1_", "IM_", "SM_", etc]), type it into the .odt document where you want,
 // format it in the .odt document as desired, and then add the field name and value anywhere into this document below.
 // Again, order doesn't matter. You can add, rename, or delete any of the fields below as you wish. Just be sure to make
 // the corresponding FIELD_NAME changes in the .odt document.
 
-// 8. If you don't want to do a find/replace on a field below you can either delete it or simply comment it out by
+// 9. If you don't want to do a find/replace on a field below you can either delete it or simply comment it out by
 // adding "//" in front of the FIELD_NAME. 
 
-// 9. If you'd like to replace a FIELD_NAME with an empty string (thereby deleting the FIELD_NAME) in the .odt document,
+// 10. If you'd like to replace a FIELD_NAME with an empty string (thereby deleting the FIELD_NAME) in the .odt document,
 // just leave the field_value blank below.
 
-// 10. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill them
+// 11. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill them
 // out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See the
 // list below.
 // Special Fields:
@@ -44,7 +50,7 @@
 //     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 
-// 11. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
+// 12. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
 // to look at. Good examples of no-cost text editors for basic software development include Notepad++, Sublime Text,
 // Geany, Visual Studio Code, and Atom, for example.
 
@@ -119,6 +125,8 @@ SM_BENEDICTION:             Alma Theyounger
 // -----------------------------------------------------------------------------------------
 CCA_COORDINATOR:        Mosiah King
 CCA_COORDINATOR_PHONE:  123-456-7890
+
+
 
 
 

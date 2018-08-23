@@ -86,8 +86,12 @@ class Bulletin:
                 if (len(first_word) >= 2 and first_word[0:2]=='//'):
                     save_line = False
             if (save_line==True):
-                # field_name is the first word, minus the ":" character
-                field_name = first_word.replace(':','')
+                # field_name is the first word, minus the ":" character at the end (note: don't use the string
+                # "replace()" function to perform this operation, as I only want to replace the ":" char if it is the
+                # *last* char of the word!)
+                field_name = first_word
+                if (field_name[-1] == ':'):
+                    field_name = field_name[:-1]
                 # field_value is all the rest of the words combined (separate words w/a space), but remember that the 
                 # field_value could be blank
                 num_words = len(words)
