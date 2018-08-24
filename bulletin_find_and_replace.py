@@ -5,7 +5,7 @@ bulletin_find_and_replace
 
 Gabriel Staples
 Written: 22 Aug. 2018 
-Updated: 22 Aug. 2018
+Updated: 23 Aug. 2018
 https://www.ElectricRCAircraftGuy.com
 - Find my email by clicking the "Contact me" link at the top of my website above.
 
@@ -15,7 +15,9 @@ or improvements you make to it, but you do NOT have to open source any of your p
 
 References:
  1. Files: https://docs.python.org/3/tutorial/inputoutput.html
- 2. Strings: https://www.tutorialspoint.com/python/python_strings.htm
+ 2. Strings: 
+   - https://www.tutorialspoint.com/python/python_strings.htm
+   - str.count() & str.replace() - https://docs.python.org/3.3/library/stdtypes.html#str.replace 
  3. Accessing the index in 'for' loops: https://stackoverflow.com/a/28072982/4561887 
  4. https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python
  5. *****Split and parse a string in Python - https://stackoverflow.com/a/20985070/4561887
@@ -29,6 +31,7 @@ References:
    - Best practice: for both, just use forward slashes (/), NOT back-slashes! (\\)
    - https://stackoverflow.com/a/18776536/4561887 
    - https://stackoverflow.com/a/501197/4561887
+ 10. *****Search & replace text in file: https://stackoverflow.com/a/17141572/4561887
 
 Notes:
  - 
@@ -62,7 +65,8 @@ class Bulletin:
 
     def loadFields(self):
         """
-        Load field name and value pairs from the bulletin_inputs_filepath document.
+        Load field name and value pairs from the bulletin_inputs_filepath document into a class instance variable for
+        use by the class.
         """
 
         # Parse bulletin fields from input document
@@ -107,6 +111,8 @@ class Bulletin:
         bulletin_inputs_filename = self.bulletin_inputs_filepath.split('/')[-1]
         print("Printing input fields from \"" + bulletin_inputs_filename + "\":\n" +
               "Format: ['field_name', 'field_value']")
+        ###########
+        self.fields.sort(reverse = True)
         for field in self.fields:
             print(field)
 
@@ -114,14 +120,37 @@ class Bulletin:
         # 1. Uncompress (unzip) the .odt file
         zip_ref = zipfile.ZipFile(self.input_odt_filepath, 'r')
         dir_to_extract_to = "../tmp/" + self.output_odt_filename
-        # Delete this dir if it already exists
+        # Delete this temporary dir if it already exists
         if (os.path.isdir(dir_to_extract_to)):
             shutil.rmtree(dir_to_extract_to)
-        # Extract
+        # Extract to the temporary dir
         zip_ref.extractall(dir_to_extract_to)
         zip_ref.close()
 
-        # 2. 
+        # 2. Load "content.xml" from the extracted .odt file, and do the find and replace inside it
+        # Example from: https://stackoverflow.com/a/17141572/4561887
+        # Read in the file
+        contentxml_path = dir_to_extract_to + "/content.xml"
+        file = open(contentxml_path, 'r')
+        filedata = file.read()
+        file.close()
+        # Replace the target strings (fields)
+        print("\nReplacing fields\n" +
+              "Log format: `index: # replacements, ['field_name', 'field_value']`")
+        for index, field in enumerate(self.fields):
+            field_name = field[0]
+            field_value = field[1]
+            num_replacements = filedata.count(field_name) # Number of times the field_name occurs inside the file
+            print(str(index) + ": " + str(num_replacements) + ", [\'" + field_name + "\', \'" + field_value + "\']")
+            # print(str(index) + ": [\'" + field_name + "\', \'" + field_value + "\'] x " + str(num_replacements) +
+            #       " replacements")
+            filedata = filedata.replace(field_name, field_value)
+
+        # # Write the file out again
+        # with open('file.txt', 'w') as file:
+        #   file.write(filedata)
+        # # str.count()
+        # # str.replace()
 
     
 
@@ -145,5 +174,5 @@ if __name__ == '__main__':
     # print(hymns.getHymnsList())
 
     bulletin.printFields()
-    # bulletin.replaceFields()
+    bulletin.replaceFields()
 
