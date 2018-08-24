@@ -1,3 +1,17 @@
+LibreBulletin project:
+
+1. License on all *code*: LGPL 3 or later (see license below).   
+  - What this means in my words: (Open source; can be used for commercial products; you DO have to maintain this code
+open source, including any changes or improvements you make to it, but you do NOT have to open source any of your
+proprietary code which is statically or dynamically linked to this code)
+  - See: https://www.gnu.org/licenses/lgpl-3.0.en.html
+  - Note: my words above are not legally binding; the license below is.
+2. License on all of the .odt documents in this project: CC BY-SA 4.0.
+  - See: https://creativecommons.org/licenses/by-sa/4.0/
+3. License on the generic church bulletin format itself: none: it is in the public domain.
+
+---------------------------------------------------------------------
+
                    GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
