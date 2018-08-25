@@ -26,12 +26,14 @@ References:
  7. Zip file manipulation:
    1. https://stackoverflow.com/questions/3451111/unzipping-files-in-python
    2. zipfile module official documentation: https://docs.python.org/3.5/library/zipfile.html
+   3. zip a folder in Python (using shutil): https://stackoverflow.com/a/25650295/4561887
  8. Example usage of "os" to determine operating system - https://stackoverflow.com/a/38319607/4561887
  9. Info. on backslashes vs forward slashes for paths in Windows/Linux
    - Best practice: for both, just use forward slashes (/), NOT back-slashes! (\\)
    - https://stackoverflow.com/a/18776536/4561887 
    - https://stackoverflow.com/a/501197/4561887
  10. *****Search & replace text in file: https://stackoverflow.com/a/17141572/4561887
+ 11. Rename files w/os.rename(): https://stackoverflow.com/questions/2759067/rename-multiple-files-in-a-directory-in-python
 
 Notes:
  - 
@@ -111,8 +113,6 @@ class Bulletin:
         bulletin_inputs_filename = self.bulletin_inputs_filepath.split('/')[-1]
         print("Printing input fields from \"" + bulletin_inputs_filename + "\":\n" +
               "Format: ['field_name', 'field_value']")
-        ###########
-        self.fields.sort(reverse = True)
         for field in self.fields:
             print(field)
 
@@ -129,30 +129,48 @@ class Bulletin:
 
         # 2. Load "content.xml" from the extracted .odt file, and do the find and replace inside it
         # Example from: https://stackoverflow.com/a/17141572/4561887
+
         # Read in the file
         contentxml_path = dir_to_extract_to + "/content.xml"
         file = open(contentxml_path, 'r')
         filedata = file.read()
         file.close()
+        
         # Replace the target strings (fields)
+        # NB: you must do the replacement in the order of the field_names being *reverse-sorted*, so that longer string
+        # replacement occur before short ones. Ex: if field names & values are: ['AA', 'hello'] and ['A', 'goodbye'],
+        # then you need to find and replace field "AA" with "hello" *before* finding and replacing "A" with
+        # "goodbye". Otherwise, "AA" will get replaced by "goodbyegoodbye" instead of "hello" due to 
+        # the "A" field replacement occuring before "AA" is even searched. 
         print("\nReplacing fields\n" +
               "Log format: `index: # replacements, ['field_name', 'field_value']`")
-        for index, field in enumerate(self.fields):
+        fields_rev_sorted = self.fields.copy()
+        fields_rev_sorted.sort(reverse = True)
+        fields_num_replacements = {} # dictionary to store the # of replacements for each field
+        for index, field in enumerate(fields_rev_sorted):
             field_name = field[0]
             field_value = field[1]
             num_replacements = filedata.count(field_name) # Number of times the field_name occurs inside the file
-            print(str(index) + ": " + str(num_replacements) + ", [\'" + field_name + "\', \'" + field_value + "\']")
-            # print(str(index) + ": [\'" + field_name + "\', \'" + field_value + "\'] x " + str(num_replacements) +
-            #       " replacements")
+            fields_num_replacements[field_name] = num_replacements
             filedata = filedata.replace(field_name, field_value)
 
-        # # Write the file out again
-        # with open('file.txt', 'w') as file:
-        #   file.write(filedata)
-        # # str.count()
-        # # str.replace()
+        # Print the log in the format above now, but in the order it was read from the user's input file:
+        for index, field in enumerate(self.fields):
+            field_name = field[0]
+            field_value = field[1]
+            num_replacements = fields_num_replacements[field_name]
+            print(str(index) + ": " + str(num_replacements) + ", [\'" + field_name + "\', \'" + field_value + "\']")
 
-    
+        # Write the file out again
+        file = open(contentxml_path, 'w')
+        file.write(filedata)
+        file.close()
+
+        # 3. Rezip up the .odt file
+        dir_to_zip = dir_to_extract_to
+        shutil.make_archive(self.output_odt_filepath, 'zip', dir_to_zip)
+        # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
+        # os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath) ###############
 
 if __name__ == '__main__':
 
