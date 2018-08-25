@@ -2,7 +2,7 @@
 
 // INSTRUCTIONS: 
 
-// 1. Fill in the tet fields below. Format is "FIELD_NAME: field_value", where "FIELD_NAME" must be contained verbatim
+// 1. Fill in the text fields below. Format is "FIELD_NAME: field_value", where "FIELD_NAME" must be contained verbatim
 // in the "ward_bulletin_template.odt" document, and "field_value" is the verbatim word, words, or phrase you want to
 // replace the corresponding "FIELD_NAME" in the .odt document via an automatic find/replace performed by the Python
 // script.
@@ -52,10 +52,7 @@
 //     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 
-// 12. // Turn fastSunday format on or off by setting this value to "True" or "T", or "False" or "F". Caps and spacing
-// don't matter, but the equals sign ("=") is required. Commenting it out defaults this setting to "False".///////////
-
-// 13. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
+// 12. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
 // to look at. Good examples of no-cost text editors for basic software development include Notepad++, Sublime Text,
 // Geany, Visual Studio Code, and Atom, for example.
 
@@ -121,10 +118,7 @@ SM_SACRAMENT_HYMN_NUM:      196
 
 // "Administration and Passing of the Sacrament" happens here.
 
-// Turn fastSunday format on or off by setting this value to "True" or "T", or "False" or "F". Caps and spacing
-// don't matter, but the equals sign ("=") is required. Commenting it out defaults this setting to "False".
-config.fastSunday = True
-// These fields are ignored if config.fastSunday is True
+// These next 4 fields are ignored if fastSunday is set to True in "config.py"
 SM_YOUTH_SPEAKER:           Gina Good
 SM_SPEAKER1:                Zara Zarahemla
 SM_INTERMEDIATE_HYMN_NUM:   129

@@ -1,5 +1,5 @@
 # LibreBulletin
-A bulletin for Sunday meetings of the Church of Jesus Christ of Latter-day Saints\*, using automated Python scripting to find and replace inside a LibreOffice Writer `.odt` file.
+A bulletin for Sunday meetings of the Church of Jesus Christ of Latter-day Saints\*, using automated Python scripting to find and replace text "fields" inside a LibreOffice Writer `.odt` file.
 
 # Details
 The automated scripting includes text replacement and automatic hymn name lookup and placement into a [LibreOffice](https://www.libreoffice.org/) Writer `.odt` text document. This means that you input content in the form of "fields" and "values" into a standard `.txt` text document as an input file, and the script will parse your input and perform automatic replacement of text "fields" within the `.odt` dcoument with "values" from your input `.txt` document, by matching field names in both documents and doing a find/replace on the raw (extracted) `.odt` content. It also will do hymn name lookup, looking up hymn numbers and automatically placing their corresponding hymn names into the bulletin. 

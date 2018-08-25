@@ -40,6 +40,7 @@ Notes:
 
 """
 
+import config # config.py, for paths and stuff
 import hymn_num_2_name # For obtaining hymn names from hymn numbers
 import zipfile
 import os # https://docs.python.org/dev/library/os.path.html#os.path.isdir
@@ -90,7 +91,7 @@ class Bulletin:
         # 1. USER FIELDS
         # Parse bulletin fields from the user input document
         # Read in the file
-        file = open(bulletin_inputs_filepath, "r")
+        file = open(self.bulletin_inputs_filepath, "r")
         lines = file.readlines()
         file.close()
         # Parse lines
@@ -215,7 +216,7 @@ class Bulletin:
         
         # 3. Replace the Sacrament Meeting portion of the bulletin with the appropriate XML content in case it is 
         # "Fast Sunday"
-        
+
 
         # 4. Replace the target strings (fields)
         # NB: you must do the replacement in the order of the field_names being *reverse-sorted*, so that longer string
@@ -255,23 +256,26 @@ class Bulletin:
 
 if __name__ == '__main__':
 
-    # NB: use forward slashes (/) for path names, NOT back slashes (\)!--Even in Windows!
-    input_odt_filepath = "./ward_bulletin_template.odt"
-    output_odt_filepath = "../ward_bulletin_template_out_1.odt"
-    bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
-    hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
+    bulletin = Bulletin(
+        config.input_odt_filepath, config.output_odt_filepath, 
+        config.bulletin_inputs_filepath, config.hymns_src_filepath
+    )
+    bulletin.replaceFields()
+    bulletin.openOutputOdtFile()
 
-    bulletin = Bulletin(input_odt_filepath, output_odt_filepath, bulletin_inputs_filepath, hymns_src_filepath)
 
-    # Test
-    hymn_num = 330
-    hymn_name = bulletin.hymns.getHymnName(hymn_num)
-    print("\nTest:")
-    print("hymn_num = " + str(hymn_num) + "; hymn_name = \"" + hymn_name + "\"")
+
+
+
+
+    # bulletin.printFields()
+
+    # # Test
+    # hymn_num = 330
+    # hymn_name = bulletin.hymns.getHymnName(hymn_num)
+    # print("\nTest:")
+    # print("hymn_num = " + str(hymn_num) + "; hymn_name = \"" + hymn_name + "\"")
 
     # print()
     # print(hymns.getHymnsList())
 
-    # bulletin.printFields()
-    bulletin.replaceFields()
-    bulletin.openOutputOdtFile()
