@@ -4,8 +4,8 @@ bulletin_find_and_replace
   in the document as specified by the user in "bulletin_INPUTS.txt"
 
 Gabriel Staples
-Written: 22 Aug. 2018 
-Updated: 23 Aug. 2018
+Started: 22 Aug. 2018 
+Last Updated: See `git log`
 https://www.ElectricRCAircraftGuy.com
 - Find my email by clicking the "Contact me" link at the top of my website above.
 
@@ -27,7 +27,7 @@ References:
    1. https://stackoverflow.com/questions/3451111/unzipping-files-in-python
    2. zipfile module official documentation: https://docs.python.org/3.5/library/zipfile.html
    3. zip a folder in Python (using shutil): https://stackoverflow.com/a/25650295/4561887
- 8. Example usage of "os" to determine operating system - https://stackoverflow.com/a/38319607/4561887
+ 8. Example usage of "os" to determine operating system [my own ans] - https://stackoverflow.com/a/38319607/4561887
  9. Info. on backslashes vs forward slashes for paths in Windows/Linux
    - Best practice: for both, just use forward slashes (/), NOT back-slashes! (\\)
    - https://stackoverflow.com/a/18776536/4561887 
@@ -44,6 +44,7 @@ import hymn_num_2_name # For obtaining hymn names from hymn numbers
 import zipfile
 import os # https://docs.python.org/dev/library/os.path.html#os.path.isdir
 import shutil # High-level file/folder manipulation - https://docs.python.org/3/library/shutil.html#shutil.rmtree
+import subprocess
 
 VERSION = '0.1.0'
 
@@ -135,6 +136,16 @@ class Bulletin:
         for field in self.fields:
             print(field)
 
+    def openOutputOdtFile(self):
+        """
+        Open up the output .odt file in your system's default editor for it (should be LibreOffice)
+        Source: https://stackoverflow.com/a/435669/4561887
+        """
+        if (os.name == 'nt'): # For Windows
+            os.startfile(self.output_odt_filepath)
+        elif (os.name == 'posix'): # For Linux, Mac, etc.
+            subprocess.call(('xdg-open', self.output_odt_filepath))
+
     def replaceFields(self):
         # 1. Uncompress (unzip) the .odt file
         zip_ref = zipfile.ZipFile(self.input_odt_filepath, 'r')
@@ -212,4 +223,4 @@ if __name__ == '__main__':
 
     bulletin.printFields()
     bulletin.replaceFields()
-
+    bulletin.openOutputOdtFile()
