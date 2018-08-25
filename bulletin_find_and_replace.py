@@ -45,6 +45,7 @@ import zipfile
 import os # https://docs.python.org/dev/library/os.path.html#os.path.isdir
 import shutil # High-level file/folder manipulation - https://docs.python.org/3/library/shutil.html#shutil.rmtree
 import subprocess
+import datetime
 
 VERSION = '0.1.0'
 
@@ -86,13 +87,15 @@ class Bulletin:
         use by the class.
         """
 
-        # Parse bulletin fields from input document
+        # 1. USER FIELDS
+        # Parse bulletin fields from the user input document
         # Read in the file
         file = open(bulletin_inputs_filepath, "r")
         lines = file.readlines()
         file.close()
         # Parse lines
-        self.fields = []
+        self.fields = [] # empty list
+        self.fields_dict = {} # empty dictionary
         for line in lines:
             save_line = True # set to false to discard this line
             # remove whitespace & place line into a list of strings
@@ -126,9 +129,54 @@ class Bulletin:
                 field_name = self.escapeXMLChars(field_name)
                 field_value = self.escapeXMLChars(field_value)
                 
-                # Save lines as [field_name, field_value]
+                # Save lines in list (for general use) as [field_name, field_value], where both are strings
                 self.fields.append([field_name, field_value])
-        
+                # Save lines in dict (for key-value-lookup use) as {field_name: field_value}, where both are strings
+                # TODO: consider getting rid of the self.fields list in the future and using the dictionary only, so as 
+                # to avoid redundantly storing the data twice.
+                self.fields_dict[field_name] = field_value
+
+        # 2. SPECIAL FIELDS
+        # Now load in the "Special Fields" which we need to auto-populate
+        # NB: if you update these field names here then they must be updated in the bulletin inputs doc too to 
+        # communicate that change to the user.
+
+        # A. Sunday's date
+        # Find the date of this coming Sunday, or today's date if today is Sunday
+        # Source: https://stackoverflow.com/a/8801540/4561887
+        # and: https://stackoverflow.com/a/41056161/4561887
+        today = datetime.date.today()
+        sunday = today + datetime.timedelta((6 - today.weekday()) % 7)
+        month_str = sunday.strftime("%B") # See: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
+        sunday_date_str = month_str + " " + str(sunday.day) + ", " + str(sunday.year) # Ex. Format: "August 26, 2018"
+        self.fields.append(["D_UPCOMING_SUNDAY_DATE", sunday_date_str])
+
+        # B. Hymn names
+        # hymn_field_names (tuple of tuples) format = ((HYMN_NAME_FIELDNAME, HYMN_NUM_FIELDNAME))
+        hymn_field_names = (
+            ("SM_OPENING_HYMN_NAME", "SM_OPENING_HYMN_NUM"),
+            ("SM_SACRAMENT_HYMN_NAME", "SM_SACRAMENT_HYMN_NUM"),
+            ("SM_INTERMEDIATE_HYMN_NAME", "SM_INTERMEDIATE_HYMN_NUM"),
+            ("SM_CLOSING_HYMN_NAME", "SM_CLOSING_HYMN_NUM"),
+        )
+        # For all elements in the hymn_field_names tuple just above, append the hymn_name field name and 
+        # value to "self.fields"
+        for hymn_tuple in hymn_field_names:
+            # Look up the hymn number using the hymn number field, from the fields dictionary (fields_dict)
+            hymn_num_field_name = hymn_tuple[1]
+            hymn_num_str = self.fields_dict[hymn_num_field_name]
+            if (hymn_num_str.isdigit()):
+                hymn_num = int(hymn_num_str)
+                # now use the hymn number to look up the hymn name string
+                hymn_name = self.hymns.getHymnName(hymn_num)
+            else:
+                # no hymn_num was input by the user, so just indicate that
+                hymn_name = "--NO VALID HYMN NUMBER INPUT BY USER--"
+
+            # now append this special field to the fields list
+            hymn_name_field_name = hymn_tuple[0]
+            self.fields.append([hymn_name_field_name, hymn_name])
+
     def printFields(self):
         bulletin_inputs_filename = self.bulletin_inputs_filepath.split('/')[-1]
         print("Printing input fields from \"" + bulletin_inputs_filename + "\":\n" +
@@ -160,7 +208,7 @@ class Bulletin:
         # 2. Load "content.xml" from the extracted .odt file, and do the find and replace inside it
         # Example from: https://stackoverflow.com/a/17141572/4561887
 
-        # Read in the file
+        # Read in the "content.xml" file extracted from the .odt file
         contentxml_path = dir_to_extract_to + "/content.xml"
         file = open(contentxml_path, 'r')
         filedata = file.read()
@@ -172,8 +220,6 @@ class Bulletin:
         # then you need to find and replace field "AA" with "hello" *before* finding and replacing "A" with
         # "goodbye". Otherwise, "AA" will get replaced by "goodbyegoodbye" instead of "hello" due to 
         # the "A" field replacement occuring before "AA" is even searched. 
-        print("\nReplacing fields\n" +
-              "Log format: `index: # replacements, ['field_name', 'field_value']`")
         fields_rev_sorted = self.fields.copy()
         fields_rev_sorted.sort(reverse = True)
         fields_num_replacements = {} # dictionary to store the # of replacements for each field
@@ -185,6 +231,8 @@ class Bulletin:
             filedata = filedata.replace(field_name, field_value)
 
         # Print the log in the format above now, but in the order it was read from the user's input file:
+        print("\nReplacing fields\n" +
+              "Log format: `index: # replacements, ['field_name', 'field_value']`")
         for index, field in enumerate(self.fields):
             field_name = field[0]
             field_value = field[1]

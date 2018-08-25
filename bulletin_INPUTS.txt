@@ -10,7 +10,8 @@
 // 2. FIELD_NAME must be a single word with no spaces, though underscores (_) or dashes (-) are OK.
 
 // 3. field_value can be any number of words, but if there are multiple spaces between words, they will be reduced to a
-// single space.
+// single space. It doesn't matter how much or what kind of whitespace (tabs, spaces, etc) is between the FIELD_NAME and 
+// the field_value--format this document to your liking.
 
 // 4. FIELD_NAME should have a colon (:) immediately following it, with *no spaces or other characters* between the
 // FIELD_NAME and the colon. ie: "FIELD_NAME:". However, it will still work without the colon at the end. The colon just
@@ -41,7 +42,8 @@
 
 // 11. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill them
 // out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See the
-// list below.
+// list below. These fields are automatically populated with appropriate values in the "bulletin_find_and_replace.py" 
+// file.
 // Special Fields:
 //     "D_UPCOMING_SUNDAY_DATE" = the date of this coming Sunday (or today if today is Sunday),
 //     in format "August 5, 2018", for example.
