@@ -47,16 +47,21 @@ class Hymns:
                 hymn_num = index + 1
                 print(str(hymn_num) + ": " + hymn_name)
         else:
-            print("printHymnsList Error: self.hymns_list not yet populated. \n" +
+            print("printHymnsList ERROR: self.hymns_list not yet populated. \n" +
                   "Call readFormattedHymnsFile() first to populate it.")
 
     def getHymnName(self, hymn_num):
         # only do for non-empty lists
-        if (len(self.hymns_list) > 0):
-            hymn_name = self.hymns_list[hymn_num - 1]
+        hymns_list_len = len(self.hymns_list)
+        if (hymns_list_len > 0):
+            if (hymn_num > hymns_list_len or hymn_num < 1):
+                hymn_name = "getHymnName ERROR: out of range"
+                print("printHymnsList ERROR: requested hymn_num is either too large or too small")
+            else:
+                hymn_name = self.hymns_list[hymn_num - 1]
         else:
-            hymn_name = "getHymnName Error"
-            print("printHymnsList Error: self.hymns_list not yet populated. \n" +
+            hymn_name = "getHymnName ERROR: not populated"
+            print("printHymnsList ERROR: self.hymns_list not yet populated. \n" +
                   "Call readFormattedHymnsFile() first to populate it.")
         return hymn_name
 

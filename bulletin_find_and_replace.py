@@ -269,6 +269,6 @@ if __name__ == '__main__':
     # print()
     # print(hymns.getHymnsList())
 
-    bulletin.printFields()
+    # bulletin.printFields()
     bulletin.replaceFields()
     bulletin.openOutputOdtFile()
