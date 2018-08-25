@@ -65,6 +65,20 @@ class Bulletin:
 
         self.loadFields()
 
+    def escapeXMLChars(self, str):
+        """
+        Convert chars not allowed in XML as text to chars allowed in XML as text
+        See: 
+         - https://stackoverflow.com/a/28703510/4561887
+         - https://wiki.python.org/moin/EscapingXml
+        """
+        str = str.replace("&", "&amp;")
+        str = str.replace("<", "&lt;")
+        str = str.replace(">", "&gt;")
+        str = str.replace("'", "&apos;")
+        str = str.replace('"', "&quot;")
+        return str
+
     def loadFields(self):
         """
         Load field name and value pairs from the bulletin_inputs_filepath document into a class instance variable for
@@ -104,8 +118,13 @@ class Bulletin:
                 if (num_words >= 2):
                     field_value = ' '.join(words[1:])
                 else:
-                    field_value = ' '
+                    field_value = ''
 
+                # ensure all field names and values are valid in XML files since we will be reading field names and 
+                # writing field values into an XML file (stored inside the compressed .odt archive)
+                field_name = self.escapeXMLChars(field_name)
+                field_value = self.escapeXMLChars(field_value)
+                
                 # Save lines as [field_name, field_value]
                 self.fields.append([field_name, field_value])
         
@@ -170,7 +189,7 @@ class Bulletin:
         dir_to_zip = dir_to_extract_to
         shutil.make_archive(self.output_odt_filepath, 'zip', dir_to_zip)
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
-        # os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath) ###############
+        os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath)
 
 if __name__ == '__main__':
 
