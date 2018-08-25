@@ -5,7 +5,7 @@ bulletin_find_and_replace
 
 Gabriel Staples
 Started: 22 Aug. 2018 
-Last Updated: See `git log`
+Last Updated: See `git log` and/or `git blame`
 https://www.ElectricRCAircraftGuy.com
 - Find my email by clicking the "Contact me" link at the top of my website above.
 
@@ -205,16 +205,19 @@ class Bulletin:
         zip_ref.extractall(dir_to_extract_to)
         zip_ref.close()
 
-        # 2. Load "content.xml" from the extracted .odt file, and do the find and replace inside it
+        # 2. Load "content.xml" from the extracted .odt file so I can do the find and replace inside it
         # Example from: https://stackoverflow.com/a/17141572/4561887
-
         # Read in the "content.xml" file extracted from the .odt file
         contentxml_path = dir_to_extract_to + "/content.xml"
         file = open(contentxml_path, 'r')
         filedata = file.read()
         file.close()
         
-        # Replace the target strings (fields)
+        # 3. Replace the Sacrament Meeting portion of the bulletin with the appropriate XML content in case it is 
+        # "Fast Sunday"
+        
+
+        # 4. Replace the target strings (fields)
         # NB: you must do the replacement in the order of the field_names being *reverse-sorted*, so that longer string
         # replacement occur before short ones. Ex: if field names & values are: ['AA', 'hello'] and ['A', 'goodbye'],
         # then you need to find and replace field "AA" with "hello" *before* finding and replacing "A" with
@@ -230,7 +233,7 @@ class Bulletin:
             fields_num_replacements[field_name] = num_replacements
             filedata = filedata.replace(field_name, field_value)
 
-        # Print the log in the format above now, but in the order it was read from the user's input file:
+        # 5. Print the log in the format above now, but in the order it was read from the user's input file:
         print("\nReplacing fields\n" +
               "Log format: `index: # replacements, ['field_name', 'field_value']`")
         for index, field in enumerate(self.fields):
@@ -239,12 +242,12 @@ class Bulletin:
             num_replacements = fields_num_replacements[field_name]
             print(str(index) + ": " + str(num_replacements) + ", [\'" + field_name + "\', \'" + field_value + "\']")
 
-        # Write the file out again
+        # 6. Write the file out again
         file = open(contentxml_path, 'w')
         file.write(filedata)
         file.close()
 
-        # 3. Rezip up the .odt file
+        # 7. Rezip up the .odt file
         dir_to_zip = dir_to_extract_to
         shutil.make_archive(self.output_odt_filepath, 'zip', dir_to_zip)
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
