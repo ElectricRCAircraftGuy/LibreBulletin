@@ -40,10 +40,10 @@
 // 10. If you'd like to replace a FIELD_NAME with an empty string (thereby deleting the FIELD_NAME) in the .odt document,
 // just leave the field_value blank below.
 
-// 11. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill them
-// out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See the
-// list below. These fields are automatically populated with appropriate values in the "bulletin_find_and_replace.py" 
-// file.
+// 11. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill
+// them out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See
+// the list below. These fields are automatically populated with appropriate values in the
+// "bulletin_find_and_replace.py" file.
 // Special Fields:
 //     "D_UPCOMING_SUNDAY_DATE" = the date of this coming Sunday (or today if today is Sunday),
 //     in format "August 5, 2018", for example.
@@ -52,7 +52,17 @@
 //     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 
-// 12. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
+// 12. Special markers are "fields" which must be in the document for certain script features to work, such as deleting
+// the  speakers and intermediate hymn for Fast Sunday.
+// Special Markers:
+//     "DELETE_FOR_FAST_SUNDAY_START" = an "invisible" (white font) marker placed in the document just before the 
+//     list of speakers, in order to indicate to the script where to start deleting when modifying the document for
+//     Fast Sundays.
+//     "DELETE_FOR_FAST_SUNDAY_END" = an "invisible" (white font) marker placed in the document just after the 
+//     list of speakers, in order to indicate to the script where to stop deleting when modifying the document for
+//     Fast Sundays.
+
+// 13. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
 // to look at. Good examples of no-cost text editors for basic software development include Notepad++, Sublime Text,
 // Geany, Visual Studio Code, and Atom, for example.
 
