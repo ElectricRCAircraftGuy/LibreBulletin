@@ -12,6 +12,23 @@ TODO: Add a gif demo "video" here, showing how easy it is to use this tool, and 
 
 ## TODO: Screenshots
 
+TODO: Add a few screenshots of input --> output bulletin relations (ex: image of: .odt image in + .txt inputs image = .odt image out).
+
+# Programs
+Note: for Windows, use `py -3` in place of `python3` in the commands below. For Linux, use `python3`.
+
+## Main Code
+Run `python3 bulletin_find_and_replace.py` to generate a new bulletin from the `.odt` file template.  
+You must first:
+ 1. Open and format the "ward_bulletin_template.odt" document as desired, inserting any textual strings you'd like to become "fields".
+ 2. Insert all field names and values in "bulletin_INPUTS.txt". Also read the instructions at the top of this document.
+ 3. Update "config.py" with paths and other variables, as required by the document.
+ 4. Then run `python3 bulletin_find_and_replace.py`.
+
+## Utilities
+
+Run `python3 hymns_formatter.py` to format the "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints.txt" file (as manually copied from the church website) to "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt". Read the top of the "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints.txt" file for instructions.
+
 # \*Disclaimer & Background
 This project is not officially affiliated with the Church of Jesus Christ of Latter-day Saints. Rather, I was asked by the bishop of my local congregation (AKA: "ward") if I would be willing to make the bulletin each week for our ward as my voluntary assignment, or "calling".  After doing it for a few months, I decided that I was tired of the tedious nature of retyping information into the formatted bulletin, as it required jumping around all over the document, taking great care not to mess up formatting in the process, and having to meticulously look up the hymn numbers each week on the church website in order to be sure I type the corresponding hymn name exactly, with correct capitalization and formatting. Therefore, I decided to try to automate the process, and this is simply the result of this project I began originally for myself to speed up the weekly bulletin-creation process. 
 
