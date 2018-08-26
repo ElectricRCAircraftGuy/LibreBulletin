@@ -1,6 +1,8 @@
 # LibreBulletin
 A bulletin for Sunday meetings of the Church of Jesus Christ of Latter-day Saints\*, using automated Python scripting to find and replace text "fields" inside a LibreOffice Writer `.odt` file.
 
+Cross-platform! LibreBulletin relies on Python 3 and LibreOffice, both of which are free and open source, and work on virtually all major operating systems, including Windows, Mac, and Linux.
+
 # Details
 The automated scripting includes text replacement and automatic hymn name lookup and placement into a [LibreOffice](https://www.libreoffice.org/) Writer `.odt` text document. This means that you input content in the form of "fields" and "values" into a standard `.txt` text document as an input file, and the script will parse your input and perform automatic replacement of text "fields" within the `.odt` dcoument with "values" from your input `.txt` document, by matching field names in both documents and doing a find/replace on the raw (extracted) `.odt` content. It also will do hymn name lookup, looking up hymn numbers and automatically placing their corresponding hymn names into the bulletin. 
 
@@ -28,6 +30,12 @@ You must first:
 ## Utilities
 
 Run `python3 hymns_formatter.py` to format the "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints.txt" file (as manually copied from the church website) to "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt". Read the top of the "hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints.txt" file for instructions.
+
+## Dependencies
+To use this software, you must have:  
+ * [Python 3](https://www.python.org/downloads/)
+ * [Pillow](https://pillow.readthedocs.io/en/latest/installation.html) (a fork of the original "Python Image Library", or PIL)
+   * Install in python3 with `python3 -m pip install Pillow`. See [here](https://stackoverflow.com/a/20061019/4561887).
 
 # \*Disclaimer & Background
 This project is not officially affiliated with the Church of Jesus Christ of Latter-day Saints. Rather, I was asked by the bishop of my local congregation (AKA: "ward") if I would be willing to make the bulletin each week for our ward as my voluntary assignment, or "calling".  After doing it for a few months, I decided that I was tired of the tedious nature of retyping information into the formatted bulletin, as it required jumping around all over the document, taking great care not to mess up formatting in the process, and having to meticulously look up the hymn numbers each week on the church website in order to be sure I type the corresponding hymn name exactly, with correct capitalization and formatting. Therefore, I decided to try to automate the process, and this is simply the result of this project I began originally for myself to speed up the weekly bulletin-creation process. 

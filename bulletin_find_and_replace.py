@@ -196,6 +196,8 @@ class Bulletin:
             subprocess.call(('xdg-open', self.output_odt_filepath))
 
     def replaceFields(self):
+        print("\nReplacing fields...")
+
         # 1. Uncompress (unzip) the .odt file
         zip_ref = zipfile.ZipFile(self.input_odt_filepath, 'r')
         dir_to_extract_to = "../tmp/" + self.output_odt_filename
@@ -217,6 +219,37 @@ class Bulletin:
         # 3. Replace the Sacrament Meeting portion of the bulletin with the appropriate XML content in case it is 
         # "Fast Sunday"
 
+        # Steps: 
+        # - search content.xml until you find the "START_OF_DELETE_FOR_FAST_SUNDAY" marker string
+        # - search backwards to find the P__ number (paragraph style number) just in front of it, indicating its 
+        # formatting style
+        # - jump to the beginning of the document and update its formatting (for this paragraph style number) to be
+        # *normal* font color now instead of white
+        #   - Also ensure you have made this style *centered* (now in the xml, or previously, manually in the 
+        #  .odt template), since we are about to use it 
+        # - search to the delete start marker again, and replace that string with "FAST AND TESTIMONY MEETING"
+        # - Add a return line just in front of it (look in the xml file for examples of what this looks like)
+        #   - You now have "Administration & Passing of the Sacrament", followed by 2 return lines, followed by 
+        #   "FAST AND TESTIMONY MEETING". This is good.
+        # - Add 2 return lines just after "FAST AND TESTIMONY MEETING"
+        # - Delete everything from just after these 2 return lines to the "END_OF_DELETE_FOR_FAST_SUNDAY" marker string,
+        # including that marker string itself
+        # - You now have:
+        #     Administration and Passing of the Sacrament 
+        #     [new line]
+        #     [new line]
+        #     FAST AND TESTIMONY MEETING [centered, normal black font color]
+        #     [new line]
+        #     [new line]
+        #     Closing Hymn......hymn_hum
+        #           hymn_name 
+        #     Benediction.....etc etc.
+        # - DONE!
+
+
+
+
+
 
         # 4. Replace the target strings (fields)
         # NB: you must do the replacement in the order of the field_names being *reverse-sorted*, so that longer string
@@ -235,7 +268,7 @@ class Bulletin:
             filedata = filedata.replace(field_name, field_value)
 
         # 5. Print the log in the format above now, but in the order it was read from the user's input file:
-        print("\nReplacing fields\n" +
+        print("\nReplacing fields complete.\n" +
               "Log format: `index: # replacements, ['field_name', 'field_value']`")
         for index, field in enumerate(self.fields):
             field_name = field[0]
@@ -254,6 +287,14 @@ class Bulletin:
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
         os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath)
 
+    def replaceFrontCoverImage(self, image_filepath):
+        """ 
+        Replace the document's front cover image with this image. The image must be either an ".odt" document with a
+        single image saved in it, OR a ".png" or ".jpg" image????
+        """
+        print("\nReplacing front cover image...")
+
+
 if __name__ == '__main__':
 
     bulletin = Bulletin(
@@ -261,6 +302,7 @@ if __name__ == '__main__':
         config.bulletin_inputs_filepath, config.hymns_src_filepath
     )
     bulletin.replaceFields()
+    bulletin.replaceFrontCoverImage(config.front_cover_image_filepath)
     bulletin.openOutputOdtFile()
 
 

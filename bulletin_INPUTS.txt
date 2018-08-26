@@ -55,10 +55,10 @@
 // 12. Special markers are "fields" which must be in the document for certain script features to work, such as deleting
 // the  speakers and intermediate hymn for Fast Sunday.
 // Special Markers:
-//     "DELETE_FOR_FAST_SUNDAY_START" = an "invisible" (white font) marker placed in the document just before the 
+//     "START_OF_DELETE_FOR_FAST_SUNDAY" = a text marker placed in the document just before the 
 //     list of speakers, in order to indicate to the script where to start deleting when modifying the document for
 //     Fast Sundays.
-//     "DELETE_FOR_FAST_SUNDAY_END" = an "invisible" (white font) marker placed in the document just after the 
+//     "END_OF_DELETE_FOR_FAST_SUNDAY" = a text marker placed in the document just after the 
 //     list of speakers, in order to indicate to the script where to stop deleting when modifying the document for
 //     Fast Sundays.
 
