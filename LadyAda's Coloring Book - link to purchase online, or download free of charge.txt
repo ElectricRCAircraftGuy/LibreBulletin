@@ -1,0 +1,19 @@
+
+Gabriel Staples notes:
+26 Aug. 2018
+
+I am not affiliated with Adafruit or LadyAda in any way, shape, or form. I just stuck this book in here because I think
+it's AWESOME! Let me repeat: AWESOME! I also used a lot of words from the book to populate my sample
+cleaning_assignments.ods document here, so I thought I'd include the book for reference. If you haven't read the names
+in the document, I'd encourage you to do so. I may even get a smile out of you... :)
+
+---------------------------
+
+$9.95 as of 26 Aug. 2018
+
+Buy: https://www.adafruit.com/product/1000
+
+Direct download link: http://adafruit-coloringbook.s3.amazonaws.com/coloringbook_9-17-2012.pdf
+
+License: This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
