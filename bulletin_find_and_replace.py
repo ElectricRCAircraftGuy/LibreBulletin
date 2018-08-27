@@ -34,6 +34,8 @@ References:
    - https://stackoverflow.com/a/501197/4561887
  10. *****Search & replace text in file: https://stackoverflow.com/a/17141572/4561887
  11. Rename files w/os.rename(): https://stackoverflow.com/questions/2759067/rename-multiple-files-in-a-directory-in-python
+ 12. stdtypes (esp. see the "str." functions, such as "str.find()", or "str.replace()"!) - https://docs.python.org/3/library/stdtypes.html
+ 13. *****Python regular expression (RE) operations & searches - https://docs.python.org/3/library/re.html
 
 Notes:
  - 
@@ -47,6 +49,8 @@ import os # https://docs.python.org/dev/library/os.path.html#os.path.isdir
 import shutil # High-level file/folder manipulation - https://docs.python.org/3/library/shutil.html#shutil.rmtree
 import subprocess
 import datetime
+# import fnmatch # See https://docs.python.org/3/library/fnmatch.html and https://stackoverflow.com/a/11427183/4561887
+import re # Regular Expression operations; see: https://docs.python.org/3/library/re.html
 
 VERSION = '0.1.0'
 
@@ -219,8 +223,8 @@ class Bulletin:
         # 3. Replace the Sacrament Meeting portion of the bulletin with the appropriate XML content in case it is 
         # "Fast Sunday"
 
-        # Steps: 
-        # - search content.xml until you find the "START_OF_DELETE_FOR_FAST_SUNDAY" marker string
+        # Steps: (d = 'd'one)
+        # d- search content.xml until you find the "START_OF_DELETE_FOR_FAST_SUNDAY" marker string
         # - search backwards to find the P__ number (paragraph style number) just in front of it, indicating its 
         # formatting style
         # - jump to the beginning of the document and update its formatting (for this paragraph style number) to be
@@ -245,7 +249,41 @@ class Bulletin:
         #           hymn_name 
         #     Benediction.....etc etc.
         # - DONE!
-        
+        start_delete_marker = "START_OF_DELETE_FOR_FAST_SUNDAY"
+        end_delete_marker = "END_OF_DELETE_FOR_FAST_SUNDAY"
+
+        if (config.fastSunday == True):
+            print("fastSunday == True, so converting bulletin to Fast Sunday format.")
+            markers_found = True
+            # First, ensure the string markers are even present in the filedata string
+            if (start_delete_marker not in filedata):
+                markers_found = False 
+                print("ERROR: start_delete_marker string (\"" + start_delete_marker + "\") NOT FOUND in filedata.")
+            if (end_delete_marker not in filedata):
+                markers_found = False 
+                print("ERROR: end_delete_marker string (\"" + end_delete_marker + "\") NOT FOUND in filedata.")
+            if (markers_found == False):
+                print("If you are sure the string(s) is/are in the .odt template, ensure the entire string has\n"
+                      "consistent formatting by clicking the string in the LibreOffice Writer template,\n"
+                      "selecting the \"Clone Formatting\" tool at the top of LibreOffice Writer, then\n"
+                      "highlighting the entire string with the tool. This ensures the entire string\n"
+                      "has consitent formatting and can now be found contiguously in the compressed,\n"
+                      "internal .xml file.")
+            else: # markers_found == True
+                # find index to the start of start_delete_marker in filedata
+                i = filedata.find(start_delete_marker) 
+                # 
+                search_str = '<text:p text:style-name="P*">'
+                # filtered = fnmatch.filter(filedata[i-100:i], search_str)
+                print(filtered)
+                print(filedata[i-100:i])
+                print(search_str)
+
+                print(i)
+                print(filedata[i:i+60])
+        else: # config.fastSunday == False
+            print("fastSunday == False, so continuing on withOUT converting to Fast Sunday format.")
+
 
 
 
