@@ -5,6 +5,12 @@
 # See "bulletin_INPUTs.txt" for which user fields this setting affects.
 fastSunday = True # True, False, or "auto"
 
+# TODO: make this control the date placed on the bulletin. Anything before this time will use today's date, if today is
+# Sunday. Anything equal to or after this time will use next Sunday's date on the bulletin, even if today is Sunday.
+# This way, if you run the bulletin script before church you'll get today's date on it, but if you run it after church
+# (ex: in preparation for the next Sunday), you'll get next Sunday's date on it.
+timeToUseNextSundayDate = "12:30pm" # TODO: determine proper format: datetime library vs string?
+
 # Paths:
 # NB: use forward slashes (/) for path names, NOT back slashes (\)!--Even in Windows!
 # For relative paths, use "." for the current directory and ".." for one directory up.

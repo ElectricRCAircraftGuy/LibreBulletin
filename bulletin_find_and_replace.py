@@ -245,7 +245,7 @@ class Bulletin:
         #           hymn_name 
         #     Benediction.....etc etc.
         # - DONE!
-
+        
 
 
 
