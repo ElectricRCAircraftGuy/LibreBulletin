@@ -146,6 +146,7 @@ class Bulletin:
         # Now load in the "Special Fields" which we need to auto-populate
         # NB: if you update these field names here then they must be updated in the bulletin inputs doc too to 
         # communicate that change to the user.
+        self.special_fields_start_i = len(self.fields) # starting index of the special fields
 
         # A. Sunday's date
         # Find the date of this coming Sunday, or today's date if today is Sunday
@@ -361,11 +362,18 @@ class Bulletin:
         # 5. Print the log in the format above now, but in the order it was read from the user's input file:
         print("\nReplacing fields complete.\n" +
               "Field replacement log:\n" + 
-              "-Log format: `index: # replacements, ['field_name', 'field_value']`")
+              "-Log format: `index: # replacements, ['field_name', 'field_value']`\n" + 
+              "---------------------\n" +
+              "Start of USER FIELDS:\n" + 
+              "---------------------")
         for index, field in enumerate(self.fields):
             field_name = field[0]
             field_value = field[1]
             num_replacements = fields_num_replacements[field_name]
+            if (index == self.special_fields_start_i):
+                print("------------------------\n" +
+                      "Start of SPECIAL FIELDS:\n" + 
+                      "------------------------")
             print(str(index) + ": " + str(num_replacements) + ", [\'" + field_name + "\', \'" + field_value + "\']")
 
         # 6. Write the file out again
