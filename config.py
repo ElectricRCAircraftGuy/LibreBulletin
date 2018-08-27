@@ -19,6 +19,8 @@ output_odt_filepath = "../ward_bulletin_template_out_1.odt"
 bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
 
-# Must be either a ".odt" document with a single image saved in it, OR a ".png", ".jpg", or ".bmp" image????
-# TODO: TEST OUT IMAGE CONVERSION WITH PILLOW, AND GET THIS WORKING.
-front_cover_image_filepath = "front_cover_image.odt"
+# Must be either a ".odt" document with a single image saved in it, OR a ".png", ".jpg", or ".bmp" image.
+# Set to "None" (without the quotes) if you don't want to replace the front cover image.
+# ie: `front_cover_image_filepath = None`
+# TODO: TEST OUT IMAGE CONVERSION WITH PILLOW, AND GET THIS WORKING.###########
+front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
