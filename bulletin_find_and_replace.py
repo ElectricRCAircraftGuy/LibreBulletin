@@ -36,6 +36,7 @@ References:
  11. Rename files w/os.rename(): https://stackoverflow.com/questions/2759067/rename-multiple-files-in-a-directory-in-python
  12. stdtypes (esp. see the "str." functions, such as "str.find()", or "str.replace()"!) - https://docs.python.org/3/library/stdtypes.html
  13. *****Python regular expression (RE) operations & searches - https://docs.python.org/3/library/re.html
+ 14. Force expression continuation onto next line: https://stackoverflow.com/questions/4172448/is-it-possible-to-break-a-long-line-to-multiple-lines-in-python
 
 Notes:
  - 
@@ -223,22 +224,24 @@ class Bulletin:
         # 3. Replace the Sacrament Meeting portion of the bulletin with the appropriate XML content in case it is 
         # "Fast Sunday"
 
-        # Steps: (d = 'd'one)
+        # Steps (General Idea): 
+        # KEY: (Note: d = 'd'one; m = I 'm'odified this step instead; n = I decided 'n'ot to do this one)
+        #
         # d- search content.xml until you find the "START_OF_DELETE_FOR_FAST_SUNDAY" marker string
-        # - search backwards to find the P__ number (paragraph style number) just in front of it, indicating its 
+        # m- search backwards to find the P__ number (paragraph style number) just in front of it, indicating its 
         # formatting style
-        # - jump to the beginning of the document and update its formatting (for this paragraph style number) to be
+        # n- jump to the beginning of the document and update its formatting (for this paragraph style number) to be
         # *normal* font color now instead of white
-        #   - Also ensure you have made this style *centered* (now in the xml, or previously, manually in the 
+        # d  - Also ensure you have made this style *centered* (now in the xml, or previously, manually in the 
         #  .odt template), since we are about to use it 
-        # - search to the delete start marker again, and replace that string with "FAST AND TESTIMONY MEETING"
-        # - Add a return line just in front of it (look in the xml file for examples of what this looks like)
-        #   - You now have "Administration & Passing of the Sacrament", followed by 2 return lines, followed by 
+        # m- search to the delete start marker again, and replace that string with "FAST AND TESTIMONY MEETING"
+        # m- Add a return line just in front of it (look in the xml file for examples of what this looks like)
+        # m  - You now have "Administration & Passing of the Sacrament", followed by 2 return lines, followed by 
         #   "FAST AND TESTIMONY MEETING". This is good.
-        # - Add 2 return lines just after "FAST AND TESTIMONY MEETING"
-        # - Delete everything from just after these 2 return lines to the "END_OF_DELETE_FOR_FAST_SUNDAY" marker string,
+        # m- Add 2 return lines just after "FAST AND TESTIMONY MEETING"
+        # m- Delete everything from just after these 2 return lines to the "END_OF_DELETE_FOR_FAST_SUNDAY" marker string,
         # including that marker string itself
-        # - You now have:
+        # d- You now have:
         #     Administration and Passing of the Sacrament 
         #     [new line]
         #     [new line]
@@ -248,7 +251,7 @@ class Bulletin:
         #     Closing Hymn......hymn_hum
         #           hymn_name 
         #     Benediction.....etc etc.
-        # - DONE!
+        # d- DONE!
         start_delete_marker = "START_OF_DELETE_FOR_FAST_SUNDAY"
         end_delete_marker = "END_OF_DELETE_FOR_FAST_SUNDAY"
 
@@ -270,35 +273,74 @@ class Bulletin:
                       "has consitent formatting and can now be found contiguously in the compressed,\n"
                       "internal .xml file.")
             else: # markers_found == True
-                
+                """
+                For the following code, reference this sample content from "content.xml". Note that "=>" indicates
+                the deletion start point (`i_delete_start` index below), and "<=" indicates the deletion end point
+                (`i_delete_end` index below):
+                    <text:p text:style-name="P56">Administration and Passing of the Sacrament</text:p>
+                    <text:p text:style-name="P52"/>
+                =>  <text:p text:style-name="P57">START_OF_DELETE_FOR_FAST_SUNDAY</text:p>
+                    .
+                    .
+                    .
+                    <text:p text:style-name="P57">END_OF_DELETE_FOR_FAST_SUNDAY</text:p>  <=
+                """
+
                 # find index to the start of start_delete_marker in filedata
-                i = filedata.find(start_delete_marker) 
-                
-
-                
-                # search backwards to find the P__ number (paragraph style number) just in front of it, indicating its 
-                # formatting style. Ex: I want to find "P57" in this string: '<text:p text:style-name="P57">'
+                i = filedata.find(start_delete_marker)
+                # print(i) # debugging
+                # search backwards to find the end of the *previous* style (ie: the ">" after "P52" above)
+                i = filedata.rfind(">", i-1000, i-1)
+                # print(i) # debugging
+                i_delete_start = i + 1
+                # Now find the preceding P number (ie: decipher that it is "P52" just before this point)
                 # Regular Expression help: https://docs.python.org/3/library/re.html
-                regex_search_pattern = r'P.{0,5}">' # 'r' for 'r'aw string
+                regex_search_pattern = r'"P.{0,5}"' # 'r' for 'r'aw string
                 str_found = re.search(regex_search_pattern, filedata[i-10:i]).group(0)
-                # strip the last 2 chars off of str_found since I really just want the "P57" type part
-                str_found = str_found[:-2]
-                print(str_found)
-                # 
+                # strip off the first and last chars since they are the double quotes above
+                p_num = str_found[1:-1]
+                # print(p_num) # debugging: results in 'P52' for the data as written above
+                # Since this paragraph style should be centered and the proper formatting in the .odt template, we 
+                # can now use this p number to generate an appropriate "blank line" string.
+                # Format: '<text:p text:style-name="P52"/>'
+                p_line_str_blanknewline = '<text:p text:style-name="' + p_num + '"/>'
+                # We can also determine the beginning and end p_line strings to place before and after text we want
+                # formatted with this paragraph style
+                p_line_str_beg = '<text:p text:style-name="' + p_num + '">'
+                p_line_str_end = '</text:p>'
 
-                # # print(filtered)
-                # print(filedata[i-100:i])
-                # # print(search_str)
+                # find the index to the end_delete_marker in filedata
+                i = filedata.find(end_delete_marker)
+                # find the next '>' AFTER this string
+                i = filedata.find(">", i+len(end_delete_marker), i+100)
+                i_delete_end = i + 1
 
-                # print(i)
-                # print(filedata[i:i+60])
+                # Now delete from i_delete_start to i_delete_end by using the slice operator
+                first_half = filedata[:i_delete_start]
+                last_half = filedata[i_delete_end:]
+
+                # Now, just before the "Closing Hymn", insert the following:
+                """
+                    [new line]
+                    FAST AND TESTIMONY MEETING [centered, normal black font color]
+                    [new line]
+                    [new line]
+                """
+                first_half = (first_half
+                              + p_line_str_blanknewline 
+                              + p_line_str_beg + "FAST AND TESTIMONY MEETING" + p_line_str_end
+                              + p_line_str_blanknewline
+                              + p_line_str_blanknewline)
+
+                # re-unite the 2 xml document halfs into one
+                filedata = first_half + last_half
+
         else: # config.fastSunday == False
             print("fastSunday == False, so continuing on withOUT converting to Fast Sunday format.")
-
-
-
-
-
+            print("Adding the start and end delete markers to the fields list with an empty replace\n" +
+                  "string (field_value), so as to force the deletion below.")
+            self.fields.append([start_delete_marker, ''])
+            self.fields.append([end_delete_marker, ''])
 
         # 4. Replace the target strings (fields)
         # NB: you must do the replacement in the order of the field_names being *reverse-sorted*, so that longer string
@@ -318,7 +360,8 @@ class Bulletin:
 
         # 5. Print the log in the format above now, but in the order it was read from the user's input file:
         print("\nReplacing fields complete.\n" +
-              "Log format: `index: # replacements, ['field_name', 'field_value']`")
+              "Field replacement log:\n" + 
+              "-Log format: `index: # replacements, ['field_name', 'field_value']`")
         for index, field in enumerate(self.fields):
             field_name = field[0]
             field_value = field[1]
@@ -342,6 +385,7 @@ class Bulletin:
         single image saved in it, OR a ".png" or ".jpg" image????
         """
         print("\nReplacing front cover image...")
+        print("TODO")
 
 
 if __name__ == '__main__':
