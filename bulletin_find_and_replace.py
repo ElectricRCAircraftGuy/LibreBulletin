@@ -270,17 +270,28 @@ class Bulletin:
                       "has consitent formatting and can now be found contiguously in the compressed,\n"
                       "internal .xml file.")
             else: # markers_found == True
+                
                 # find index to the start of start_delete_marker in filedata
                 i = filedata.find(start_delete_marker) 
-                # 
-                search_str = '<text:p text:style-name="P*">'
-                # filtered = fnmatch.filter(filedata[i-100:i], search_str)
-                print(filtered)
-                print(filedata[i-100:i])
-                print(search_str)
+                
 
-                print(i)
-                print(filedata[i:i+60])
+                
+                # search backwards to find the P__ number (paragraph style number) just in front of it, indicating its 
+                # formatting style. Ex: I want to find "P57" in this string: '<text:p text:style-name="P57">'
+                # Regular Expression help: https://docs.python.org/3/library/re.html
+                regex_search_pattern = r'P.{0,5}">' # 'r' for 'r'aw string
+                str_found = re.search(regex_search_pattern, filedata[i-10:i]).group(0)
+                # strip the last 2 chars off of str_found since I really just want the "P57" type part
+                str_found = str_found[:-2]
+                print(str_found)
+                # 
+
+                # # print(filtered)
+                # print(filedata[i-100:i])
+                # # print(search_str)
+
+                # print(i)
+                # print(filedata[i:i+60])
         else: # config.fastSunday == False
             print("fastSunday == False, so continuing on withOUT converting to Fast Sunday format.")
 
