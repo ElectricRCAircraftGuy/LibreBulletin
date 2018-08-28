@@ -382,7 +382,8 @@ class Bulletin:
         # 6. Replace the document's front cover image
         if (config.front_cover_image_filepath != None):
             print("\nReplacing front cover image...")
-            # Get the current font cover image's name and extension, then convert the new image to the same extension 
+            
+            # 1. Get the current font cover image's name and extension, then convert the new image to the same extension 
             # (file type) and name, and make the replacement
             
             pics_dir = dir_to_extract_to + "/Pictures"
@@ -400,8 +401,15 @@ class Bulletin:
             source_im = Image.open(config.front_cover_image_filepath)
             source_im.save(dest_im_filepath)
 
-            # Scale and position the new image as appropriate
-            width_px, height_px = source_im.size
+            # 2. Scale and position the new image as appropriate
+
+            # image_size_x_px, image_size_y_px = source_im.size
+            # im_ratio_actual = image_size_y_px/image_size_x_px
+            # im_ratio_max = config.max_image_size_y/config.max_image_size_x
+            # if (im_ratio_actual > im_ratio_max):
+            #     # y is the limiting factor, so scale everything to make actual_y = max_y
+            #     scaling_factor = config.max_image_size_y/
+
             # determine the image name
             im_name = dest_im_filepath.split("/")[-1]
             # find it in the xml file
@@ -421,54 +429,31 @@ class Bulletin:
             # but perhaps for other locals/settings they are internally stored in metric units, so I may need to 
             # add support for metric units too,whatever those would be in this case (m?, mm?)
             # 1. x
-            start_pattern = 'svg:x="'
-            end_pattern = 'in"'
-            i1 = filedata.find(start_pattern, i_start, i_end)
-            i2 = filedata.find(end_pattern, i1)
-            x_str = filedata[i1 + len(start_pattern):i2]
-            x = float(x_str)
+            prefix_str = 'svg:x="'
+            suffix_str = 'in"'
+            x_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
+            x_old = float(x_str_old)
             # 2. y
-            start_pattern = 'svg:y="'
-            end_pattern = 'in"'
-            i1 = filedata.find(start_pattern, i_start, i_end)
-            i2 = filedata.find(end_pattern, i1)
-            y_str = filedata[i1 + len(start_pattern):i2]
-            y = float(y_str)
+            prefix_str = 'svg:y="'
+            suffix_str = 'in"'
+            y_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
+            y_old = float(y_str_old)
             # 3. width
-            start_pattern = 'svg:width="'
-            end_pattern = 'in"'
-            i1 = filedata.find(start_pattern, i_start, i_end)
-            i2 = filedata.find(end_pattern, i1)
-            width_str = filedata[i1 + len(start_pattern):i2]
-            width = float(width_str)
-            # 3. height
-            start_pattern = 'svg:height="'
-            end_pattern = 'in"'
-            i1 = filedata.find(start_pattern, i_start, i_end)
-            i2 = filedata.find(end_pattern, i1)
-            height_str = filedata[i1 + len(start_pattern):i2]
-            height = float(height_str)
-
-            # x = re.search(r'x=".*in"', filedata[i_start:i_end]).group(0)
-            # # 2. 'y="0.9701in"'
-            # y = re.search(r'y=".*in"', filedata[i_start:i_end]).group(0)
-            # # 3. 'width="4.5in"'
-            # width = re.search(r'width=".*in"', filedata[i_start:i_end]).group(0)
-            # # 4. 'height="2.8165in"'
-            # height = re.search(r'height=".*in"', filedata[i_start:i_end]).group(0)
+            prefix_str = 'svg:width="'
+            suffix_str = 'in"'
+            width_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
+            width_old = float(width_str_old)
+            # 4. height
+            prefix_str = 'svg:height="'
+            suffix_str = 'in"'
+            height_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
+            height_old = float(height_str_old)
             
-            print("From xml file: image (x, y, width, height) = ({}, {}, {}, {}) in".format(x, y, width, height))
-
-
-            # # 1. 'x="6.0098in"'
-            # x = re.search(r'x=".*in"', filedata[i_start:i_end]).group(0)
-            # # 2. 'y="0.9701in"'
-            # y = re.search(r'y=".*in"', filedata[i_start:i_end]).group(0)
-            # # 3. 'width="4.5in"'
-            # width = re.search(r'width=".*in"', filedata[i_start:i_end]).group(0)
-            # # 4. 'height="2.8165in"'
-            # height = re.search(r'height=".*in"', filedata[i_start:i_end]).group(0)
+            # Debugging:
             # print("From xml file: image (x, y, width, height) = ({}, {}, {}, {}) in".format(x, y, width, height))
+
+            
+
 
         # 7. Write the file out again
         file = open(contentxml_path, 'w')
@@ -480,6 +465,38 @@ class Bulletin:
         shutil.make_archive(self.output_odt_filepath, 'zip', dir_to_zip)
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
         os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath)
+
+    def __parseSubStr(self, data_str, prefix_str, suffix_str, i_srch_start = None, i_srch_end = None):
+        """
+        Find the unknown substring contained between a known prefix string and suffix string.
+
+        Find and return a substring from within a string, knowing only the substring's *prefix* (ie: some string chars
+        *before* the substring) and *sufix* (ie: some string chars *after* the substring). In other words, return 
+        the substring which is contained between prefix_str and suffix_str.
+
+        Ex: imagine you have a string containing `svg:x="6.0098in"`, and you want to extract the "6.0098" part as a 
+        substring, but you don't know what this number is (it could be anything). You do, however, know what 
+        prefix_str_ and suffix_str surround whatever the number is. You could find the number as a substring by calling
+        this function like this: 
+        `num_str = self.__parseSubStr(data_str, 'svg:x="', 'in"')`
+        """
+        if (i_srch_start == None):
+            i_srch_start = 0
+        if (i_srch_end == None):
+            i_srch_end = len(data_str)
+
+        i_prefix = data_str.find(prefix_str, i_srch_start, i_srch_end)
+        i_after_prefix = i_prefix + len(prefix_str)
+        i_suffix = data_str.find(suffix_str, i_after_prefix, i_srch_end)
+        sub_str = data_str[i_after_prefix:i_suffix] 
+        return sub_str
+
+    def __replaceSubStr(self):
+        """
+        This is the opposite of __parseSubStr...
+        """
+        pass
+
 
 if __name__ == '__main__':
 

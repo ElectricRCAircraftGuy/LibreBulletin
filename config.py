@@ -27,14 +27,23 @@ hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints
 # Set to "None" (without the quotes) if you don't want to replace the front cover image.
 # ie: `front_cover_image_filepath = None`
 # TODO: TEST OUT IMAGE CONVERSION WITH PILLOW, AND GET THIS WORKING.###########
-# front_cover_image_filepath = None
+# front_cover_image_filepath = None # Uncomment this, and comment out the line below to disable image replacement.
 front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
 # For scaling & positioning the image:
+# - These are the max x/y sizes, as the image will be scaled proportionally to its original x/y dimensions, but not
+#   to exceed these max image sizes below.
 max_image_size_x = 4.5 # inches; default: 4.5 in
 max_image_size_y = 4.65 # inches; default: 4.65 in
+
+# frame sizes (ie: the x/y area on the page where the image needs to fit)
+# - these parameters are required separately from the max_image_size x/y above so that image centering calcs (below)
+#   still work even if you shrink the image (via the max_image_size x/y parameters above) to be smaller than 
+#   the frame size
+frame_size_x = 4.5 # inches
+frame_size_y = 4.65 # inches
 # specify where you want the center of the picture relative to the entire page
-center_x_pos = 6 + 4.5/2 # inches from left side of entire page
-center_y_pos = 0.25 + 4.65/2 # inches from top of entire page
+center_x_pos = 6 + frame_size_x/2 # inches from left side of entire page
+center_y_pos = 0.25 + frame_size_y/2 # inches from top of entire page
 
 # ----------------------------------------------------------------------------------------------------------------------
 # PROGRAMMER PARAMETERS (not intended to be changed by user)
