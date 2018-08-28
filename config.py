@@ -1,4 +1,8 @@
 
+# ----------------------------------------------------------------------------------------------------------------------
+# USER PARAMETERS
+# ----------------------------------------------------------------------------------------------------------------------
+
 # Turn fastSunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
 # automatically  make an educated guess by assuming that the 1st Sunday of each month is "Fast Sunday", which is
 # normally the case. 
@@ -23,4 +27,12 @@ hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints
 # Set to "None" (without the quotes) if you don't want to replace the front cover image.
 # ie: `front_cover_image_filepath = None`
 # TODO: TEST OUT IMAGE CONVERSION WITH PILLOW, AND GET THIS WORKING.###########
+# front_cover_image_filepath = None
 front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# PROGRAMMER PARAMETERS (not intended to be changed by user)
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Note: use Semantic Versioning (https://semver.org/spec/v2.0.0.html)
+VERSION = '0.1.0'

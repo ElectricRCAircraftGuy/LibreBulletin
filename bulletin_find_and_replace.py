@@ -52,8 +52,10 @@ import subprocess
 import datetime
 # import fnmatch # See https://docs.python.org/3/library/fnmatch.html and https://stackoverflow.com/a/11427183/4561887
 import re # Regular Expression operations; see: https://docs.python.org/3/library/re.html
-
-VERSION = '0.1.0'
+import glob # For determining files in directories; see here: https://stackoverflow.com/a/3215392/4561887
+from PIL import Image # Pillow (Python Image Library); req. for image conversion
+                      # Install: https://stackoverflow.com/a/20061019/4561887
+                      # Usage: https://stackoverflow.com/a/10759132/4561887
 
 class Bulletin:
 
@@ -376,25 +378,40 @@ class Bulletin:
                       "------------------------")
             print(str(index) + ": " + str(num_replacements) + ", [\'" + field_name + "\', \'" + field_value + "\']")
 
-        # 6. Write the file out again
+        # 6. Replace the document's front cover image
+        if (config.front_cover_image_filepath != None):
+            print("\nReplacing front cover image...")
+            # Get the current font cover image's name and extension, then convert the new image to the same extension 
+            # (file type) and name, and make the replacement
+            
+            pics_dir = dir_to_extract_to + "/Pictures"
+            file_list = glob.glob(pics_dir + "/*") # Source: https://stackoverflow.com/a/3215392/4561887
+            # assume the front cover image is the first file returned
+            # TODO: if this ever isn't the case (ex: if the user ever puts multiple images into their bulletin and
+            # this assumption ever becomes wrong), then come up with a more sure solution to find out which image
+            # from the "file_list" list is the front cover image (ex: perhaps determine it by which page it's on, 
+            # using the 'text:anchor-page-number="1"' tag in the xml file?).
+            dest_im_filepath = file_list[0] 
+            print("dest_im_filepath = \"" + dest_im_filepath + "\"")
+           
+            # Convert source image format to destination image format, saving in destination location inside the 
+            # extracted .odt directory; see: https://stackoverflow.com/a/10759132/4561887
+            source_im = Image.open(config.front_cover_image_filepath)
+            source_im.save(dest_im_filepath)
+
+            # TODO: Scale and position the new image as appropriate
+
+
+        # 7. Write the file out again
         file = open(contentxml_path, 'w')
         file.write(filedata)
         file.close()
 
-        # 7. Rezip up the .odt file
+        # 8. Rezip up the .odt file
         dir_to_zip = dir_to_extract_to
         shutil.make_archive(self.output_odt_filepath, 'zip', dir_to_zip)
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
         os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath)
-
-    def replaceFrontCoverImage(self, image_filepath):
-        """ 
-        Replace the document's front cover image with this image. The image must be either an ".odt" document with a
-        single image saved in it, OR a ".png" or ".jpg" image????
-        """
-        print("\nReplacing front cover image...")
-        print("TODO")
-
 
 if __name__ == '__main__':
 
@@ -403,7 +420,6 @@ if __name__ == '__main__':
         config.bulletin_inputs_filepath, config.hymns_src_filepath
     )
     bulletin.replaceFields()
-    bulletin.replaceFrontCoverImage(config.front_cover_image_filepath)
     bulletin.openOutputOdtFile()
 
 
