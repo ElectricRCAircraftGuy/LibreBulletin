@@ -29,6 +29,12 @@ hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints
 # TODO: TEST OUT IMAGE CONVERSION WITH PILLOW, AND GET THIS WORKING.###########
 # front_cover_image_filepath = None
 front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
+# For scaling & positioning the image:
+max_image_size_x = 4.5 # inches; default: 4.5 in
+max_image_size_y = 4.65 # inches; default: 4.65 in
+# specify where you want the center of the picture relative to the entire page
+center_x_pos = 6 + 4.5/2 # inches from left side of entire page
+center_y_pos = 0.25 + 4.65/2 # inches from top of entire page
 
 # ----------------------------------------------------------------------------------------------------------------------
 # PROGRAMMER PARAMETERS (not intended to be changed by user)

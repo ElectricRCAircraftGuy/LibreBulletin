@@ -198,6 +198,7 @@ class Bulletin:
         Open up the output .odt file in your system's default editor for it (should be LibreOffice)
         Source: https://stackoverflow.com/a/435669/4561887
         """
+        print("Opening output .odt file...")
         if (os.name == 'nt'): # For Windows
             os.startfile(self.output_odt_filepath)
         elif (os.name == 'posix'): # For Linux, Mac, etc.
@@ -399,8 +400,75 @@ class Bulletin:
             source_im = Image.open(config.front_cover_image_filepath)
             source_im.save(dest_im_filepath)
 
-            # TODO: Scale and position the new image as appropriate
+            # Scale and position the new image as appropriate
+            width_px, height_px = source_im.size
+            # determine the image name
+            im_name = dest_im_filepath.split("/")[-1]
+            # find it in the xml file
+            i_end = filedata.find(im_name) # index of the start of the im_name below
+            # For the following section of code, imagine your xml file consists of the following code:
+            """
+            <draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="page" text:anchor-page-number="1" 
+            svg:x="6.0098in" svg:y="0.9701in" svg:width="4.5in" svg:height="2.8165in" draw:z-index="1">
+                <draw:image xlink:href="Pictures/10000000000004FE00000320A52375C81C54D988.png" xlink:type="simple" 
+                xlink:show="embed" xlink:actuate="onLoad" loext:mime-type="image/png"/>
+            </draw:frame>
+            """
+            # now find the previous instance of "<draw:frame"
+            i_start = filedata.rfind("<draw:frame", 0, i_end)
+            # now from i_start to i_end, find:
+            # TODO: Are LibreOffice Writer image units always internally inches? I'm assuming units of inches here, 
+            # but perhaps for other locals/settings they are internally stored in metric units, so I may need to 
+            # add support for metric units too,whatever those would be in this case (m?, mm?)
+            # 1. x
+            start_pattern = 'svg:x="'
+            end_pattern = 'in"'
+            i1 = filedata.find(start_pattern, i_start, i_end)
+            i2 = filedata.find(end_pattern, i1)
+            x_str = filedata[i1 + len(start_pattern):i2]
+            x = float(x_str)
+            # 2. y
+            start_pattern = 'svg:y="'
+            end_pattern = 'in"'
+            i1 = filedata.find(start_pattern, i_start, i_end)
+            i2 = filedata.find(end_pattern, i1)
+            y_str = filedata[i1 + len(start_pattern):i2]
+            y = float(y_str)
+            # 3. width
+            start_pattern = 'svg:width="'
+            end_pattern = 'in"'
+            i1 = filedata.find(start_pattern, i_start, i_end)
+            i2 = filedata.find(end_pattern, i1)
+            width_str = filedata[i1 + len(start_pattern):i2]
+            width = float(width_str)
+            # 3. height
+            start_pattern = 'svg:height="'
+            end_pattern = 'in"'
+            i1 = filedata.find(start_pattern, i_start, i_end)
+            i2 = filedata.find(end_pattern, i1)
+            height_str = filedata[i1 + len(start_pattern):i2]
+            height = float(height_str)
 
+            # x = re.search(r'x=".*in"', filedata[i_start:i_end]).group(0)
+            # # 2. 'y="0.9701in"'
+            # y = re.search(r'y=".*in"', filedata[i_start:i_end]).group(0)
+            # # 3. 'width="4.5in"'
+            # width = re.search(r'width=".*in"', filedata[i_start:i_end]).group(0)
+            # # 4. 'height="2.8165in"'
+            # height = re.search(r'height=".*in"', filedata[i_start:i_end]).group(0)
+            
+            print("From xml file: image (x, y, width, height) = ({}, {}, {}, {}) in".format(x, y, width, height))
+
+
+            # # 1. 'x="6.0098in"'
+            # x = re.search(r'x=".*in"', filedata[i_start:i_end]).group(0)
+            # # 2. 'y="0.9701in"'
+            # y = re.search(r'y=".*in"', filedata[i_start:i_end]).group(0)
+            # # 3. 'width="4.5in"'
+            # width = re.search(r'width=".*in"', filedata[i_start:i_end]).group(0)
+            # # 4. 'height="2.8165in"'
+            # height = re.search(r'height=".*in"', filedata[i_start:i_end]).group(0)
+            # print("From xml file: image (x, y, width, height) = ({}, {}, {}, {}) in".format(x, y, width, height))
 
         # 7. Write the file out again
         file = open(contentxml_path, 'w')
