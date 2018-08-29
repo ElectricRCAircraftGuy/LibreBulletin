@@ -32,18 +32,18 @@ front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
 # For scaling & positioning the image:
 # - These are the max x/y sizes, as the image will be scaled proportionally to its original x/y dimensions, but not
 #   to exceed these max image sizes below.
-max_image_size_x = 4.5 # inches; default: 4.5 in
-max_image_size_y = 4.65 # inches; default: 4.65 in
+max_image_size_x_in = 4.5 # inches; default: 4.5 in
+max_image_size_y_in = 4.65 # inches; default: 4.65 in
 
 # frame sizes (ie: the x/y area on the page where the image needs to fit)
-# - these parameters are required separately from the max_image_size x/y above so that image centering calcs (below)
+# - these parameters are required separately from the max_image_size x/y above so that image centering calcs
 #   still work even if you shrink the image (via the max_image_size x/y parameters above) to be smaller than 
 #   the frame size
-frame_size_x = 4.5 # inches
-frame_size_y = 4.65 # inches
-# specify where you want the center of the picture relative to the entire page
-center_x_pos = 6 + frame_size_x/2 # inches from left side of entire page
-center_y_pos = 0.25 + frame_size_y/2 # inches from top of entire page
+frame_size_x_in = 4.5 # inches
+frame_size_y_in = 4.65 # inches
+# frame position
+frame_left_x_pos_in = 6 # inches; from left side of entire page
+frame_top_y_pos_in = 0.25 # inches; from top of entire page
 
 # ----------------------------------------------------------------------------------------------------------------------
 # PROGRAMMER PARAMETERS (not intended to be changed by user)

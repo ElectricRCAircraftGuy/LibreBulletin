@@ -403,18 +403,11 @@ class Bulletin:
 
             # 2. Scale and position the new image as appropriate
 
-            # image_size_x_px, image_size_y_px = source_im.size
-            # im_ratio_actual = image_size_y_px/image_size_x_px
-            # im_ratio_max = config.max_image_size_y/config.max_image_size_x
-            # if (im_ratio_actual > im_ratio_max):
-            #     # y is the limiting factor, so scale everything to make actual_y = max_y
-            #     scaling_factor = config.max_image_size_y/
-
             # determine the image name
             im_name = dest_im_filepath.split("/")[-1]
             # find it in the xml file
             i_end = filedata.find(im_name) # index of the start of the im_name below
-            # For the following section of code, imagine your xml file consists of the following code:
+            # For the following Python parsing code code, imagine your xml file consists of the following xml code:
             """
             <draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="page" text:anchor-page-number="1" 
             svg:x="6.0098in" svg:y="0.9701in" svg:width="4.5in" svg:height="2.8165in" draw:z-index="1">
@@ -424,36 +417,77 @@ class Bulletin:
             """
             # now find the previous instance of "<draw:frame"
             i_start = filedata.rfind("<draw:frame", 0, i_end)
-            # now from i_start to i_end, find:
+            # now from i_start to i_end, find the image x pos, y pos, width, height:
             # TODO: Are LibreOffice Writer image units always internally inches? I'm assuming units of inches here, 
             # but perhaps for other locals/settings they are internally stored in metric units, so I may need to 
             # add support for metric units too,whatever those would be in this case (m?, mm?)
-            # 1. x
-            prefix_str = 'svg:x="'
-            suffix_str = 'in"'
-            x_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
-            x_old = float(x_str_old)
-            # 2. y
-            prefix_str = 'svg:y="'
-            suffix_str = 'in"'
-            y_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
-            y_old = float(y_str_old)
+            # 1. x position
+            x_prefix_str = 'svg:x="'
+            x_suffix_str = 'in"'
+            x_old_str = self.__parseSubStr(filedata, x_prefix_str, x_suffix_str, i_start, i_end)
+            x_old = float(x_old_str)
+            # 2. y position
+            y_prefix_str = 'svg:y="'
+            y_suffix_str = 'in"'
+            y_old_str = self.__parseSubStr(filedata, y_prefix_str, y_suffix_str, i_start, i_end)
+            y_old = float(y_old_str)
             # 3. width
-            prefix_str = 'svg:width="'
-            suffix_str = 'in"'
-            width_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
-            width_old = float(width_str_old)
+            width_prefix_str = 'svg:width="'
+            width_suffix_str = 'in"'
+            width_old_str = self.__parseSubStr(filedata, width_prefix_str, width_suffix_str, i_start, i_end)
+            width_old = float(width_old_str)
             # 4. height
-            prefix_str = 'svg:height="'
-            suffix_str = 'in"'
-            height_str_old = self.__parseSubStr(filedata, prefix_str, suffix_str, i_start, i_end)
-            height_old = float(height_str_old)
+            height_prefix_str = 'svg:height="'
+            height_suffix_str = 'in"'
+            height_old_str = self.__parseSubStr(filedata, height_prefix_str, height_suffix_str, i_start, i_end)
+            height_old = float(height_old_str)
             
+            # Scale the new image
+            image_size_x_px, image_size_y_px = source_im.size
+            im_ratio_actual = 1.04#image_size_y_px/image_size_x_px
+            im_ratio_max = config.max_image_size_y_in/config.max_image_size_x_in
+            if (im_ratio_actual > im_ratio_max):
+                # y is the limiting factor, so scale everything to make actual_y_in = max_y_in
+                scaling_factor = config.max_image_size_y_in/image_size_y_px # [in/px]
+            else:
+                # x is the limiting factor, so scale everything to make actual_x_in = max_x_in
+                scaling_factor = config.max_image_size_x_in/image_size_x_px # [in/px]
+            # scale image
+            width_new = image_size_x_px*scaling_factor # [px * in/px = in]
+            height_new = image_size_y_px*scaling_factor # [px * in/px = in]
+            width_new_str = self.__num2XMLStr(width_new)
+            height_new_str = self.__num2XMLStr(height_new)
+
+            # position the image
+            x_new = config.frame_left_x_pos_in + (config.frame_size_x_in - width_new)/2
+            y_new = config.frame_top_y_pos_in + (config.frame_size_y_in - height_new)/2
+            x_new_str = self.__num2XMLStr(x_new)
+            y_new_str = self.__num2XMLStr(y_new)
+
             # Debugging:
+            ##############TODO: UPDATE THIS TO PRINT ALL 4 PARAMETERS FOR THE IMAGE BOTH *BEFORE* *AND* *AFTER* 
+            # PREPPING THE NEW IMAGE!
             # print("From xml file: image (x, y, width, height) = ({}, {}, {}, {}) in".format(x, y, width, height))
+            print("scaled image: (width_new_str, height_new_str) = ({}, {}) in".format(width_new_str, height_new_str))
+            print("new location: (x_pos, y_pos) = ({}, {}) in".format(x_new_str, y_new_str))
 
+            # Now replace the old values in the XML file with the new values we just calculated
             
+            sub_str_old = x_prefix_str + x_old_str + x_suffix_str
+            sub_str_new = x_prefix_str + x_new_str + x_suffix_str
+            filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
 
+            sub_str_old = y_prefix_str + y_old_str + y_suffix_str
+            sub_str_new = y_prefix_str + y_new_str + y_suffix_str
+            filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
+
+            sub_str_old = width_prefix_str + width_old_str + width_suffix_str
+            sub_str_new = width_prefix_str + width_new_str + width_suffix_str
+            filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
+
+            sub_str_old = height_prefix_str + height_old_str + height_suffix_str
+            sub_str_new = height_prefix_str + height_new_str + height_suffix_str
+            filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
 
         # 7. Write the file out again
         file = open(contentxml_path, 'w')
@@ -466,13 +500,28 @@ class Bulletin:
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"
         os.rename(self.output_odt_filepath + ".zip", self.output_odt_filepath)
 
+    def __num2XMLStr(self, num):
+        """
+        Convert a number to an XML-ready string for LibreOffice Writer. 
+
+        This means convert the number to a float  string with 4 decimal digits of precision, while stripping alll
+        trailing zeros and the decimal if necessary (ex: "2.0000" --> "2", "2.12345678" --> "2.1234", etc.)
+
+        See the following for where I learned about the strip call: https://stackoverflow.com/a/2440786/4561887
+        """
+        output_str = "{:.4f}".format(num).rstrip('.0')
+        return output_str
+
     def __parseSubStr(self, data_str, prefix_str, suffix_str, i_srch_start = None, i_srch_end = None):
         """
         Find the unknown substring contained between a known prefix string and suffix string.
 
         Find and return a substring from within a string, knowing only the substring's *prefix* (ie: some string chars
         *before* the substring) and *sufix* (ie: some string chars *after* the substring). In other words, return 
-        the substring which is contained between prefix_str and suffix_str.
+        the substring which is contained between prefix_str and suffix_str, exclusive.
+
+        Note that i_srch_start and i_srch_end are used as slice operators, so i_srch_start is inclusive, but 
+        i_srch_end is exclusive.
 
         Ex: imagine you have a string containing `svg:x="6.0098in"`, and you want to extract the "6.0098" part as a 
         substring, but you don't know what this number is (it could be anything). You do, however, know what 
@@ -491,12 +540,38 @@ class Bulletin:
         sub_str = data_str[i_after_prefix:i_suffix] 
         return sub_str
 
-    def __replaceSubStr(self):
+    def __replaceSubStr(self, data_str, sub_str_old, sub_str_new, i_srch_start = None, i_srch_end = None, count = None):
         """
-        This is the opposite of __parseSubStr...
-        """
-        pass
+        Replace sub_str_old with sub_str_new inside data_str.
 
+        Optionally specify the search start and end indices inside data_str, and the count, which is the # of 
+        replacements to do before stopping.
+
+        This is essentially the opposite of the __parseSubStr() method.
+
+        Note that i_srch_start and i_srch_end are used as slice operators, so i_srch_start is inclusive, but 
+        i_srch_end is exclusive.
+        """
+        # Slice the data_str into 3 parts, where the replacement will occur only in the middle part
+        i_data_str_end = len(data_str)
+        if (i_srch_start == None):
+            i_srch_start = 0
+        if (i_srch_end == None):
+            i_srch_end = i_data_str_end
+        str_beg = data_str[0:i_srch_start]
+        str_mid = data_str[i_srch_start:i_srch_end]
+        str_end = data_str[i_srch_end:i_data_str_end]
+
+        # Do the replacement
+        if (count == None):
+            str_mid = str_mid.replace(sub_str_old, sub_str_new)
+        else:
+            str_mid = str_mid.replace(sub_str_old, sub_str_new, count)
+
+        # Rejoin all 3 strings into 1 again
+        new_data_str = str_beg + str_mid + str_end
+
+        return new_data_str
 
 if __name__ == '__main__':
 
