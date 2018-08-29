@@ -3,14 +3,29 @@ A bulletin for Sunday meetings of the Church of Jesus Christ of Latter-day Saint
 
 Cross-platform! LibreBulletin relies on Python 3 and LibreOffice, both of which are free and open source, and work on virtually all major operating systems, including Windows, Mac, and Linux.
 
-# Details
-The automated scripting includes text replacement and automatic hymn name lookup and placement into a [LibreOffice](https://www.libreoffice.org/) Writer `.odt` text document. This means that you input content in the form of "fields" and "values" into a standard `.txt` text document as an input file, and the script will parse your input and perform automatic replacement of text "fields" within the `.odt` dcoument with "values" from your input `.txt` document, by matching field names in both documents and doing a find/replace on the raw (extracted) `.odt` content. It also will do hymn name lookup, looking up hymn numbers and automatically placing their corresponding hymn names into the bulletin. 
-
-I'm hoping that semi-automating the bulletin like this will reduce my time required to edit the bulletin document each week from ~45 to ~15 minutes.
-
 ## TODO: Gif Demo
 
 TODO: Add a gif demo "video" here, showing how easy it is to use this tool, and how the process works: `.txt` --> `.odt`.
+
+# Features
+- User-editable LibreOffice Writer `.odt` template
+- Customizable user fields within `.odt` template
+- Automated replacement of user fields in template with fields typed by user into easy-to-edit `.txt` file
+- Automated insertion of hymn names into template, using hymn-number-to-hymn-name lookup
+  - No more time wasted typing in hymn names!
+  - No more misspellings or incorrect punctuation on hymn names! 
+  - No more having to go to https://www.lds.org/music/library/hymns?lang=eng every week to verify hymn names and numbers!
+  - You just get the hymn *number* right, and LibreBulletin will get the hymn *name* right for you!
+- Automated replacement of front cover image in template (just give it a file name), including automatic scaling and positioning of new image
+- Automated insertion of tabulated "Cleaning Assignment" information into a table in the template
+- Automated date insertion of the date of the upcoming Sunday
+- Automated conversion of the sacrament meeting schedule to "Fast Sunday" format (user can select "auto" to have the script assume the first Sunday of every month is Fast Sunday, or they can manually override this setting to force it on or off for any given Sunday)
+
+# Details
+
+The automated scripting includes text replacement and automatic hymn name lookup and placement into a [LibreOffice](https://www.libreoffice.org/) Writer `.odt` text document, as well as automated front cover image replacement, date insertion, Cleaning Assignment table insertion, and "Fast Sunday" format conversion. This means that you input content in the form of "fields" and "values" into a standard `.txt` text document as an input file, and the script will parse your input and perform automatic replacement of text "fields" within the `.odt` dcoument with "values" from your input `.txt` document, by matching field names in both documents and doing a find/replace on the raw (extracted) `.odt` content. It also will do hymn name lookup, looking up hymn numbers and automatically placing their corresponding hymn names into the bulletin. Parameters for the settings, including featuers such as front cover image replacement, can be found in the `config.py` file.
+
+I'm hoping that semi-automating the bulletin like this will reduce my time required to edit the bulletin document each week from ~45 to ~15 minutes.
 
 ## TODO: Screenshots
 
@@ -26,6 +41,9 @@ You must first:
  2. Insert all field names and values in "bulletin_INPUTS.txt". Also read the instructions at the top of this document.
  3. Update "config.py" with paths and other variables, as required by the document.
  4. Then run `python3 bulletin_find_and_replace.py`.
+ 5. Your new, finalized and coverted, ready-to-go LibreOffice Writer `.odt`-format bulletin will automatically open.
+ 6. Manually print it or export it to PDF, as desired.
+ 7. Done!
 
 ## Utilities
 

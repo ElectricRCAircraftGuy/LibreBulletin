@@ -50,4 +50,4 @@ frame_top_y_pos_in = 0.25 # inches; from top of entire page
 # ----------------------------------------------------------------------------------------------------------------------
 
 # Note: use Semantic Versioning (https://semver.org/spec/v2.0.0.html)
-VERSION = '0.1.0'
+VERSION = '0.0.0' # Increment to 0.1.0 and beyond once I have decided to release my first "done" version
