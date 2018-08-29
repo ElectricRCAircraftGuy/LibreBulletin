@@ -45,6 +45,20 @@ frame_size_y_in = 4.65 # inches
 frame_left_x_pos_in = 6 # inches; from left side of entire page
 frame_top_y_pos_in = 0.25 # inches; from top of entire page
 
+# TODO: In the distant future in the far-away land of Distasia (ie: someday--not important right now), I need to do a
+# better job of automatically vertically-centering the contents of the front cover when I do the automatic front cover
+# image replacement. Currently, I only take into account the "frame size" above, which is simply the size of the
+# imaginary box that I'd like the front cover image to fit into, above the text box below the image, and below some
+# reasonable location near the top of the page. This does a pretty good job of vertically centering the image, but since
+# it doesn't also shift the text box below the image around, it can't do it perfectly.  So, **add vertical centering of
+# the text box below the image** as part of the process when vertically centering the image. This will require
+# identifying it, looking up its x, y, width, height parameters in contents.xml, calculating new values, and doing the
+# replacement, but will allow perfect vertical centering of both the new front cover image and the text box each time a
+# new image is added.
+# CURRENT WORKAROUND: just manually bump the image up or down and the text box up or down with the arrow keys before
+# printing and after doing the automatic image replacement/bulletin generation each week. Done! Good enough for now!
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # PROGRAMMER PARAMETERS (not intended to be changed by user)
 # ----------------------------------------------------------------------------------------------------------------------

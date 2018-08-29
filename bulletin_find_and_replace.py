@@ -188,7 +188,7 @@ class Bulletin:
 
     def printFields(self):
         bulletin_inputs_filename = self.bulletin_inputs_filepath.split('/')[-1]
-        print("Printing input fields from \"" + bulletin_inputs_filename + "\":\n" +
+        print("\nPrinting input fields from \"" + bulletin_inputs_filename + "\":\n" +
               "Format: ['field_name', 'field_value']")
         for field in self.fields:
             print(field)
@@ -198,7 +198,7 @@ class Bulletin:
         Open up the output .odt file in your system's default editor for it (should be LibreOffice)
         Source: https://stackoverflow.com/a/435669/4561887
         """
-        print("Opening output .odt file...")
+        print("\nOpening output .odt file...")
         if (os.name == 'nt'): # For Windows
             os.startfile(self.output_odt_filepath)
         elif (os.name == 'posix'): # For Linux, Mac, etc.
@@ -260,7 +260,7 @@ class Bulletin:
         end_delete_marker = "END_OF_DELETE_FOR_FAST_SUNDAY"
 
         if (config.fastSunday == True):
-            print("fastSunday == True, so converting bulletin to Fast Sunday format.")
+            print("\nfastSunday == True, so converting bulletin to Fast Sunday format.")
             markers_found = True
             # First, ensure the string markers are even present in the filedata string
             if (start_delete_marker not in filedata):
@@ -340,7 +340,7 @@ class Bulletin:
                 filedata = first_half + last_half
 
         else: # config.fastSunday == False
-            print("fastSunday == False, so continuing on withOUT converting to Fast Sunday format.")
+            print("\nfastSunday == False, so continuing on withOUT converting to Fast Sunday format.")
             print("Adding the start and end delete markers to the fields list with an empty replace\n" +
                   "string (field_value), so as to force the deletion below.")
             self.fields.append([start_delete_marker, ''])
@@ -464,13 +464,15 @@ class Bulletin:
             x_new_str = self.__num2XMLStr(x_new)
             y_new_str = self.__num2XMLStr(y_new)
 
-            # Debugging:
-            ##############TODO: UPDATE THIS TO PRINT ALL 4 PARAMETERS FOR THE IMAGE BOTH *BEFORE* *AND* *AFTER* 
-            # PREPPING THE NEW IMAGE!
-            # print("From xml file: image (x, y, width, height) = ({}, {}, {}, {}) in".format(x, y, width, height))
-            print("scaled image: (width_new_str, height_new_str) = ({}, {}) in".format(width_new_str, height_new_str))
-            print("new location: (x_pos, y_pos) = ({}, {}) in".format(x_new_str, y_new_str))
-
+            print('Old image from .odt template:\n'
+                  '  Values from "content.xml" within the extracted .odt doc:\n'
+                  '  (x, y, width, height) = ({}, {}, {}, {}) in'.format(
+                    x_old_str, y_old_str, width_old_str, height_old_str))
+            print('New image from "{}":\n'
+                  '  New auto-scaled and auto-positioned values:\n'
+                  '  (x, y, width, height) = ({}, {}, {}, {}) in'.format(
+                    config.front_cover_image_filepath, x_new_str, y_new_str, width_new_str, height_new_str))
+            
             # Now replace the old values in the XML file with the new values we just calculated
             
             sub_str_old = x_prefix_str + x_old_str + x_suffix_str
