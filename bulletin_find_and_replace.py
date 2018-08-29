@@ -56,6 +56,7 @@ import glob # For determining files in directories; see here: https://stackoverf
 from PIL import Image # Pillow (Python Image Library); req. for image conversion
                       # Install: https://stackoverflow.com/a/20061019/4561887
                       # Usage: https://stackoverflow.com/a/10759132/4561887
+                      # Documentation: https://pillow.readthedocs.io/en/4.2.x/reference/Image.html
 
 class Bulletin:
 
@@ -395,16 +396,41 @@ class Bulletin:
             # using the 'text:anchor-page-number="1"' tag in the xml file?).
             dest_im_filepath = file_list[0] 
             print("dest_im_filepath = \"" + dest_im_filepath + "\"")
+            # determine the image name
+            im_name = dest_im_filepath.split("/")[-1]
            
             # Convert source image format to destination image format, saving in destination location inside the 
             # extracted .odt directory; see: https://stackoverflow.com/a/10759132/4561887
+            # NB: since image conversion is one of the slowest parts of this entire script, let's make sure to minimize
+            # how often we do it by saving our converted image locally and seeing if it already exists first each
+            # time we run, rather than automatically just re-converting it.
+            dest_im_extension = im_name[-4:] # destination image extension almost certainly will be ".png"
+            # print(dest_im_extension) # For debugging
+
+            # Determine desired local image copy name; ex: "new_image.png" instead of "new_image.jpg" 
+            desired_local_im_copy = config.front_cover_image_filepath[:-4] + dest_im_extension
+            # print(desired_local_im_copy) # For debugging
+
+            # Open and use the source (new) image
             source_im = Image.open(config.front_cover_image_filepath)
-            source_im.save(dest_im_filepath)
+            # If a local copy of the file *in the desired format* doesn't yet exist, create it!
+            if (os.path.isfile(desired_local_im_copy) != True):
+                print('Converting Image: saving a local copy of the new image in the desired format at:\n'
+                      '  "{}".'.format(desired_local_im_copy))
+                source_im.save(desired_local_im_copy)
+            else:
+                print('Using a previously-created copy of the new image in the desired format from:\n'
+                      '  "{}".'.format(desired_local_im_copy))
+            # Get image dimensions in pixels
+            image_size_x_px, image_size_y_px = source_im.size
+            source_im.close()
+
+            # Now copy this local file over to the compressed .odt folder
+            # Source: https://stackoverflow.com/a/123212/4561887
+            shutil.copyfile(desired_local_im_copy, dest_im_filepath)
 
             # 2. Scale and position the new image as appropriate
 
-            # determine the image name
-            im_name = dest_im_filepath.split("/")[-1]
             # find it in the xml file
             i_end = filedata.find(im_name) # index of the start of the im_name below
             # For the following Python parsing code code, imagine your xml file consists of the following xml code:
@@ -443,8 +469,7 @@ class Bulletin:
             height_old = float(height_old_str)
             
             # Scale the new image
-            image_size_x_px, image_size_y_px = source_im.size
-            im_ratio_actual = 1.04#image_size_y_px/image_size_x_px
+            im_ratio_actual = image_size_y_px/image_size_x_px
             im_ratio_max = config.max_image_size_y_in/config.max_image_size_x_in
             if (im_ratio_actual > im_ratio_max):
                 # y is the limiting factor, so scale everything to make actual_y_in = max_y_in
@@ -469,7 +494,7 @@ class Bulletin:
                   '  (x, y, width, height) = ({}, {}, {}, {}) in'.format(
                     x_old_str, y_old_str, width_old_str, height_old_str))
             print('New image from "{}":\n'
-                  '  New auto-scaled and auto-positioned values:\n'
+                  '  New auto-scaled and auto-positioned values placed into "content.xml":\n'
                   '  (x, y, width, height) = ({}, {}, {}, {}) in'.format(
                     config.front_cover_image_filepath, x_new_str, y_new_str, width_new_str, height_new_str))
             
@@ -577,13 +602,14 @@ class Bulletin:
 
 if __name__ == '__main__':
 
+    print("\nLibreBulletin START OF OPERATIONS.")
     bulletin = Bulletin(
         config.input_odt_filepath, config.output_odt_filepath, 
         config.bulletin_inputs_filepath, config.hymns_src_filepath
     )
     bulletin.replaceFields()
     bulletin.openOutputOdtFile()
-
+    print("\nLibreBulletin END OF OPERATIONS.")
 
 
 
