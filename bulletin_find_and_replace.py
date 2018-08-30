@@ -156,9 +156,9 @@ class Bulletin:
         # Source: https://stackoverflow.com/a/8801540/4561887
         # and: https://stackoverflow.com/a/41056161/4561887
         today = datetime.date.today()
-        sunday = today + datetime.timedelta((6 - today.weekday()) % 7)
-        month_str = sunday.strftime("%B") # See: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
-        sunday_date_str = month_str + " " + str(sunday.day) + ", " + str(sunday.year) # Ex. Format: "August 26, 2018"
+        self.this_sunday = today + datetime.timedelta((6 - today.weekday()) % 7)
+        self.this_month_str = self.this_sunday.strftime("%B") # See: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
+        sunday_date_str = self.this_month_str + " " + str(self.this_sunday.day) + ", " + str(self.this_sunday.year) # Ex. Format: "August 26, 2018"
         self.fields.append(["D_UPCOMING_SUNDAY_DATE", sunday_date_str])
 
         # B. Hymn names
@@ -516,12 +516,66 @@ class Bulletin:
             sub_str_new = height_prefix_str + height_new_str + height_suffix_str
             filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
 
-        # 7. Write the file out again
+        # 7. Import and place the cleaning assignments table into the bulletin
+        print('\nUpdating church cleaning assignments table from "{}"...'.format(
+            config.cleaning_assignments_csv_filepath))
+
+        file = open(config.cleaning_assignments_csv_filepath, 'r')
+        lines = file.readlines()
+        file.close()
+
+        # Parse all lines
+        cleaning_list = []
+        for line in lines:
+            # strip trailing whitespace (in particular the trailing newline char) as well as 
+            # leading whitespace too just in case there is any (there shouldn't be though)
+            line = line.strip()
+            # get a list of column data
+            cols = line.split(',')
+            # append this column data as a new row in the cleaning_list
+            cleaning_list.append(cols)
+
+        # Find the index of the first date after this coming Sunday in the cleaning list .csv data
+        found_month = False
+        found_day = False
+        for index, row in enumerate(cleaning_list):
+            month_str = row[0]
+            day = int(row[1])
+            # if the first 3 chars of the month in the table coincide with the first 3 chars of this month, break
+            if (month_str[0:3] == self.this_month_str[0:3]):
+                found_month = True
+            if (found_month == True):
+
+                 and day > self.this_sunday.day):
+                found_day = True
+                # break, since we found the index!
+                break
+
+        # For debugging:
+        # print(self.this_sunday.month)
+        # print(self.this_sunday.day)
+        # print(self.this_month_str)
+
+        # Now start filling in the table into the xml file, but only IF we found valid data in our source .csv
+        # file for an upcoming date
+        if (found_day == True):
+            # As long as "CCA_MONTH" exists in the document, and we haven't exceeded the bounds of the 
+            # cleaning_list list, keep replacing values in the table line-by-line
+            table_row_cnt = 0
+            first_itn = True
+            while ("CCA_MONTH" in filedata) and (index < len(cleaning_list)):
+                table_row_cnt += 1
+                month = 
+
+                filedata = filedata.replace("CCA_MONTH", cleaning_list[, 1)
+            print("{} rows replaced in the cleaning assignments table.".format(table_row_cnt))
+
+        # 8. Write the file out again
         file = open(contentxml_path, 'w')
         file.write(filedata)
         file.close()
 
-        # 8. Rezip up the .odt file
+        # 9. Rezip up the .odt file
         dir_to_zip = dir_to_extract_to
         shutil.make_archive(self.output_odt_filepath, 'zip', dir_to_zip)
         # the output archive name is now "self.output_odt_filepath.zip", so rename the file by removing the ".zip"

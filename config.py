@@ -22,8 +22,14 @@ input_odt_filepath = "./ward_bulletin_template.odt"
 output_odt_filepath = "../ward_bulletin_template_out_1.odt"
 bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
+# The cleaning assignments list must be a "csv" (Comma-Separated Variable) type file. You can easily export this 
+# file type from Microsoft Excel, LibreOffice Calc, or Google docs spreadsheets. 
+cleaning_assignments_csv_filepath = "./cleaning_assignments.csv"
 
 # Must be either a ".odt" document with a single image saved in it, OR a ".png", ".jpg", or ".bmp" image.
+# TODO: IMPLEMENT THE ability to read image in from another .odt file. This shouldn't be that hard. 
+# Also, test Pillow's ability to use/convert png and bmp files (I've already tested .jpg to .png and it works fine).
+
 # Set to "None" (without the quotes) if you don't want to replace the front cover image.
 # ie: `front_cover_image_filepath = None`
 # TODO: TEST OUT IMAGE CONVERSION WITH PILLOW, AND GET THIS WORKING.###########

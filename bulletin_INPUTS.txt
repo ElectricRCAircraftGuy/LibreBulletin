@@ -51,7 +51,7 @@
 //     “SM_SACRAMENT_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
-//   TODO: add the special fields used for cleaning table replacement too.
+//   TODO: add the special fields used for cleaning table replacement too.////////////
 
 // 12. Special markers are "fields" which must be in the document for certain script features to work, such as deleting
 // the  speakers and intermediate hymn for Fast Sunday.
