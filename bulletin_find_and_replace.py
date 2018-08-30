@@ -538,6 +538,7 @@ class Bulletin:
         # Find the index of the first date after this coming Sunday in the cleaning list .csv data
         found_month = False
         found_day = False
+        self.next_month_str = self.this_sunday.strftime("%B")
         for index, row in enumerate(cleaning_list):
             month_str = row[0]
             day = int(row[1])
@@ -552,7 +553,7 @@ class Bulletin:
                 break
 
         # For debugging:
-        # print(self.this_sunday.month)
+        # print(self.this_sunday.month) # ex: prints 8 for "August"
         # print(self.this_sunday.day)
         # print(self.this_month_str)
 
