@@ -634,6 +634,7 @@ class Bulletin:
                     
                     # Extract column values out of this row of the cleaning_list
                     row_data = cleaning_list[row_i]
+                    row_i += 1
                     
                     # Guarantee placement of the correct month string on the very first row of the table
                     # Also make the month name ALL-CAPS by calling the `str.upper()` method on the month name.
@@ -650,7 +651,6 @@ class Bulletin:
                     family1 = row_data[2]
                     family2 = row_data[3]
                     family3 = row_data[4]
-                    row_i += 1
 
                     # Be sure to get a good start index in filedata to know where the next row in the table is. This
                     # ensures good replacement of weak fields (ie: fields which are definitely *not* guaranteed to be
