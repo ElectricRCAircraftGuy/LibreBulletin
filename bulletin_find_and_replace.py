@@ -34,7 +34,7 @@ References:
    - https://stackoverflow.com/a/501197/4561887
  10. *****Search & replace text in file: https://stackoverflow.com/a/17141572/4561887
  11. Rename files w/os.rename(): https://stackoverflow.com/questions/2759067/rename-multiple-files-in-a-directory-in-python
- 12. stdtypes (esp. see the "str." functions, such as "str.find()", or "str.replace()"!) - https://docs.python.org/3/library/stdtypes.html
+ 12. *****+stdtypes (esp. see the "str." functions, such as "str.find()", or "str.replace()"!) - https://docs.python.org/3/library/stdtypes.html
  13. *****Python regular expression (RE) operations & searches - https://docs.python.org/3/library/re.html
  14. Force expression continuation onto next line: https://stackoverflow.com/questions/4172448/is-it-possible-to-break-a-long-line-to-multiple-lines-in-python
 
@@ -43,8 +43,12 @@ Notes:
 
 """
 
+# Internal modules from within this project
 import config # config.py, for paths and stuff
 import hymn_num_2_name # For obtaining hymn names from hymn numbers
+import date # for getRelativeMonth()
+
+# External Modules
 import zipfile
 import os # https://docs.python.org/dev/library/os.path.html#os.path.isdir
 import shutil # High-level file/folder manipulation - https://docs.python.org/3/library/shutil.html#shutil.rmtree
@@ -156,8 +160,11 @@ class Bulletin:
         # Source: https://stackoverflow.com/a/8801540/4561887
         # and: https://stackoverflow.com/a/41056161/4561887
         today = datetime.date.today()
+        # today = datetime.datetime(2018, 12, 12) # FOR TESTING PURPOSES TO FORCE A CERTAIN DATE TO BE "TODAY"
+        # today = datetime.datetime(2018, 9, 28) # FOR TESTING PURPOSES TO FORCE A CERTAIN DATE TO BE "TODAY"
         self.this_sunday = today + datetime.timedelta((6 - today.weekday()) % 7)
         self.this_month_str = self.this_sunday.strftime("%B") # See: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
+        self.this_month_num = self.this_sunday.month
         sunday_date_str = self.this_month_str + " " + str(self.this_sunday.day) + ", " + str(self.this_sunday.year) # Ex. Format: "August 26, 2018"
         self.fields.append(["D_UPCOMING_SUNDAY_DATE", sunday_date_str])
 
@@ -517,59 +524,112 @@ class Bulletin:
             filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
 
         # 7. Import and place the cleaning assignments table into the bulletin
-        print('\nUpdating church cleaning assignments table from "{}"...'.format(
-            config.cleaning_assignments_csv_filepath))
+        if (config.cleaning_assignments_csv_filepath == None):
+            print('\nSkipping church cleaning assingments table update since it is disabled...')
+        else:
+            print('\nUpdating church cleaning assignments table from "{}"...'.format(
+                config.cleaning_assignments_csv_filepath))
 
-        file = open(config.cleaning_assignments_csv_filepath, 'r')
-        lines = file.readlines()
-        file.close()
+            file = open(config.cleaning_assignments_csv_filepath, 'r')
+            lines = file.readlines()
+            file.close()
 
-        # Parse all lines
-        cleaning_list = []
-        for line in lines:
-            # strip trailing whitespace (in particular the trailing newline char) as well as 
-            # leading whitespace too just in case there is any (there shouldn't be though)
-            line = line.strip()
-            # get a list of column data
-            cols = line.split(',')
-            # append this column data as a new row in the cleaning_list
-            cleaning_list.append(cols)
+            # Parse all lines
+            cleaning_list = []
+            for line in lines:
+                # strip trailing whitespace (in particular the trailing newline char) as well as 
+                # leading whitespace too just in case there is any (there shouldn't be though)
+                line = line.strip()
+                # get a list of column data
+                cols = line.split(',')
+                # append this column data as a new row in the cleaning_list
+                cleaning_list.append(cols)
 
-        # Find the index of the first date after this coming Sunday in the cleaning list .csv data
-        found_month = False
-        found_day = False
-        self.next_month_str = self.this_sunday.strftime("%B")
-        for index, row in enumerate(cleaning_list):
-            month_str = row[0]
-            day = int(row[1])
-            # if the first 3 chars of the month in the table coincide with the first 3 chars of this month, break
-            if (month_str[0:3] == self.this_month_str[0:3]):
-                found_month = True
-            if (found_month == True):
+            # Find the index of the first date after this coming Sunday in the cleaning list .csv data
+            found_this_month = False
+            found_next_month = False
+            found_table_start = False
+            next_month_num, next_month_str = date.getRelativeMonth(self.this_month_num, +1)
+            # get lowercase strings to avoid mismatch due to case differences only
+            this_month_str_lower = self.this_month_str.lower()
+            next_month_str_lower = next_month_str.lower()
+            this_month_str_from_cleaning_list = ''
+            for index, row in enumerate(cleaning_list):
+                # ignore header rows
+                if (index < config.cleaning_assignments_num_header_rows):
+                    continue
 
-                 and day > self.this_sunday.day):
-                found_day = True
-                # break, since we found the index!
-                break
+                # determine if we are on the desired starting row in the table from which we will begin copying data
+                month_str = row[0]
+                day = int(row[1])
+                # if the first 3 chars of the month in the table coincide with the first 3 chars of this month, it means we
+                # reached a row where we are finally in the current month
+                # Note: use the lower-case form of the strings to remove potential missmatch due only to case differences.
+                if (month_str[0:3].lower() == this_month_str_lower[0:3]):
+                    found_this_month = True
+                    this_month_str_from_cleaning_list = month_str # save for use below
+                if (month_str[0:3].lower() == next_month_str_lower[0:3]):
+                    found_next_month = True
+                if ((found_this_month == True and day > self.this_sunday.day) or (found_next_month == True)):
+                    found_table_start = True
+                    # break, since we found the index!
+                    break
 
-        # For debugging:
-        # print(self.this_sunday.month) # ex: prints 8 for "August"
-        # print(self.this_sunday.day)
-        # print(self.this_month_str)
+            # For debugging:
+            # print(self.this_sunday.month) # ex: prints 8 for "August"
+            # print(self.this_sunday.day)
+            # print(self.this_month_str)
 
-        # Now start filling in the table into the xml file, but only IF we found valid data in our source .csv
-        # file for an upcoming date
-        if (found_day == True):
-            # As long as "CCA_MONTH" exists in the document, and we haven't exceeded the bounds of the 
-            # cleaning_list list, keep replacing values in the table line-by-line
-            table_row_cnt = 0
-            first_itn = True
-            while ("CCA_MONTH" in filedata) and (index < len(cleaning_list)):
-                table_row_cnt += 1
-                month = 
+            # Now start filling in the table into the xml file, but only IF we found valid data in our source .csv
+            # file for an upcoming date
+            if (found_table_start == True):
+                # As long as "CCA_MONTH" exists in the document and we haven't exceeded the bounds of the 
+                # cleaning_list list, keep replacing values in the table line-by-line
+                table_row_cnt = 0
+                # If it's the first iteration, get it to insert the current month name on the first row of the table
+                # regardless of whether or not the month name is present in the cleaning_list list.
+                first_itn = True
+                row_i = index
+                while ("CCA_MONTH" in filedata) and (row_i < len(cleaning_list)):
+                    table_row_cnt += 1
+                    
+                    # Extract column values out of this row of the cleaning_list
+                    row_data = cleaning_list[row_i]
+                    
+                    # Guarantee placement of the correct month string on the very first row of the table
+                    # Also make the month name ALL-CAPS by calling the `str.upper()` method on the month name.
+                    # pull new month string value from cleaning_list
+                    month = row_data[0].upper()
+                    if (first_itn == True):
+                        first_itn = False # update
+                        # If month is currently an empty string
+                        if (month == ''):
+                            # pull the previously-saved month string value from the cleaning_list
+                            month = this_month_str_from_cleaning_list.upper() 
+                    # pull other column values from cleaning_list
+                    day = row_data[1]
+                    family1 = row_data[2]
+                    family2 = row_data[3]
+                    family3 = row_data[4]
+                    row_i += 1
 
-                filedata = filedata.replace("CCA_MONTH", cleaning_list[, 1)
-            print("{} rows replaced in the cleaning assignments table.".format(table_row_cnt))
+                    # Be sure to get a good start index in filedata to know where the next row in the table is. This
+                    # ensures good replacement of weak fields (ie: fields which are definitely *not* guaranteed to be
+                    # unique in the document) like "DAY" in the table without accidentally replacing other, legitimate
+                    # "DAY" *words* in the document *as though they were fields*.
+                    start_i = filedata.find("CCA_MONTH")
+                    # Now replace the fields one-by-one for a single row in the table!
+                    filedata_1st_half = filedata[:start_i]
+                    filedata_2nd_half = filedata[start_i:]
+                    filedata_2nd_half = filedata_2nd_half.replace("CCA_MONTH", month, 1)
+                    filedata_2nd_half = filedata_2nd_half.replace("DAY", day, 1)
+                    filedata_2nd_half = filedata_2nd_half.replace("CCA_FAMILY1", family1, 1)
+                    filedata_2nd_half = filedata_2nd_half.replace("CCA_FAMILY2", family2, 1)
+                    filedata_2nd_half = filedata_2nd_half.replace("CCA_FAMILY3", family3, 1)
+                    filedata = filedata_1st_half + filedata_2nd_half
+
+                print("Updating Church Cleaning assignments table done!")
+                print("  {} rows replaced in the cleaning assignments table.".format(table_row_cnt))
 
         # 8. Write the file out again
         file = open(contentxml_path, 'w')

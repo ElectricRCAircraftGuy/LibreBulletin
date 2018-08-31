@@ -1,4 +1,20 @@
 
+# TODO: Either delete this commented-out code or determine if you want to keep going
+# down this route.
+# # Global vars in this module
+# SUNDAY = 1
+# MONDAY = 2
+# TUESDAY = 3
+# WEDNESDAY = 4
+# THURSDAY = 5
+# FRIDAY = 6
+# SATURDAY = 7
+
+# def getUpcomingSunday():
+#     """
+
+#     """
+
 def getRelativeMonth(current_month_num, months_from_now):
     """
     Given a month number 1-12, and the number of months from now (+/- any integer), 

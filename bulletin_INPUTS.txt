@@ -43,15 +43,24 @@
 // 11. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill
 // them out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See
 // the list below. These fields are automatically populated with appropriate values in the
-// "bulletin_find_and_replace.py" file.
+// "bulletin_find_and_replace.py" file. Also see the "config.py" file.
 // Special Fields:
+//   Date:
 //     "D_UPCOMING_SUNDAY_DATE" = the date of this coming Sunday (or today if today is Sunday),
 //     in format "August 5, 2018", for example.
+//   Hymn Names: 
 //     “SM_OPENING_HYMN_NAME” = opening hymn name; automatically pulled using the hymn number field below
 //     “SM_SACRAMENT_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
 //     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
-//   TODO: add the special fields used for cleaning table replacement too.////////////
+//   For Church Cleaning Assignments Table:
+//     "CCA_MONTH" = the church cleaning assignments table month--ex: "September". Nb: This field *must come first*, 
+//     out of these 5 fields, for each new row in the table. Otherwise, as it is currently written, the code will not 
+//     be able to properly parse and place the following 4 fields. 
+//     "DAY" = the cleaning day--ex: "22"
+//     "CCA_FAMILY1" = 1st family assigned to clean on this day--ex: "Smith"
+//     "CCA_FAMILY2" = 2nd family assigned to clean on this day--ex: "Adams"
+//     "CCA_FAMILY3" = 3rd family assigned to clean on this day--ex: "Jones"
 
 // 12. Special markers are "fields" which must be in the document for certain script features to work, such as deleting
 // the  speakers and intermediate hymn for Fast Sunday.

@@ -22,9 +22,14 @@ input_odt_filepath = "./ward_bulletin_template.odt"
 output_odt_filepath = "../ward_bulletin_template_out_1.odt"
 bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
+
 # The cleaning assignments list must be a "csv" (Comma-Separated Variable) type file. You can easily export this 
 # file type from Microsoft Excel, LibreOffice Calc, or Google docs spreadsheets. 
+# Set to "None" (without the quotes) if you have removed the cleaning assignments table from the bulletin and don't
+# need to auto-load values into it.
+# cleaning_assignments_csv_filepath = None # Uncomment this, and comment out the line below to disable this.
 cleaning_assignments_csv_filepath = "./cleaning_assignments.csv"
+cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv file which contain header names instead of data
 
 # Must be either a ".odt" document with a single image saved in it, OR a ".png", ".jpg", or ".bmp" image.
 # TODO: IMPLEMENT THE ability to read image in from another .odt file. This shouldn't be that hard. 
