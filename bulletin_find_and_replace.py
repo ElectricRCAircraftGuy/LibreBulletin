@@ -160,8 +160,11 @@ class Bulletin:
         # Source: https://stackoverflow.com/a/8801540/4561887
         # and: https://stackoverflow.com/a/41056161/4561887
         today = datetime.date.today()
-        # today = datetime.datetime(2018, 12, 12) # FOR TESTING PURPOSES TO FORCE A CERTAIN DATE TO BE "TODAY"
-        # today = datetime.datetime(2018, 9, 28) # FOR TESTING PURPOSES TO FORCE A CERTAIN DATE TO BE "TODAY"
+        # FOR TESTING PURPOSES TO FORCE A CERTAIN DATE TO BE "TODAY" (comment out when done)
+        # today = datetime.datetime(2018, 9, 28)
+        # today = datetime.datetime(2018, 12, 12) # GOOD TEST--helped me catch a bug regarding getting data from the next yr
+        # today = datetime.datetime(2018, 12, 28) # GOOD TEST--forces script to start table with data from the next yr
+        # today = datetime.datetime(2018, 12, 31)
         self.this_sunday = today + datetime.timedelta((6 - today.weekday()) % 7)
         self.this_month_str = self.this_sunday.strftime("%B") # See: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
         self.this_month_num = self.this_sunday.month
@@ -524,13 +527,19 @@ class Bulletin:
             filedata = self.__replaceSubStr(filedata, sub_str_old, sub_str_new, i_start, i_end)
 
         # 7. Import and place the cleaning assignments table into the bulletin
-        if (config.cleaning_assignments_csv_filepath == None):
-            print('\nSkipping church cleaning assingments table update since it is disabled...')
+        if (config.cleaning_assignments_csv_filepath_this_yr == None):
+            print('\nSkipping church cleaning assignments table update since this feature is disabled by the user...')
         else:
-            print('\nUpdating church cleaning assignments table from "{}"...'.format(
-                config.cleaning_assignments_csv_filepath))
+            print('\nUpdating church cleaning assignments table from "{}"'.format(
+                config.cleaning_assignments_csv_filepath_this_yr), end='')
 
-            file = open(config.cleaning_assignments_csv_filepath, 'r')
+            if (config.cleaning_assignments_csv_filepath_next_yr == None):
+                print('...')
+            else:
+                print('\n  and "{}"...'.format(config.cleaning_assignments_csv_filepath_next_yr))
+
+            # 1st year: Import the csv table file for this year
+            file = open(config.cleaning_assignments_csv_filepath_this_yr, 'r')
             lines = file.readlines()
             file.close()
 
@@ -544,12 +553,34 @@ class Bulletin:
                 cols = line.split(',')
                 # append this column data as a new row in the cleaning_list
                 cleaning_list.append(cols)
+            cleaning_list_yr1_len = len(cleaning_list)
+
+            # 2nd year: Import the csv table file for next year
+            if (config.cleaning_assignments_csv_filepath_next_yr != None):
+                file = open(config.cleaning_assignments_csv_filepath_next_yr, 'r')
+                lines = file.readlines()
+                file.close()
+
+                # Parse all lines
+                for index, line in enumerate(lines):
+                    # For next year's data, don't import the header rows
+                    if (index < config.cleaning_assignments_num_header_rows):
+                        continue
+
+                    # strip trailing whitespace (in particular the trailing newline char) as well as 
+                    # leading whitespace too just in case there is any (there shouldn't be though)
+                    line = line.strip()
+                    # get a list of column data
+                    cols = line.split(',')
+                    # append this column data as a new row in the cleaning_list
+                    cleaning_list.append(cols)
 
             # Find the index of the first date after this coming Sunday in the cleaning list .csv data
             found_this_month = False
             found_next_month = False
             found_table_start = False
             next_month_num, next_month_str = date.getRelativeMonth(self.this_month_num, +1)
+
             # get lowercase strings to avoid mismatch due to case differences only
             this_month_str_lower = self.this_month_str.lower()
             next_month_str_lower = next_month_str.lower()
@@ -569,7 +600,15 @@ class Bulletin:
                     found_this_month = True
                     this_month_str_from_cleaning_list = month_str # save for use below
                 if (month_str[0:3].lower() == next_month_str_lower[0:3]):
-                    found_next_month = True
+                    if (next_month_num < self.this_month_num):
+                        # Month roll-over occured from this month to next month (ie: Dec --> Jan), so we know
+                        # we didn't actually find the next month unless it's also the next year, which will 
+                        # have an index >= the length of the first year's worth of data.
+                        if (index >= cleaning_list_yr1_len):
+                            found_next_month = True
+                    else: # next_month_num >= self.this_month_num
+                        # Next month is within the same year as this month, so we know we found it.
+                        found_next_month = True
                 if ((found_this_month == True and day > self.this_sunday.day) or (found_next_month == True)):
                     found_table_start = True
                     # break, since we found the index!
@@ -617,6 +656,9 @@ class Bulletin:
                     # ensures good replacement of weak fields (ie: fields which are definitely *not* guaranteed to be
                     # unique in the document) like "DAY" in the table without accidentally replacing other, legitimate
                     # "DAY" *words* in the document *as though they were fields*.
+                    # - NB: There is no need to ensure start_i != -1 after this find operation, as it is guaranteed
+                    # to return a valid index since we are already ensuring the substring is present via the while loop
+                    # check above!
                     start_i = filedata.find("CCA_MONTH")
                     # Now replace the fields one-by-one for a single row in the table!
                     filedata_1st_half = filedata[:start_i]
