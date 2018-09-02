@@ -760,6 +760,12 @@ class Bulletin:
 if __name__ == '__main__':
 
     print("\nLibreBulletin START OF OPERATIONS.")
+    if (config.demo == True):
+        print("Using demonstration inputs to see this code function...")
+    else:
+        print("**************************************************\n" +
+              "Using ACTUAL INPUTS to generate a real bulletin...\n" + 
+              "**************************************************")
     bulletin = Bulletin(
         config.input_odt_filepath, config.output_odt_filepath, 
         config.bulletin_inputs_filepath, config.hymns_src_filepath

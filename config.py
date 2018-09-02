@@ -4,6 +4,11 @@
 # Update these parameters to customize your bulletin!
 # ----------------------------------------------------------------------------------------------------------------------
 
+# Set to True to demonstrate this library with example input files, or set to False to use your real input files
+# (which are, in my case for generating the real bulletin for my ward, written below)
+# demo = True
+demo = True
+
 # Fast Sunday formatting:
 # Turn fastSunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
 # automatically  make an educated guess by assuming that the 1st Sunday of each month is "Fast Sunday", which is
@@ -20,10 +25,17 @@ timeToUseNextSundayDate = "12:30pm" # TODO: determine proper format: datetime li
 # Bulletin Input Template, Output File, & Hymns Paths:
 # NB: use forward slashes (/) for path names, NOT back slashes (\)!--Even in Windows!
 # For relative paths, use "." for the current directory and ".." for one directory up.
-input_odt_filepath = "./ward_bulletin_template.odt"
-output_odt_filepath = "../ward_bulletin_template_out_1.odt"
-bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
+if (demo == True):  
+    # Demonstration input files to see this code function
+    input_odt_filepath = "./ward_bulletin_template.odt"
+    output_odt_filepath = "../ward_bulletin_template_out_1.odt"
+    bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
+else: 
+    # My real input files to generate my bulletin
+    input_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin Template-20180902#1.odt"
+    output_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin-20180902#1.odt"
+    bulletin_inputs_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/bulletin_INPUTS.txt"
 
 # Cleaning assignments:
 # The cleaning assignments list must be a "csv" (Comma-Separated Variable) type file. You can easily export this 
@@ -35,12 +47,19 @@ hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints
 # detect where the data *transitions* from one year to another is all.
 # - Set the paths below to "None" (without the quotes) to disable automatic filling of this table in the bulletin, or 
 # you can simply remove the cleaning assignments table and its associated "Special Fields" from the bulletin.
-# - Ex: uncomment the below 2 lines, and comment out the 2 lines below that to disable this feature.
-# cleaning_assignments_csv_filepath_this_yr = None 
-# cleaning_assignments_csv_filepath_next_yr = None
-cleaning_assignments_csv_filepath_this_yr = "./cleaning_assignments_2018.csv"
-cleaning_assignments_csv_filepath_next_yr = "./cleaning_assignments_2019.csv"
-cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv files which contain header names instead of data
+if (demo == True):
+    # Demonstration input files to see this code function   
+    # - Ex: uncomment the below 2 lines, and comment out the 2 lines below that to disable this feature.
+    # cleaning_assignments_csv_filepath_this_yr = None 
+    # cleaning_assignments_csv_filepath_next_yr = None
+    cleaning_assignments_csv_filepath_this_yr = "./cleaning_assignments_2018.csv"
+    cleaning_assignments_csv_filepath_next_yr = "./cleaning_assignments_2019.csv"
+    cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv files which contain header names instead of data
+else: 
+    # My real input files to generate my bulletin
+    cleaning_assignments_csv_filepath_this_yr = "./PERSONAL_INFO_NOT_FOR_REPO/Cleaning Assignments - 2018.csv"
+    cleaning_assignments_csv_filepath_next_yr = None
+    cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv files which contain header names instead of data
 
 # Front cover image:
 # Must be either a ".odt" document with a single image saved in it, OR a ".png", ".jpg", or ".bmp" image.
@@ -48,23 +67,33 @@ cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv files whic
 # Also, test Pillow's ability to use/convert png and bmp files (I've already tested .jpg to .png and it works fine).
 # Set to "None" (without the quotes) if you don't want to replace the front cover image.
 # ie: `front_cover_image_filepath = None`
-# front_cover_image_filepath = None # Uncomment this, and comment out the line below to disable image replacement.
-front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
-# For scaling & positioning the image:
-# - These are the max x/y sizes, as the image will be scaled proportionally to its original x/y dimensions, but not
-#   to exceed these max image sizes below.
-max_image_size_x_in = 4.5 # inches; default: 4.5 in
-max_image_size_y_in = 4.65 # inches; default: 4.65 in
+if (demo == True):
+    # For demonstration purposes to see this code function:
+    # front_cover_image_filepath = None # Uncomment this, and comment out the line below to disable image replacement.
+    front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
+    # For scaling & positioning the image:
+    # - These are the max x/y sizes, as the image will be scaled proportionally to its original x/y dimensions, but not
+    #   to exceed these max image sizes below.
+    max_image_size_x_in = 4.5 # inches; default: 4.5 in
+    max_image_size_y_in = 4.65 # inches; default: 4.65 in
 
-# frame sizes (ie: the x/y area on the page where the image needs to fit)
-# - these parameters are required separately from the max_image_size x/y above so that image centering calcs
-#   still work even if you shrink the image (via the max_image_size x/y parameters above) to be smaller than 
-#   the frame size
-frame_size_x_in = 4.5 # inches
-frame_size_y_in = 4.65 # inches
-# frame position
-frame_left_x_pos_in = 6 # inches; from left side of entire page
-frame_top_y_pos_in = 0.25 # inches; from top of entire page
+    # frame sizes (ie: the x/y area on the page where the image needs to fit)
+    # - these parameters are required separately from the max_image_size x/y above so that image centering calcs
+    #   still work even if you shrink the image (via the max_image_size x/y parameters above) to be smaller than 
+    #   the frame size
+    frame_size_x_in = 4.5 # inches
+    frame_size_y_in = 4.65 # inches
+    # frame position
+    frame_left_x_pos_in = 6 # inches; from left side of entire page
+    frame_top_y_pos_in = 0.25 # inches; from top of entire page
+else:
+    front_cover_image_filepath = "pics/the-second-coming-39621-print.jpg"
+    max_image_size_x_in = 4.5 # inches; default: 4.5 in
+    max_image_size_y_in = 4.65 # inches; default: 4.65 in
+    frame_size_x_in = 4.5 # inches
+    frame_size_y_in = 4.65 # inches
+    frame_left_x_pos_in = 6 # inches; from left side of entire page
+    frame_top_y_pos_in = 0.25 # inches; from top of entire page
 
 # TODO: In the distant future in the far-away land of Distasia (ie: someday--not important right now), I need to do a
 # better job of automatically vertically-centering the contents of the front cover when I do the automatic front cover
