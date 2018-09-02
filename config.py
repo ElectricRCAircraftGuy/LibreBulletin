@@ -7,7 +7,7 @@
 # Set to True to demonstrate this library with example input files, or set to False to use your real input files
 # (which are, in my case for generating the real bulletin for my ward, written below)
 # demo = True
-demo = True
+demo = False
 
 # Fast Sunday formatting:
 # Turn fastSunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
@@ -33,8 +33,8 @@ if (demo == True):
     bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 else: 
     # My real input files to generate my bulletin
-    input_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin Template-20180902#1.odt"
-    output_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin-20180902#1.odt"
+    input_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin Template-20180902#2.odt"
+    output_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin-20180902#2.odt"
     bulletin_inputs_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/bulletin_INPUTS.txt"
 
 # Cleaning assignments:
