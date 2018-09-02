@@ -8,3 +8,6 @@
 # Sublime Text project workspaces (save projects only, not workspaces)
 # More info here: http://docs.sublimetext.info/en/latest/file_management/projects.html
 *.sublime-workspace
+
+# Personal info. to build the bulletin for my actual ward. Therefore, do NOT back it up in the public repository!
+/PERSONAL_INFO_NOT_FOR_REPO
