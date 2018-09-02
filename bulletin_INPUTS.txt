@@ -1,4 +1,7 @@
-// bulletin.txt
+// bulletin_INPUTS.txt
+// LibreBulletin automated bulletin generation
+// By Gabriel Staples
+// https://github.com/ElectricRCAircraftGuy/LibreBulletin
 
 // INSTRUCTIONS: 
 
