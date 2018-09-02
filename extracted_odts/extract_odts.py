@@ -15,6 +15,8 @@ import shutil # High-level file/folder manipulation - https://docs.python.org/3/
 import sys # for getting the system argument vector
 import glob # For determining files in directories; see here: https://stackoverflow.com/a/3215392/4561887
 
+folder = 'extracted_odts'
+
 def extractOdts():
     print('Running Python script "{}".'.format(sys.argv[0]))
     print('Scanning current directory for .odt and .ods files...')
@@ -38,7 +40,7 @@ def extractOdts():
         path_dest = path_dest[:-4] + '_' + path_dest[-3:]
 
         # add path prefix to front of path
-        path_dest = './extracted_odts/' + path_dest
+        path_dest = './' + folder + '/' + path_dest
         paths_dest.append(path_dest)
         # print('  "{}"'.format(path_dest))
 
@@ -58,6 +60,17 @@ def extractOdts():
         # Extract to the destination dir
         zip_ref.extractall(dest_dir)
         zip_ref.close()
+
+    # Re-write the XML to pretty-print it, since LibreOffice by default stores it as literally one single line in 
+    # the file.
+    # For all .xml files in the extracted folders, rewrite them in pretty format.
+
+    # First, recursively find all *.xml files in "folder".
+    # NB: this recursive glob method required Python 3.5 or later. 
+    # See here: https://stackoverflow.com/a/2186565/4561887
+    filepaths_xml = glob.glob('./' + folder + '/**/*.xml', recursive=True)
+    # TODO: NOW MAKE THEM PRETTY! See here: https://stackoverflow.com/a/1206856/4561887
+
 
     print("Done.\n")
 
