@@ -120,8 +120,9 @@ T1_14_PH:   eee-eee-eeee
 // Front cover image credits
 // ("IM_" stands for "IMage")
 // -----------------------------------------------------------------------------------------
-IM_IMAGE_NAME:                  Manti, Utah Temple
+IM_IMAGE_NAME:                  "The Resurrected Jesus Christ," by Harry Anderson
 HTTPS://WWW.IM_IMAGE_URL.COM:   https://www.lds.org/media-library/images/the-second-coming-39621?lang=eng
+// IM_IMAGE_NAME:                  Manti, Utah Temple w/“Charcoal Sketch” filter applied in LibreOffice 6.1
 // HTTPS://WWW.IM_IMAGE_URL.COM:   https://www.lds.org/temples/photo-gallery/manti-utah-temple?lang=eng
 
 // -----------------------------------------------------------------------------------------
