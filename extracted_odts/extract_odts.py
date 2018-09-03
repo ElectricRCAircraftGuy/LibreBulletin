@@ -14,6 +14,7 @@ import os # https://docs.python.org/dev/library/os.path.html#os.path.isdir
 import shutil # High-level file/folder manipulation - https://docs.python.org/3/library/shutil.html#shutil.rmtree
 import sys # for getting the system argument vector
 import glob # For determining files in directories; see here: https://stackoverflow.com/a/3215392/4561887
+            # Find files recursively with glob: https://stackoverflow.com/a/2186565/4561887
 
 folder = 'extracted_odts'
 
@@ -66,8 +67,8 @@ def extractOdts():
     # For all .xml files in the extracted folders, rewrite them in pretty format.
 
     # First, recursively find all *.xml files in "folder".
-    # NB: this recursive glob method required Python 3.5 or later. 
-    # See here: https://stackoverflow.com/a/2186565/4561887
+    # NB: this recursive glob method requires Python 3.5 or later. 
+    # See here (find files recursively with glob): https://stackoverflow.com/a/2186565/4561887
     filepaths_xml = glob.glob('./' + folder + '/**/*.xml', recursive=True)
     # TODO: NOW MAKE THEM PRETTY! See here: https://stackoverflow.com/a/1206856/4561887
 

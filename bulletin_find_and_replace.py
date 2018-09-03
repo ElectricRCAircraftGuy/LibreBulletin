@@ -404,7 +404,7 @@ class Bulletin:
             # this assumption ever becomes wrong), then come up with a more sure solution to find out which image
             # from the "file_list" list is the front cover image (ex: perhaps determine it by which page it's on, 
             # using the 'text:anchor-page-number="1"' tag in the xml file?).
-            dest_im_filepath = file_list[0]#[0] ####### TODO: BUG! THIS CAN VARY
+            dest_im_filepath = file_list[1]#[0] ####### TODO: BUG! THIS CAN VARY
             print("dest_im_filepath = \"" + dest_im_filepath + "\"")
             # determine the image name
             im_name = dest_im_filepath.split("/")[-1]

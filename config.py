@@ -14,7 +14,7 @@ demo = False
 # automatically  make an educated guess by assuming that the 1st Sunday of each month is "Fast Sunday", which is
 # normally the case. 
 # See "bulletin_INPUTs.txt" for which user fields this setting affects.
-fastSunday = True # True, False, or "auto"
+fastSunday = False # True, False, or "auto"
 
 # TODO: make this control the date placed on the bulletin. Anything before this time will use today's date, if today is
 # Sunday. Anything equal to or after this time will use next Sunday's date on the bulletin, even if today is Sunday.
@@ -33,9 +33,9 @@ if (demo == True):
     bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 else: 
     # My real input files to generate my bulletin
-    input_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin Template-20180902#2.odt"
-    output_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/Ward Bulletin-20180902#2.odt"
-    bulletin_inputs_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/bulletin_INPUTS.txt"
+    input_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/20180909#1--Ward Bulletin Template.odt"
+    output_odt_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/20180909#1--Ward Bulletin.odt"
+    bulletin_inputs_filepath = "./PERSONAL_INFO_NOT_FOR_REPO/20180909#1--bulletin_INPUTS.txt"
 
 # Cleaning assignments:
 # The cleaning assignments list must be a "csv" (Comma-Separated Variable) type file. You can easily export this 
@@ -57,7 +57,7 @@ if (demo == True):
     cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv files which contain header names instead of data
 else: 
     # My real input files to generate my bulletin
-    cleaning_assignments_csv_filepath_this_yr = "./PERSONAL_INFO_NOT_FOR_REPO/Cleaning Assignments - 2018.csv"
+    cleaning_assignments_csv_filepath_this_yr = "./PERSONAL_INFO_NOT_FOR_REPO/20180909#1--Cleaning Assignments - 2018.csv"
     cleaning_assignments_csv_filepath_next_yr = None
     cleaning_assignments_num_header_rows = 1 # Number of rows in the .csv files which contain header names instead of data
 
