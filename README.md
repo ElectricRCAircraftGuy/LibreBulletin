@@ -38,13 +38,13 @@ Note: for Windows, use `py -3` in place of `python3` in the commands below. For 
 Run `python3 bulletin_find_and_replace.py` to generate a new bulletin from the `.odt` file template.  
 
 ### Instructions
- 1. Open and manually format the "ward_bulletin_template.odt" document as desired:
+ 1. Open and manually format the "**ward_bulletin_template.odt**" document as desired:
    1. Insert any textual strings you'd like to become "fields".
    2. Manually update any announcements, formatting, or other non-automated parts of the template.
- 2. Insert all field names and values in "bulletin_INPUTS.txt". Also read the instructions at the top of this document.
- 3. Update "config.py" with paths and other variables, as required by the document.
+ 2. Insert all field names and values in "**bulletin_INPUTS.txt**". Also read the instructions at the top of this document.
+ 3. Update "**config.py**" with paths and other variables, as required by the document.
  4. Then run `python3 bulletin_find_and_replace.py`.
- 5. Your new, finalized and coverted, ready-to-go LibreOffice Writer `.odt`-format bulletin will automatically open.
+ 5. Your new, finalized and converted, ready-to-go LibreOffice Writer `.odt`-format bulletin will automatically open.
  6. Manually print it or export it to PDF, as desired.
  7. Done!
 
@@ -78,6 +78,20 @@ https://www.ElectricRCAircraftGuy.com
 
 # License
 See "LICENSE.txt"
+
+# Version History
+**Description**
+* The version number is stored in the variable `VERSION` in "config.py".
+* Use Semantic Versioning (https://semver.org/spec/v2.0.0.html).
+* Follow a version format similar to this project's: https://github.com/NicoHood/HID/blob/master/Readme.md.
+* Format: `Major.Minor.Patch (yearMonthDay)`; Date example: `20180905` is 5 Sept. 2018.
+
+**0.2.0 (20180905)**
+* First release; the code works! But if you have more than one image/photo inside the bulletin template, the automatic replacement of the photo is buggy and inconsistent.
+* Many features are still left to implement. 
+* However, at this point I'm starting to use this code in my actual weekly bulletin generation, and it works and definitely speeds up the process!
+
+**0.1.0 (Skipped--not released)**
 
 
 
