@@ -45,6 +45,12 @@ Notes:
 
 # Internal modules from within this project
 import config # config.py, for paths and stuff
+# Ensure you have the correct "config.py" file imported
+if (config.demo == False):
+    # 1st, delete access to old config file. See here: https://stackoverflow.com/a/32234323/4561887.
+    del config
+    # 2nd, import my personal (not shared) config.py file for my ward specifically, instead
+    from PERSONAL_INFO_NOT_FOR_REPO import config
 import hymn_num_2_name # For obtaining hymn names from hymn numbers
 import date # for getRelativeMonth()
 
