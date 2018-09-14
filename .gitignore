@@ -10,4 +10,7 @@
 *.sublime-workspace
 
 # Personal info. to build the bulletin for my actual ward. Therefore, do NOT back it up in the public repository!
-/PERSONAL_INFO_NOT_FOR_REPO
+# See: 
+# - https://stackoverflow.com/a/5534865/4561887
+# - https://stackoverflow.com/questions/8006393/force-add-despite-the-gitignore-file
+/MY_PERSONAL_WARD_INFO
