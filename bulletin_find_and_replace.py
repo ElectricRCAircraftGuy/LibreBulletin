@@ -50,7 +50,7 @@ if (config.demo == False):
     # 1st, delete access to old config file. See here: https://stackoverflow.com/a/32234323/4561887.
     del config
     # 2nd, import my personal (not shared) config.py file for my ward specifically, instead
-    from PERSONAL_INFO_NOT_FOR_REPO import config
+    from MY_PERSONAL_WARD_INFO import config
 import hymn_num_2_name # For obtaining hymn names from hymn numbers
 import date # for getRelativeMonth()
 
@@ -767,11 +767,11 @@ if __name__ == '__main__':
 
     print("\nLibreBulletin START OF OPERATIONS.")
     if (config.demo == True):
-        print("Using demonstration inputs to see this code function...")
+        print("`config.demo == True`, so using demonstration inputs to see this code function...")
     else:
-        print("**************************************************\n" +
-              "Using ACTUAL INPUTS to generate a real bulletin...\n" + 
-              "**************************************************")
+        print("*****************************************************************************\n" +
+              "`config.demo == False`, so using ACTUAL INPUTS to generate a real bulletin...\n" + 
+              "*****************************************************************************")
     bulletin = Bulletin(
         config.input_odt_filepath, config.output_odt_filepath, 
         config.bulletin_inputs_filepath, config.hymns_src_filepath

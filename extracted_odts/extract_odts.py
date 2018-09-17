@@ -53,7 +53,6 @@ def extractOdts():
         print(('Extracting file {}: "{}"\n' +
                '  to dir "{}"').format(i+1, source_file, dest_dir))
 
-        # Do the zip file stuff!
         zip_ref = zipfile.ZipFile(source_file, 'r')
         # Delete the destination dir if it already exists
         if (os.path.isdir(dest_dir)):

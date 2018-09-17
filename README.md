@@ -25,7 +25,7 @@ TODO: Add a gif demo "video" here, showing how easy it is to use this tool, and 
 
 The automated scripting includes text replacement and automatic hymn name lookup and placement into a [LibreOffice](https://www.libreoffice.org/) Writer `.odt` text document, as well as automated front cover image replacement, date insertion, Cleaning Assignment table insertion, and "Fast Sunday" format conversion. This means that you input content in the form of "fields" and "values" into a standard `.txt` text document as an input file, and the script will parse your input and perform automatic replacement of text "fields" within the `.odt` dcoument with "values" from your input `.txt` document, by matching field names in both documents and doing a find/replace on the raw (extracted) `.odt` content. It also will do hymn name lookup, looking up hymn numbers and automatically placing their corresponding hymn names into the bulletin. Parameters for the settings, including featuers such as front cover image replacement, can be found in the `config.py` file.
 
-I'm hoping that semi-automating the bulletin like this will reduce my time required to edit the bulletin document each week from ~45 to ~15 minutes (since typing in announcements will still be done manually in the `.odt` template file).
+I'm hoping that semi-automating the bulletin like this will reduce my time required to edit the bulletin document each week from well over 1 hr. to <45 minutes (since typing in announcements will still be done manually in the `.odt` template file, and it still requires finding a new cover photo, manually pulling things from online Google spreadsheets [although this can be automated in the future], etc.).
 
 ## TODO: Screenshots
 
@@ -38,9 +38,9 @@ Note: for Windows, use `py -3` in place of `python3` in the commands below. For 
 Run `python3 bulletin_find_and_replace.py` to generate a new bulletin from the `.odt` file template.  
 
 ### Instructions
- 1. Open and manually format the "**ward_bulletin_template.odt**" document as desired:
-   1. Insert any textual strings you'd like to become "fields".
-   2. Manually update any announcements, formatting, or other non-automated parts of the template.
+ 1. Open and manually format the "**ward_bulletin_template.odt**" LibreOffice Writer document as desired:
+   1. Insert any textual strings you'd like to become "fields" (see the top of "bulletin_INPUTS.txt" for more info. about "fields").
+   2. Manually update any announcements, formatting, or other non-automated parts of the `.odt` template.
  2. Insert all field names and values in "**bulletin_INPUTS.txt**". Also read the instructions at the top of this document.
  3. Update "**config.py**" with paths and other variables, as required by the document.
  4. Then run `python3 bulletin_find_and_replace.py`.
