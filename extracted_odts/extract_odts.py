@@ -15,6 +15,7 @@ import shutil # High-level file/folder manipulation - https://docs.python.org/3/
 import sys # for getting the system argument vector
 import glob # For determining files in directories; see here: https://stackoverflow.com/a/3215392/4561887
             # Find files recursively with glob: https://stackoverflow.com/a/2186565/4561887
+import xml.dom.minidom # for prettifying xml files; see my ans here: https://stackoverflow.com/a/52125645/4561887
 
 folder = 'extracted_odts'
 
@@ -66,13 +67,40 @@ def extractOdts():
     # For all .xml files in the extracted folders, rewrite them in pretty format.
 
     # First, recursively find all *.xml files in "folder".
-    # NB: this recursive glob method requires Python 3.5 or later. 
+    # NB: this recursive glob method requires Python 3.5 or later. If this becomes a problem, the example at the link
+    # below also offers a nice Python 2.2 to 3.4 solution which I can use instead.
     # See here (find files recursively with glob): https://stackoverflow.com/a/2186565/4561887
     filepaths_xml = glob.glob('./' + folder + '/**/*.xml', recursive=True)
-    # TODO: NOW MAKE THEM PRETTY! See here: https://stackoverflow.com/a/1206856/4561887
+    # Print & prettify all .xml files found.
+    print('"Prettifying" .xml files:')
+    for index, path in enumerate(filepaths_xml):
+        # 1) print 
+        filenum = index + 1
+        if (filenum < 10):
+            spaces = ' '*2
+        else:
+            spaces = ' '*1
+        print(('  {}.' + spaces + '{}').format(filenum, path))
+        
+        # 2) prettify
+        # Only prettify the xml if the file isn't empty (ie: its size > 0)
+        # - See: https://stackoverflow.com/a/2507871/4561887 and https://docs.python.org/3/library/os.html#os.stat
+        filesize_bytes = os.stat(path).st_size
+        if (filesize_bytes == 0):
+            spaces = ' '*6
+            print(spaces + '- Skipping this file since filesize == 0 bytes...')
+        else:
+            # See my ans here: https://stackoverflow.com/a/52125645/4561887
+            file = open(path, 'r')
+            xml_string = file.read()
+            file.close()
+            xml_string = xml.dom.minidom.parseString(xml_string)
+            xml_string_pretty = xml_string.toprettyxml()
+            file = open(path, 'w') # overwrite existing file
+            file.write(xml_string_pretty)
+            file.close()
 
-
-    print("Done.\n")
+    print("END of custom script.\n")
 
 if __name__ == '__main__':
     extractOdts()
