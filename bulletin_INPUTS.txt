@@ -1,93 +1,97 @@
-// bulletin_INPUTS.txt
-// LibreBulletin automated bulletin generation
-// By Gabriel Staples
-// https://github.com/ElectricRCAircraftGuy/LibreBulletin
+# bulletin_INPUTS.txt
+# LibreBulletin automated bulletin generation
+# By Gabriel Staples
+# https://github.com/ElectricRCAircraftGuy/LibreBulletin
 
-// INSTRUCTIONS: 
+# INSTRUCTIONS: 
 
-// 1. Fill in the text fields below. Format is "FIELD_NAME: field_value", where "FIELD_NAME" must be contained verbatim
-// in the "ward_bulletin_template.odt" document, and "field_value" is the verbatim word, words, or phrase you want to
-// replace the corresponding "FIELD_NAME" in the .odt document via an automatic find/replace performed by the Python
-// script.
+# 1. Fill in the text fields below. Format is "FIELD_NAME: field_value", where "FIELD_NAME" must be contained verbatim
+# in the "ward_bulletin_template.odt" document, and "field_value" is the verbatim word, words, or phrase you want to
+# replace the corresponding "FIELD_NAME" in the .odt document via an automatic find/replace performed by this
+# LibreBulletin Python script.
 
-// 2. FIELD_NAME must be a single word with no spaces, though underscores (_) or dashes (-) are OK.
+# 2. FIELD_NAME must be a single word with no spaces, though underscores (_) or dashes (-) are OK.
 
-// 3. field_value can be any number of words, but if there are multiple spaces between words, they will be reduced to a
-// single space. It doesn't matter how much or what kind of whitespace (tabs, spaces, etc) is between the FIELD_NAME and 
-// the field_value--format this document to your liking.
+# 3. field_value can be any number of words, but if there are multiple spaces between words, they will be reduced to a
+# single space. It doesn't matter how much or what kind of whitespace (tabs, spaces, etc) is between the FIELD_NAME and 
+# the field_value--format this text document to your liking.
 
-// 4. FIELD_NAME should have a colon (:) immediately following it, with *no spaces or other characters* between the
-// FIELD_NAME and the colon. ie: "FIELD_NAME:". However, it will still work without the colon at the end. The colon just
-// makes the list below more readable.
+# 4. FIELD_NAME should have a colon (:) immediately following it, with *no spaces or other characters* between the
+# FIELD_NAME and the colon. ie: "FIELD_NAME:". However, it will still work without the colon at the end. The colon just
+# makes the list below more readable. The FIELD_NAME is simply identified as the *first word* of an uncommented line.
 
-// 5. By convention, FIELD_NAME should be written in ALL CAPS, though this is not enforced, and it will work even if in 
-// mixed case or all lower-case. Using ALL CAPS, however, helps to make the field stand out more in the .odt document
-// so you can more quickly identify which words in the document are fields you expect to be replaced, and which words 
-// are not.
+# 5. By convention, FIELD_NAME should be written in ALL CAPS, though this is not enforced, and it will work even if it
+# is mixed case or all lower-case. Using ALL CAPS, however, helps to make the field stand out more in the .odt document
+# so you can more quickly identify which words in the document are fields you expect to be replaced, and which words
+# are not.
 
-// 6. Comments in this document begin with "//", and are ignored, so feel free to delete all these comments if you  feel
-// like it. Blank spaces also are ignored and don't matter.
+# 6. Comments in this document begin with "#", and are ignored, so feel free to delete all these comments if you feel
+# like it. Blank spaces also are ignored and don't matter. 
 
-// 7. Order of fields doesn't matter, so feel free to re-arrange them below as you see fit.
+# 7. Comments can NOT come on the same line as field names (ex: at end very end of the line), as they will be
+# interpreted as field *values* instead, since all characters and words after the field *name* are automatically
+# considered to be part of the field  *value*.
 
-// 8. If you'd like to add a new field to find and replace in the .odt document, simply invent one with any unique name
-// you can think of (I recommend all caps and with a few preceding characters to indicate what it might mean, such as is
-// indicated in the examples below [ex: "T1_", "IM_", "SM_", etc]), type it into the .odt document where you want,
-// format it in the .odt document as desired, and then add the field name and value anywhere into this document below.
-// Again, order doesn't matter. You can add, rename, or delete any of the fields below as you wish. Just be sure to make
-// the corresponding FIELD_NAME changes in the .odt document.
+# 8. If you don't want to do a find/replace on a field below you can either delete it or simply comment it out by
+# adding the comment character "#" in front of the FIELD_NAME. 
 
-// 9. If you don't want to do a find/replace on a field below you can either delete it or simply comment it out by
-// adding "//" in front of the FIELD_NAME. 
+# 9. Order of fields doesn't matter, so feel free to re-arrange them below as you see fit.
 
-// 10. If you'd like to replace a FIELD_NAME with an empty string (thereby deleting the FIELD_NAME) in the .odt document,
-// just leave the field_value blank below.
+# 10. If you'd like to add a new field to find and replace in the .odt document, simply invent one with any unique name
+# you can think of (I recommend all caps and with a few preceding characters to indicate what it might mean, such as is
+# indicated in the examples below [ex: "T1_", "IM_", "SM_", etc]), type it into the .odt document where you want,
+# format it in the .odt document as desired, and then add the field name and value anywhere into this document below.
+# Again, order doesn't matter. You can add, rename, or delete any of the fields below as you wish. Just be sure to make
+# the corresponding FIELD_NAME changes in the .odt document.
 
-// 11. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill
-// them out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See
-// the list below. These fields are automatically populated with appropriate values in the
-// "bulletin_find_and_replace.py" file. Also see the "config.py" file.
-// Special Fields:
-//   Date:
-//     "D_UPCOMING_SUNDAY_DATE" = the date of this coming Sunday (or today if today is Sunday),
-//     in format "August 5, 2018", for example.
-//   Hymn Names: 
-//     “SM_OPENING_HYMN_NAME” = opening hymn name; automatically pulled using the hymn number field below
-//     “SM_SACRAMENT_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
-//     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
-//     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
-//   For Church Cleaning Assignments Table:
-//     "CCA_MONTH" = the church cleaning assignments table month--ex: "September". Nb: This field *must come first*, 
-//     out of these 5 fields, for each new row in the table. Otherwise, as it is currently written, the code will not 
-//     be able to properly parse and place the following 4 fields. 
-//     "DAY" = the cleaning day--ex: "22"
-//     "CCA_FAMILY1" = 1st family assigned to clean on this day--ex: "Smith"
-//     "CCA_FAMILY2" = 2nd family assigned to clean on this day--ex: "Adams"
-//     "CCA_FAMILY3" = 3rd family assigned to clean on this day--ex: "Jones"
+# 11. If you'd like to replace a FIELD_NAME with an empty string (thereby deleting the FIELD_NAME) in the .odt document,
+# just leave the field_value blank below.
 
-// 12. Special markers are "fields" which must be in the document for certain script features to work, such as deleting
-// the  speakers and intermediate hymn for Fast Sunday.
-// Special Markers:
-//     "START_OF_DELETE_FOR_FAST_SUNDAY" = a text marker placed in the document just before the 
-//     list of speakers, in order to indicate to the script where to start deleting when modifying the document for
-//     Fast Sundays.
-//     "END_OF_DELETE_FOR_FAST_SUNDAY" = a text marker placed in the document just after the 
-//     list of speakers, in order to indicate to the script where to stop deleting when modifying the document for
-//     Fast Sundays.
+# 12. Special fields are fields which will get automatically loaded into the document, but you *don't* have to fill
+# them out here at all. Just make sure their FIELD_NAMEs are in the .odt document is all if you'd like to use them. See
+# the list below. These fields are automatically populated with appropriate values by the LibreBulletin script.
+# See the "bulletin_find_and_replace.py" file and the "config.py" file for the source code.
+# Special Fields:
+#   Date:
+#     "D_UPCOMING_SUNDAY_DATE" = the date of this coming Sunday (or today if today is Sunday),
+#     in format "August 5, 2018", for example.
+#   Hymn Names: 
+#     “SM_OPENING_HYMN_NAME” = opening hymn name; automatically pulled using the hymn number field below
+#     “SM_SACRAMENT_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
+#     “SM_INTERMEDIATE_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
+#     “SM_CLOSING_HYMN_NAME” = hymn name automatically pulled based on the corresponding hymn number field below
+#   For Church Cleaning Assignments Table:
+#     "CCA_MONTH" = the church cleaning assignments table month--ex: "September". Nb: This field *must come first*, 
+#     out of these 5 fields, for each new row in the table. Otherwise, as it is currently written, the code will not 
+#     be able to properly parse and place the following 4 fields. 
+#     "DAY" = the cleaning day--ex: "22"
+#     "CCA_FAMILY1" = 1st family assigned to clean on this day--ex: "Smith"
+#     "CCA_FAMILY2" = 2nd family assigned to clean on this day--ex: "Adams"
+#     "CCA_FAMILY3" = 3rd family assigned to clean on this day--ex: "Jones"
 
-// 13. Note: feel free to view this file in a text editor with C or C++ syntax highlighting in order to make it easier
-// to look at. Good examples of no-cost text editors for basic software development include Notepad++, Sublime Text,
-// Geany, Visual Studio Code, and Atom, for example.
+# 13. Special markers are "fields" which must be in the document for certain script features to work, such as deleting
+# the  speakers and intermediate hymn for Fast Sunday.
+# Special Markers:
+#     "START_OF_DELETE_FOR_FAST_SUNDAY" = a text marker placed in the document just before the 
+#     list of speakers, in order to indicate to the script where to start deleting when modifying the document for
+#     Fast Sundays.
+#     "END_OF_DELETE_FOR_FAST_SUNDAY" = a text marker placed in the document just after the 
+#     list of speakers, in order to indicate to the script where to stop deleting when modifying the document for
+#     Fast Sundays.
 
-// =========================================================================================
-// User Fields
-// =========================================================================================
+# 14. Note: view this file in a text editor with Python syntax highlighting in order to make it easier to look at. This
+# will make comments stand out from FIELDS and VALUES. Good examples of no-cost text editors for basic software
+# development include Notepad++, Sublime Text, Geany, Visual Studio Code, and Atom, for example.
 
-// -----------------------------------------------------------------------------------------
-// Ward Leadership Directory:
-// ("T1_" here means "Table 1")
-// -----------------------------------------------------------------------------------------
-// NAMES:
+# =========================================================================================
+# User Fields
+# =========================================================================================
+
+# -----------------------------------------------------------------------------------------
+# Ward Leadership Directory:
+# ("T1_" here means "Table 1")
+# -----------------------------------------------------------------------------------------
+# NAMES:
 T1_1_BISHOP:                John Doe
 T1_2_1ST_COUNSELOR:         Alex Albert    
 T1_3_2ND_COUNSELOR:         Billy Bob
@@ -103,7 +107,7 @@ T1_12_WARD_MISSION_LDR:     Henry Hopper
 T1_13_FT_MISSION_SISTERS:   Sisters Hylda & Hedwig
 T1_14_FT_MISSION_ELDERS:    Elders Illinois & Iliad
 
-// PHONE NUMBERS:
+# PHONE NUMBERS:
 T1_1_PH:    111-111-1111
 T1_2_PH:    222-222-2222
 T1_3_PH:    333-333-3333
@@ -119,19 +123,19 @@ T1_12_PH:   ccc-ccc-cccc
 T1_13_PH:   ddd-ddd-dddd
 T1_14_PH:   eee-eee-eeee
 
-// -----------------------------------------------------------------------------------------
-// Front cover image credits
-// ("IM_" stands for "IMage")
-// -----------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------
+# Front cover image credits
+# ("IM_" stands for "IMage")
+# -----------------------------------------------------------------------------------------
 IM_IMAGE_NAME:                  "The Resurrected Jesus Christ," by Harry Anderson
 HTTPS://WWW.IM_IMAGE_URL.COM:   https://www.lds.org/media-library/images/the-second-coming-39621?lang=eng
-// IM_IMAGE_NAME:                  Manti, Utah Temple w/“Charcoal Sketch” filter applied in LibreOffice 6.1
-// HTTPS://WWW.IM_IMAGE_URL.COM:   https://www.lds.org/temples/photo-gallery/manti-utah-temple?lang=eng
+# IM_IMAGE_NAME:                  Manti, Utah Temple w/“Charcoal Sketch” filter applied in LibreOffice 6.1
+# HTTPS://WWW.IM_IMAGE_URL.COM:   https://www.lds.org/temples/photo-gallery/manti-utah-temple?lang=eng
 
-// -----------------------------------------------------------------------------------------
-// Sacrament Meeting
-// ("SM_" stands for "Sacrament Meeting")
-// -----------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------
+# Sacrament Meeting
+# ("SM_" stands for "Sacrament Meeting")
+# -----------------------------------------------------------------------------------------
 SM_PRESIDING:               Bishop Bobby Blake
 SM_CONDUCTING:              Carl Caddy, 2nd Counselor
 SM_ORGANIST:                Daisy Daffodil
@@ -141,22 +145,22 @@ SM_OPENING_HYMN_NUM:        131
 SM_INVOCATION:              Frank Flanders
 SM_SACRAMENT_HYMN_NUM:      196
 
-// "Administration and Passing of the Sacrament" happens here.
+# "Administration and Passing of the Sacrament" happens here.
 
-// These next 4 fields are ignored if fastSunday is set to True in "config.py"
+# These next 4 fields are ignored if fastSunday is set to True in "config.py"
 SM_YOUTH_SPEAKER:           Gina Good
 SM_SPEAKER1:                Zara Zarahemla
 SM_INTERMEDIATE_HYMN_NUM:   129
 SM_SPEAKER2:                Nephi Sonofalma
 
-// These fields are valid whether it is Fast Sunday or not
+# These fields are valid whether it is Fast Sunday or not
 SM_CLOSING_HYMN_NUM:        304
 SM_BENEDICTION:             Alma Theyounger
 
-// -----------------------------------------------------------------------------------------
-// Church Cleaning Assignments
-// ("CCA_" stands for "Church Cleaning Assignments")
-// -----------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------
+# Church Cleaning Assignments
+# ("CCA_" stands for "Church Cleaning Assignments")
+# -----------------------------------------------------------------------------------------
 CCA_COORDINATOR:        Mosiah King
 CCA_COORDINATOR_PHONE:  123-456-7890
 

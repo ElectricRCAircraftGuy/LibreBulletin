@@ -84,6 +84,19 @@ class Bulletin:
         self.bulletin_inputs_filepath = bulletin_inputs_filepath
         self.hymns = hymn_num_2_name.Hymns(hymns_src_filepath) # Hymns class object; use to call getHymnName(), for instance
 
+        # Print inputs from config.py
+        # TODO: 1) move these print statements to somewhere more logical--maybe config.py?
+        #       2) get rid of the unnecessary pass-ins to this class via the initialization function; instead,
+        #       just call `config.var_name` directly!
+        print('\nInputs from config.py:')
+        print('  input_odt_filepath = {}'.format(self.input_odt_filepath))
+        print('  output_odt_filepath = {}'.format(self.output_odt_filepath))
+        print('  bulletin_inputs_filepath = {}'.format(self.bulletin_inputs_filepath))
+        print('  cleaning_assignments_csv_filepath_this_yr = {}'.format(config.cleaning_assignments_csv_filepath_this_yr))
+        print('  cleaning_assignments_csv_filepath_next_yr = {}'.format(config.cleaning_assignments_csv_filepath_next_yr))
+        print('  cleaning_assignments_num_header_rows = {}'.format(config.cleaning_assignments_num_header_rows))
+        print('  front_cover_image_filepath = {}'.format(config.front_cover_image_filepath))
+
         self.loadFields()
 
     def escapeXMLChars(self, str):
@@ -124,9 +137,10 @@ class Bulletin:
                 # words is an empty list ("[]")
                 save_line = False
             else: # Words exist
-                # discard comments (lines beginning with "//")  
+                # discard comments (lines beginning with "#" [used to be "//"])  
                 first_word = words[0]
-                if (len(first_word) >= 2 and first_word[0:2]=='//'):
+                comment_marker = '#'
+                if (len(first_word) >= len(comment_marker) and first_word[0:len(comment_marker)]==comment_marker):
                     save_line = False
             if (save_line==True):
                 # field_name is the first word, minus the ":" character at the end (note: don't use the string
@@ -410,7 +424,7 @@ class Bulletin:
             # this assumption ever becomes wrong), then come up with a more sure solution to find out which image
             # from the "file_list" list is the front cover image (ex: perhaps determine it by which page it's on, 
             # using the 'text:anchor-page-number="1"' tag in the xml file?).
-            dest_im_filepath = file_list[0]#[0] ####### TODO: BUG! THIS CAN VARY
+            dest_im_filepath = file_list[0]#[0] ####### TODO: BIG BUG! THIS CAN VARY; front cover image bug; picture bug
             print("dest_im_filepath = \"" + dest_im_filepath + "\"")
             # determine the image name
             im_name = dest_im_filepath.split("/")[-1]

@@ -6,8 +6,8 @@
 
 # Set to True to demonstrate this library with example input files, or set to False to use your real input files
 # (which are, in my case for generating the real bulletin for my ward, written below)
-# demo = True
-demo = False
+demo = True
+# demo = False
 
 # Fast Sunday formatting:
 # Turn fastSunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
