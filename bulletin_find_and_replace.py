@@ -99,6 +99,10 @@ class Bulletin:
 
         self.loadFields()
 
+    def separateConfigFileFromInputsFile(self):
+        pass
+        #############
+
     def escapeXMLChars(self, str):
         """
         Convert chars not allowed in XML as text to chars allowed in XML as text
