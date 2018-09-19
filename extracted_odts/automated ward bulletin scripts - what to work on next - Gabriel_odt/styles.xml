@@ -145,9 +145,9 @@
 				<text:p text:style-name="MP1">
 					<text:span text:style-name="MT1">automated ward bulletin scripts - what to work on next</text:span>
 					<text:tab/>
-					<text:page-number text:select-page="current">12</text:page-number>
+					<text:page-number text:select-page="current">13</text:page-number>
 					/
-					<text:page-count>12</text:page-count>
+					<text:page-count>13</text:page-count>
 				</text:p>
 			</style:header>
 		</style:master-page>
