@@ -41,17 +41,21 @@ https://github.com/ElectricRCAircraftGuy/LibreBulletin
 
 # Set to True to demonstrate this library with example input files, or set to False to use your real input files
 # (which are, in my case for generating the real bulletin for my ward, written below)
-# demo = True
+demo = True
 # demo = False
 
+# In case you use `demo = False` above, pull the bulletin inputs from this file:
 # bulletin_INPUTS = "auto" 
-bulletin_INPUTS = "./bulletin_INPUTS.txt"
-# bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20180930#1--2bulletin_INPUTS.txt"
+bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20180930#1--2bulletin_INPUTS.txt"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # PROGRAMMER PARAMETERS (not intended to be changed by user)
 # ----------------------------------------------------------------------------------------------------------------------
 
+# LibreBulletin version
 # Note: use Semantic Versioning (https://semver.org/spec/v2.0.0.html)
 VERSION = '0.2.0'
+
+bulletin_INPUTS_default = "./bulletin_INPUTS.txt"
+
 

@@ -1,5 +1,13 @@
 
-# =========================================================================================
+# ----------------------------------------------------------------------------------------------------------------------
+# USER PARAMETERS
+# Update these parameters to customize your bulletin!
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Set to True to demonstrate this library with example input files, or set to False to use your real input files
+# (which are, in my case for generating the real bulletin for my ward, written below)
+# demo = True
+# demo = False
 
 # Fast Sunday formatting:
 # Turn fastSunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
@@ -80,4 +88,9 @@ frame_top_y_pos_in = 0.25 # inches; from top of entire page
 # printing and after doing the automatic image replacement/bulletin generation each week. Done! Good enough for now!
 
 
+# # ----------------------------------------------------------------------------------------------------------------------
+# # PROGRAMMER PARAMETERS (not intended to be changed by user)
+# # ----------------------------------------------------------------------------------------------------------------------
 
+# # Note: use Semantic Versioning (https://semver.org/spec/v2.0.0.html)
+# VERSION = '0.2.0'
