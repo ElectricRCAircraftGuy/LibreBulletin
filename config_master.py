@@ -56,6 +56,7 @@ bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20180930#1--2bulletin_INPUTS.txt"
 # Note: use Semantic Versioning (https://semver.org/spec/v2.0.0.html)
 VERSION = '0.2.0'
 
+# This demonstration user inputs file is used when demo is set to True above.
 bulletin_INPUTS_default = "./bulletin_INPUTS.txt"
 
 
