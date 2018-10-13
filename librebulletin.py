@@ -1,0 +1,3 @@
+import bulletin_find_and_replace
+
+bulletin_find_and_replace.main()

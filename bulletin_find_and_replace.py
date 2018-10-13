@@ -785,8 +785,7 @@ class Bulletin:
 
         return new_data_str
 
-if __name__ == '__main__':
-
+def main():
     print("\nLibreBulletin START OF OPERATIONS.")
     if (config_master.demo == True):
         print("`config_master.demo == True`, so using demonstration inputs to see this code function...")
@@ -801,6 +800,9 @@ if __name__ == '__main__':
     bulletin.replaceFields()
     bulletin.openOutputOdtFile()
     print("\nLibreBulletin END OF OPERATIONS.")
+
+if __name__ == '__main__':
+    main()
 
 
 
