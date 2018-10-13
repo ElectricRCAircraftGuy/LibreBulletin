@@ -12,8 +12,9 @@ https://github.com/ElectricRCAircraftGuy/LibreBulletin
 # Update these parameters to customize your bulletin!
 # ----------------------------------------------------------------------------------------------------------------------
 
-# Set to True to demonstrate this library with example input files I have already provided, or set to False to use your
-# real input files (which are, in my case for generating the real bulletin for my ward, written below)
+# Set to True to demonstrate this library with example input files I have already provided (including
+# "bulletin_INPUTS_default", set below), or set to False to use your real input files (which are, in my case for
+# generating the real bulletin for my ward, written below).
 demo = True
 # demo = False
 
@@ -46,7 +47,7 @@ auto_search_pattern = "[0-9]{8}.?.?--.*\.txt"
 
 # LibreBulletin version
 # Note: use Semantic Versioning (https://semver.org/spec/v2.0.0.html)
-VERSION = '0.2.0'
+VERSION = "0.2.0"
 
 # This demonstration user inputs file is used when demo is set to True above.
 bulletin_INPUTS_default = "./bulletin_INPUTS.txt"
