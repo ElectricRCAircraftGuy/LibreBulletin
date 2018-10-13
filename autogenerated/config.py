@@ -2,17 +2,19 @@
 # =========================================================================================
 
 # Fast Sunday formatting:
-# Turn fastSunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
+# Turn fast_sunday format on or off by setting this value to True, False, or "auto". "auto" will have the script
 # automatically  make an educated guess by assuming that the 1st Sunday of each month is "Fast Sunday", which is
 # normally the case. 
 # See "bulletin_INPUTs.txt" for which user fields this setting affects.
-fastSunday = False # True, False, or "auto"
+fast_sunday = False # True, False, or "auto"
 
 # TODO: make this control the date placed on the bulletin. Anything before this time will use today's date, if today is
 # Sunday. Anything equal to or after this time will use next Sunday's date on the bulletin, even if today is Sunday.
 # This way, if you run the bulletin script before church you'll get today's date on it, but if you run it after church
 # (ex: in preparation for the next Sunday), you'll get next Sunday's date on it.
-timeToUseNextSundayDate = "12:30pm" # TODO: determine proper format: datetime library vs string?
+# The time string must be in a *4-digit* 24-hr time. 
+# Ex: 12:30pm is "1230". 1:15am is "0115". 1:15pm is "1315". 11:15pm is "2315", etc.
+time_to_use_next_sunday_date = "1230"
 
 # Bulletin Input Template, Output File, & Hymns Paths:
 # NB: use forward slashes (/) for path names, NOT back slashes (\)!--Even in Windows!

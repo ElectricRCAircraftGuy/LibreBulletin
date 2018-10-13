@@ -35,7 +35,7 @@ TODO: Add a few screenshots of input --> output bulletin relations (ex: image of
 Note: for Windows, use `py -3` in place of `python3` in the commands below. For Linux, use `python3`.
 
 ## Main Code Instructions (Using & Running)
-Run `python3 bulletin_find_and_replace.py` to generate a new bulletin from the `.odt` file template.  
+Run ~~`python3 bulletin_find_and_replace.py`~~ `python3 librebulletin.py` to generate a new bulletin from the `.odt` file template.  
 
 ### Instructions
  1. Open and manually format the "**ward_bulletin_template.odt**" LibreOffice Writer document as desired:
