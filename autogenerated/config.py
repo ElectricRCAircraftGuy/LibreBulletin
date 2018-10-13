@@ -6,7 +6,7 @@
 # automatically  make an educated guess by assuming that the 1st Sunday of each month is "Fast Sunday", which is
 # normally the case. 
 # See "bulletin_INPUTs.txt" for which user fields this setting affects.
-fast_sunday = False # True, False, or "auto"
+fast_sunday = "auto" # True, False, or "auto" (with the quotes)
 
 # TODO: make this control the date placed on the bulletin. Anything before this time will use today's date, if today is
 # Sunday. Anything equal to or after this time will use next Sunday's date on the bulletin, even if today is Sunday.

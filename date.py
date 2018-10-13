@@ -23,6 +23,8 @@ References:
 import datetime
 import sys
 
+SUNDAY_WEEKDAY_NUM = 6
+
 def getUpcomingSundayDateTime(time_to_use_next_sunday_date = None):
     """
     Return the datetime.datetime (see https://docs.python.org/3/library/datetime.html) object for the upcoming Sunday.
@@ -47,7 +49,6 @@ def getUpcomingSundayDateTime(time_to_use_next_sunday_date = None):
     # Steps: figure out what today is. Figure out what this coming Sunday is. If today == this coming Sunday, then see
     # if the time right now > the threshold time. If it is, then use the Sunday 7 days from now. If not, then use 
     # today.
-    SUNDAY_WEEKDAY_NUM = 6
 
     if time_to_use_next_sunday_date != None and len(time_to_use_next_sunday_date) != 4:
         print('Error: invalid "time_to_use_next_sunday_date" time string. '
@@ -91,19 +92,19 @@ def getDateInfo(datetime_obj):
 
     return month_num, month_str, date_str
 
-def isFastSunday(time_to_use_next_sunday_date = None):
+def isFastSunday(sunday_datetime_obj):
     """
     Return True if the upcoming Sunday is the first Sunday of the month, or False otherwise. Clearly, we are assuming
     that Fast Sunday is the first Sunday of the month.
-
-    Inputs:
-    time_to_use_next_sunday_date     Time after which we will use *next Sunday* as the date, assuming today is Sunday.
-        Ex: "12:30pm". If today is Sunday, and *before* 12:30pm we will use today's date. If today is Sunday but 
-        *after* "12:30pm" we will use next Sunday's date.
-        Don't pass in a value for this parameter if you'd just like to use today's date in case today is Sunday.
     """
+    isFastSunday = False
+    if sunday_datetime_obj.weekday() != SUNDAY_WEEKDAY_NUM:
+        print('Error in "date.py": the date you passed in isn\'t even a Sunday! Please try again.')
+    else:
+        if sunday_datetime_obj.day <= 7:
+            isFastSunday = True
 
-
+    return isFastSunday
 
 def getRelativeMonth(current_month_num, months_from_now):
     """

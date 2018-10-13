@@ -295,6 +295,12 @@ class Bulletin:
         start_delete_marker = "START_OF_DELETE_FOR_FAST_SUNDAY"
         end_delete_marker = "END_OF_DELETE_FOR_FAST_SUNDAY"
 
+        if (config.fast_sunday == "auto"):
+            print('\nfast_sunday == "auto", so automatically determining if it is Fast Sunday by assuming Fast\n'
+                  'Sunday is the first Sunday of the month.')
+            config.fast_sunday = date.isFastSunday(self.this_sunday)
+            print('config.fast_sunday automatically set to "{}".'.format(config.fast_sunday))
+
         if (config.fast_sunday == True):
             print("\nfast_sunday == True, so converting bulletin to Fast Sunday format.")
             markers_found = True
@@ -375,12 +381,16 @@ class Bulletin:
                 # re-unite the 2 xml document halfs into one
                 filedata = first_half + last_half
 
-        else: # config.fast_sunday == False
+        elif config.fast_sunday == False:
             print("\nfast_sunday == False, so continuing on withOUT converting to Fast Sunday format.")
             print("Adding the start and end delete markers to the fields list with an empty replace\n" +
-                  "string (field_value), so as to force the deletion below.")
+                  "string (field_value), so as to force their deletion below.")
             self.fields.append([start_delete_marker, ''])
             self.fields.append([end_delete_marker, ''])
+
+        else:
+            print('\nERROR in "{}": config.fast_sunday has an invalid value of "{}".'.format(THIS_FILENAME, 
+                  config.fast_sunday))
 
         # 4. Replace the target strings (fields)
         # NB: you must do the replacement in the order of the field_names being *reverse-sorted*, so that longer string
