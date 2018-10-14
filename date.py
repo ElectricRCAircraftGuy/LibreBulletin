@@ -20,8 +20,10 @@ References:
 
 """
 
+THIS_FILENAME = 'date.py'
+
 import datetime
-import sys
+# import sys # for sys.exit()
 
 SUNDAY_WEEKDAY_NUM = 6
 
@@ -51,9 +53,11 @@ def getUpcomingSundayDateTime(time_to_use_next_sunday_date = None):
     # today.
 
     if time_to_use_next_sunday_date != None and len(time_to_use_next_sunday_date) != 4:
-        print('Error: invalid "time_to_use_next_sunday_date" time string. '
-              'It must be 24-hr time and exactly 4 digits. Ex: use "1330" for 1:30pm, and "0930" for 9:30am.')
-        # sys.exit()
+        print('ERROR IN "{}": invalid "time_to_use_next_sunday_date" time string. '
+              'It must be 24-hr time and exactly 4 digits. Exs: use "1330" for 1:30pm, "0930" for 9:30am, etc.'
+              .format(THIS_FILENAME))
+        print('  Therefore, setting "time_to_use_next_sunday_date" to "None".')
+        time_to_use_next_sunday_date = None # set back to None to prevent problems below
 
     today = datetime.datetime.now()
     # FOR TESTING PURPOSES TO FORCE A CERTAIN DATE TO BE "TODAY" (comment out when done)
@@ -151,6 +155,17 @@ def getRelativeMonth(current_month_num, months_from_now):
         relative_month_name = month_name_list[relative_month_i]
 
     return relative_month_num, relative_month_name
+
+def getLogFilename():
+    """
+    Get a filename for a log, based on today's date, in the format "YYYYMMDD.log".
+    Ex: if today is 13 Oct. 2018, then calling getLogFilename() will produce and return "20181013.log".
+    """
+    today = datetime.date.today()
+    # For format strings see: https://docs.python.org/3/library/string.html#formatstrings
+    log_filename = '{:04d}{:02d}{:02d}.log'.format(today.year, today.month, today.day)
+    return log_filename
+
 
 if __name__ == '__main__':
 

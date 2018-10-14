@@ -81,18 +81,22 @@ class Bulletin:
     # 1) Class attributes (shared among all objects [instances] of this class):
     # None
 
-    def __init__(self, input_odt_filepath, output_odt_filepath, bulletin_inputs_filepath, hymns_src_filepath):
+    def __init__(self):
         # Object (class instance) initialization:
         # 2) Instance attributes (unique for each initialized object [instance] of this class):
         #    - See Reference #6 above for help.
-        self.input_odt_filepath = input_odt_filepath
-        self.output_odt_filepath = output_odt_filepath
+        # TODO: consider removing all of these config --> self assignments here and just using the config.whatever 
+        # variables directly throughout this code. What ramifications would this mean? Would there be any negative
+        # consequences and/or re-assignment or changes to the config.whatever variables in this module that I need
+        # to be aware of? Search throughout this file to see how they are all used and if any would be changed.
+        self.input_odt_filepath = config.input_odt_filepath
+        self.output_odt_filepath = config.output_odt_filepath
         # Extract output_odt_filename from output_odt_filepath
-        self.output_odt_filename = output_odt_filepath.split('/')[-1]
+        self.output_odt_filename = self.output_odt_filepath.split('/')[-1]
         self.output_odt_dir = self.output_odt_filepath[0:-len(self.output_odt_filename)]
         # print('self.output_odt_dir = "{}"'.format(self.output_odt_dir)) # debugging
-        self.bulletin_inputs_filepath = bulletin_inputs_filepath
-        self.hymns = hymn_num_2_name.Hymns(hymns_src_filepath) # Hymns class object; use to call getHymnName(), for instance
+        self.bulletin_inputs_filepath = config_master.bulletin_INPUTS
+        self.hymns = hymn_num_2_name.Hymns(config.hymns_src_filepath) # Hymns class object; use to call getHymnName(), for instance
 
         # Print inputs from config.py
         # TODO: 1) move these print statements to somewhere more logical--maybe config.py?
@@ -106,6 +110,7 @@ class Bulletin:
         print('  cleaning_assignments_csv_filepath_next_yr = {}'.format(config.cleaning_assignments_csv_filepath_next_yr))
         print('  cleaning_assignments_num_header_rows = {}'.format(config.cleaning_assignments_num_header_rows))
         print('  front_cover_image_filepath = {}'.format(config.front_cover_image_filepath))
+        print('  hymns_src_filepath = {}'.format(config.hymns_src_filepath))
 
         self.loadFields()
 
@@ -132,8 +137,10 @@ class Bulletin:
         Load field name and value pairs from the bulletin_inputs_filepath document into a class instance variable for
         use by the class.
         """
+        print('\nLoading all Fields.')
 
         # 1. USER FIELDS
+        print('  Loading User Fields.')
         # Parse bulletin fields from the user input document
         # Read in the file
         file = open(self.bulletin_inputs_filepath, "r")
@@ -184,6 +191,7 @@ class Bulletin:
                 self.fields_dict[field_name] = field_value
 
         # 2. SPECIAL FIELDS
+        print('  Loading Special Fields.')
         # Now load in the "Special Fields" which we need to auto-populate
         # NB: if you update these field names here then they must be updated in the bulletin inputs doc too to 
         # communicate that change to the user.
@@ -197,8 +205,10 @@ class Bulletin:
         # Get month number, month string, & date string. Ex. date string format: "August 26, 2018"
         self.this_month_num, self.this_month_str, sunday_date_str = date.getDateInfo(self.this_sunday)
         self.fields.append(["D_UPCOMING_SUNDAY_DATE", sunday_date_str])
+        print('    this_sunday = "{}"'.format(sunday_date_str))
 
         # B. Hymn names
+        print('    Performing hymn names lookup.')
         # hymn_field_names (tuple of tuples) format = ((HYMN_NAME_FIELDNAME, HYMN_NUM_FIELDNAME))
         hymn_field_names = (
             ("SM_OPENING_HYMN_NAME", "SM_OPENING_HYMN_NUM"),
@@ -247,7 +257,9 @@ class Bulletin:
 
         # 1. Uncompress (unzip) the .odt file
         zip_ref = zipfile.ZipFile(self.input_odt_filepath, 'r')
-        dir_to_extract_to = self.output_odt_dir + "/tmp/" + self.output_odt_filename
+        dir_to_extract_to = (self.output_odt_dir + ('/' if len(self.output_odt_dir) > 0 and 
+                             self.output_odt_dir[-1] != '/' else '') + "tmp/" + self.output_odt_filename)
+        print('  dir_to_extract_to = "{}"'.format(dir_to_extract_to))
         # Delete this temporary dir if it already exists
         if (os.path.isdir(dir_to_extract_to)):
             shutil.rmtree(dir_to_extract_to)
@@ -435,7 +447,9 @@ class Bulletin:
             # (file type) and name, and make the replacement
             
             pics_dir = dir_to_extract_to + "/Pictures"
-            file_list = glob.glob(pics_dir + "/*") # Source: https://stackoverflow.com/a/3215392/4561887
+            # print('pics_dir = "{}"'.format(pics_dir)) # for debugging
+            ####### QUICK FIX TO THE IMAGE BUG BELOW! SORT THE GLOB! SEE: https://stackoverflow.com/a/6774404/4561887
+            file_list = sorted(glob.glob(pics_dir + "/*")) # Source: https://stackoverflow.com/a/3215392/4561887
             # assume the front cover image is the first file returned
             # TODO: if this ever isn't the case (ex: if the user ever puts multiple images into their bulletin and
             # this assumption ever becomes wrong), then come up with a more sure solution to find out which image
@@ -802,10 +816,7 @@ def main():
         print("************************************************************************************\n" +
               "`config_master.demo == False`, so using ACTUAL INPUTS to generate a real bulletin...\n" + 
               "************************************************************************************")
-    bulletin = Bulletin(
-        config.input_odt_filepath, config.output_odt_filepath, 
-        config.bulletin_inputs_filepath, config.hymns_src_filepath
-    )
+    bulletin = Bulletin()
     bulletin.replaceFields()
     bulletin.openOutputOdtFile()
     print("\nLibreBulletin END OF OPERATIONS.")

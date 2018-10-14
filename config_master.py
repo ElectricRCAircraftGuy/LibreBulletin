@@ -15,8 +15,8 @@ https://github.com/ElectricRCAircraftGuy/LibreBulletin
 # Set to True to demonstrate this library with example input files I have already provided (including
 # "bulletin_INPUTS_default", set below), or set to False to use your real input files (which are, in my case for
 # generating the real bulletin for my ward, written below).
-demo = True
-# demo = False
+# demo = True
+demo = False
 
 # In case you use `demo = False` above, pull the bulletin inputs from this bulletin_INPUTS file:
 # - Set it to "auto" to force the program to automatically choose the bulletin_INPUTS file for you!
@@ -28,8 +28,8 @@ demo = True
 # the date at the front of its name, and the script will automatically pull this, the latest file when  auto-building
 # the bulletin!
 
-# bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20180930#1--2bulletin_INPUTS.txt"
-bulletin_INPUTS = "auto" # Uncomment to automatically use your latest bulletin_INPUTS file instead, as described above.
+bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20181014#1--2bulletin_INPUTS.txt" # Uncomment to explicitly use this path.
+# bulletin_INPUTS = "auto" # Uncomment to automatically use your latest bulletin_INPUTS file instead, as described above.
 
 # Only used if `bulletin_INPUTS = "auto"`:
 # Automatically search for the last-alphabetically-listed *.txt file in this folder, to be used as your bulletin inputs

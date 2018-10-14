@@ -8,6 +8,9 @@ __pycache__
 # temporary directory where the .odt files are extracted during field replacement
 /tmp
 
+# log directory
+/logs
+
 # Sublime Text project workspaces (save projects only, not workspaces)
 # More info here: http://docs.sublimetext.info/en/latest/file_management/projects.html
 *.sublime-workspace

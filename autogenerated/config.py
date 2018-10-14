@@ -23,7 +23,6 @@ hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints
 # Demonstration input files to see this code function
 input_odt_filepath = "./ward_bulletin_template.odt"
 output_odt_filepath = "./ward_bulletin_template_out_1.odt"
-bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 
 # Cleaning assignments:
 # The cleaning assignments list must be a "csv" (Comma-Separated Variable) type file. You can easily export this 
