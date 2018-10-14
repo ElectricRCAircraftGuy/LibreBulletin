@@ -89,6 +89,8 @@ class Bulletin:
         self.output_odt_filepath = output_odt_filepath
         # Extract output_odt_filename from output_odt_filepath
         self.output_odt_filename = output_odt_filepath.split('/')[-1]
+        self.output_odt_dir = self.output_odt_filepath[0:-len(self.output_odt_filename)]
+        # print('self.output_odt_dir = "{}"'.format(self.output_odt_dir)) # debugging
         self.bulletin_inputs_filepath = bulletin_inputs_filepath
         self.hymns = hymn_num_2_name.Hymns(hymns_src_filepath) # Hymns class object; use to call getHymnName(), for instance
 
@@ -245,7 +247,7 @@ class Bulletin:
 
         # 1. Uncompress (unzip) the .odt file
         zip_ref = zipfile.ZipFile(self.input_odt_filepath, 'r')
-        dir_to_extract_to = "../tmp/" + self.output_odt_filename
+        dir_to_extract_to = self.output_odt_dir + "/tmp/" + self.output_odt_filename
         # Delete this temporary dir if it already exists
         if (os.path.isdir(dir_to_extract_to)):
             shutil.rmtree(dir_to_extract_to)

@@ -27,6 +27,7 @@ demo = True
 # with the correct "auto_search_pattern", you can manually copy and paste your .txt file each new week, then increment
 # the date at the front of its name, and the script will automatically pull this, the latest file when  auto-building
 # the bulletin!
+
 # bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20180930#1--2bulletin_INPUTS.txt"
 bulletin_INPUTS = "auto" # Uncomment to automatically use your latest bulletin_INPUTS file instead, as described above.
 

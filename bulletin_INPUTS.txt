@@ -201,7 +201,7 @@ time_to_use_next_sunday_date = "1230"
 hymns_src_filepath = "./hymns_of_the_Church_of_Jesus_Christ_of_Latter-day_Saints_formatted.txt"
 # Demonstration input files to see this code function
 input_odt_filepath = "./ward_bulletin_template.odt"
-output_odt_filepath = "../ward_bulletin_template_out_1.odt"
+output_odt_filepath = "./ward_bulletin_template_out_1.odt"
 bulletin_inputs_filepath = "./bulletin_INPUTS.txt"
 
 # Cleaning assignments:
