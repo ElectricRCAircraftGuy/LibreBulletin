@@ -721,7 +721,7 @@ class Bulletin:
                     filedata_2nd_half = filedata_2nd_half.replace("CCA_FAMILY3", family3, 1)
                     filedata = filedata_1st_half + filedata_2nd_half
 
-                print("Updating Church Cleaning assignments table done!")
+                print("  Updating Church Cleaning assignments table done!")
                 print("  {} rows replaced in the cleaning assignments table.".format(table_row_cnt))
 
         # 8. Write the file out again
