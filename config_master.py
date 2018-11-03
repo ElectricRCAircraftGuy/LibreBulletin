@@ -28,7 +28,7 @@ demo = False
 # the date at the front of its name, and the script will automatically pull this, the latest file when  auto-building
 # the bulletin!
 
-bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20181021#2--2bulletin_INPUTS.txt" # Uncomment to explicitly use this path.
+bulletin_INPUTS = "./MY_PERSONAL_WARD_INFO/20181104#1--2bulletin_INPUTS.txt" # Uncomment to explicitly use this path.
 # bulletin_INPUTS = "auto" # Uncomment to automatically use your latest bulletin_INPUTS file instead, as described above.
 
 # Only used if `bulletin_INPUTS = "auto"`:
